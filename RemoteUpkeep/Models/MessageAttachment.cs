@@ -11,6 +11,8 @@ namespace RemoteUpkeep.Models
 
         public string FilePath { get; set; }
 
+        public int MessageId { get; set; }
+
         public virtual Message Message { get; set; }
     }
 }

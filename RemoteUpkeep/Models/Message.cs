@@ -9,16 +9,17 @@ namespace RemoteUpkeep.Models
         public Message()
         {
             this.Attachments = new List<MessageAttachment>();
+            this.Targets = new List<Target>();
         }
 
         [Key]
         public int Id { get; set; }
 
-        public int SenderId { get; set; }
+        public string SenderId { get; set; }
 
         public virtual ApplicationUser Sender { get; set; }
 
-        public int ReceiverId { get; set; }
+        public string ReceiverId { get; set; }
 
         public virtual ApplicationUser Receiver { get; set; }
 
@@ -26,12 +27,10 @@ namespace RemoteUpkeep.Models
 
         public DateTime Date { get; set; }
 
-        public int? ObjectId { get; set; }
-
-        public virtual Object Object { get; set; }
-
-        public MessageTarget MessageTarget { get; set; }
+        public MessageType MessageType { get; set; }
 
         public virtual ICollection<MessageAttachment> Attachments { get; set; }
+
+        public virtual ICollection<Target> Targets { get; set; }
     }
 }

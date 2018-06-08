@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace RemoteUpkeep.Models
 {
-    public class Object
+    public class Target
     {
-        public Object()
+        public Target()
         {
+            this.Services = new List<Service>();
             this.Actions = new List<Action>();
             this.Messages = new List<Message>();
         }
@@ -15,11 +15,12 @@ namespace RemoteUpkeep.Models
         [Key]
         public int Id { get; set; }
 
-        public int ServiceId { get; set; }
-
-        public virtual Service Service { get; set; }
+        public int LocationId { get; set; }
 
         public virtual Location Location { get; set; }
+
+        //many-to-many
+        public virtual ICollection<Service> Services { get; set; }
 
         public virtual ICollection<Action> Actions { get; set; }
 

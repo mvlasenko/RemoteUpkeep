@@ -214,7 +214,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\MessageAttachment.cs" />
-    <Compile Include="Models\Object.cs" />
+    <Compile Include="Models\Target.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Service.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

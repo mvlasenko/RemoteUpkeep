@@ -10,10 +10,8 @@ namespace RemoteUpkeep.Models
 
         public DateTime DueDate { get; set; }
 
-        public int? ObjectId { get; set; }
+        public int TargetId { get; set; }
 
-        public virtual Object Object { get; set; }
-
-
+        public virtual Target Target { get; set; }
     }
 }

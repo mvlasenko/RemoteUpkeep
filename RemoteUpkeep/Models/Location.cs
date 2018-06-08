@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity.Spatial;
 
@@ -9,7 +8,7 @@ namespace RemoteUpkeep.Models
     {
         public Location()
         {
-            this.Objects = new List<Object>();
+            this.Targets = new List<Target>();
         }
 
         [Key]
@@ -21,6 +20,6 @@ namespace RemoteUpkeep.Models
 
         public DbGeography Geography { get; set; }
 
-        public virtual ICollection<Object> Objects { get; set; }
+        public virtual ICollection<Target> Targets { get; set; }
     }
 }

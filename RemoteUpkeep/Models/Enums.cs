@@ -3,7 +3,7 @@
 namespace RemoteUpkeep.Models
 {
     [Flags]
-    public enum MessageTarget
+    public enum MessageType
     {
         None = 0,
         Email = 1,

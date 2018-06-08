@@ -18,7 +18,7 @@ namespace RemoteUpkeep.Models
 
         public virtual DbSet<Order> Orders { get; set; }
 
-        public virtual DbSet<Object> Objects { get; set; }
+        public virtual DbSet<Target> Targets { get; set; }
 
         public virtual DbSet<Location> Locations { get; set; }
 
@@ -38,57 +38,70 @@ namespace RemoteUpkeep.Models
             modelBuilder.Entity<Service>()
                 .HasRequired(e => e.CreatedBy)
                 .WithMany(e => e.Services)
-                .HasForeignKey(e => e.Id);
+                .HasForeignKey(e => e.CreatedByUserId);
 
             //orders
 
             modelBuilder.Entity<Order>()
                 .HasRequired(e => e.User)
                 .WithMany(e => e.Orders)
-                .HasForeignKey(e => e.Id);
+                .HasForeignKey(e => e.UserId);
 
-            //objects
+            //targets
 
-            modelBuilder.Entity<Object>()
-                .HasRequired(e => e.Service)
-                .WithMany(e => e.Objects)
-                .HasForeignKey(e => e.Id);
+            //many-to-many
+            modelBuilder.Entity<Target>()
+                .HasMany(e => e.Services)
+                .WithMany(x => x.Targets)
+                .Map(m =>
+                {
+                    m.MapLeftKey("TargetId");
+                    m.MapRightKey("ServiceId");
+                    m.ToTable("ServiceTargets");
+                });
 
-            modelBuilder.Entity<Object>()
+            //many-to-many
+            modelBuilder.Entity<Target>()
+                .HasMany(e => e.Messages)
+                .WithMany(x => x.Targets)
+                .Map(m =>
+                {
+                    m.MapLeftKey("TargetId");
+                    m.MapRightKey("MessageId");
+                    m.ToTable("MessageTargets");
+                });
+
+            modelBuilder.Entity<Target>()
                 .HasRequired(e => e.Location)
-                .WithMany(e => e.Objects)
-                .HasForeignKey(e => e.Id);
+                .WithMany(e => e.Targets)
+                .HasForeignKey(e => e.LocationId);
 
             //actions
 
             modelBuilder.Entity<Action>()
-                .HasRequired(e => e.Object)
+                .HasRequired(e => e.Target)
                 .WithMany(e => e.Actions)
-                .HasForeignKey(e => e.Id);
+                .HasForeignKey(e => e.TargetId);
 
             //messages
 
             modelBuilder.Entity<Message>()
                 .HasRequired(e => e.Sender)
                 .WithMany(e => e.SentMessages)
-                .HasForeignKey(e => e.Id);
+                .HasForeignKey(e => e.SenderId);
 
             modelBuilder.Entity<Message>()
                 .HasRequired(e => e.Receiver)
                 .WithMany(e => e.ReceivedMessages)
-                .HasForeignKey(e => e.Id);
-
-            modelBuilder.Entity<Message>()
-                .HasRequired(e => e.Object)
-                .WithMany(e => e.Messages)
-                .HasForeignKey(e => e.Id);
+                .HasForeignKey(e => e.ReceiverId)
+                .WillCascadeOnDelete(false);
 
             //message attachments
 
             modelBuilder.Entity<MessageAttachment>()
                 .HasRequired(e => e.Message)
                 .WithMany(e => e.Attachments)
-                .HasForeignKey(e => e.Id);
+                .HasForeignKey(e => e.MessageId);
 
         }
 

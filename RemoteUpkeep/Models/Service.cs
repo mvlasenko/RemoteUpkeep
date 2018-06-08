@@ -8,7 +8,7 @@ namespace RemoteUpkeep.Models
     {
         public Service()
         {
-            this.Objects = new List<Object>();
+            this.Targets = new List<Target>();
         }
 
         [Key]
@@ -18,13 +18,14 @@ namespace RemoteUpkeep.Models
 
         public string Description { get; set; }
 
-        public int UserId { get; set; }
+        public string CreatedByUserId { get; set; }
 
         public virtual ApplicationUser CreatedBy { get; set; }
 
         public DateTime CreatedDate { get; set; }
 
-        public virtual ICollection<Object> Objects { get; set; }
+        //many-to-many
+        public virtual ICollection<Target> Targets { get; set; }
 
     }
 }
