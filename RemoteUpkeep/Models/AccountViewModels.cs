@@ -9,6 +9,9 @@ namespace RemoteUpkeep.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
 
+        [Display(Name = "Phone")]
+        public string Phone { get; set; }
+
         [Required]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }

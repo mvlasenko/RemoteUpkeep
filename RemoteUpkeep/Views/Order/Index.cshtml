@@ -1,0 +1,29 @@
+﻿@using RemoteUpkeep.Models
+@model RemoteUpkeep.Models.OrderViewModel
+
+@{
+    ViewBag.Title = "Please select an option";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("StepOne", "Order", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div id="OrderForm" class="form-horizontal">
+
+        @foreach (var service in Model.Services)
+        {
+            <div class="form-group">
+                @Html.RadioButtonFor(m => m.ServiceId, service.Id) @service.Description
+            </div>
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Next" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

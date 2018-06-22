@@ -1,0 +1,19 @@
+﻿@using RemoteUpkeep.Models
+@model RemoteUpkeep.Models.OrderViewModel
+
+@{
+    ViewBag.Title = "Please introduce yourself";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("StepTwo", "Order", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div id="OrderForm" class="form-horizontal">
+
+        @Html.Partial("~/Views/Account/_ExternalLoginsListPartial.cshtml", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+
+    </div>
+}
