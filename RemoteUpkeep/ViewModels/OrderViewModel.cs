@@ -27,6 +27,8 @@ namespace RemoteUpkeep.ViewModels
         [UIHint("_FileUpload")]
         public List<Image> Images { get; set; }
 
+        [Display(Name = "DueDate")]
+        [UIHint("_DatePicker")]
         public DateTime? DueDate { get; set; }
     }
 }

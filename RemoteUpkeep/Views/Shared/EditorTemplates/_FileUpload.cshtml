@@ -3,7 +3,7 @@
     <i class="glyphicon glyphicon-plus"></i>
     <span>Select files...</span>
     <!-- The file input field used as target for the file upload widget -->
-    <input id="fileupload" type="file" name="file">
+    <input id="fileupload" type="file" name="files[]" multiple>
 </span>
 <br>
 <br>
@@ -11,24 +11,21 @@
 <div id="progress" class="progress">
     <div class="progress-bar progress-bar-success"></div>
 </div>
+<!-- The container for the uploaded files -->
+<div id="files" class="files"></div>
 
 <script>
     $(function () {
         'use strict';
 
-        var url = !$('#Id').val() || $('#Id').val() == '00000000-0000-0000-0000-000000000000' ? '@Url.Action("FileUploadInsert")' : '@Url.Action("FileUploadUpdate")';
+        var url = '@Url.Action("FileUpload", "Images")';
 
         $('#fileupload').fileupload({
             url: url,
             dataType: 'json',
             done: function (e, data) {
                 $.each(data.result.files, function (index, file) {
-                    $('#Id').val(file.id);
-                    $('#FileName').val(file.name);
-                    if (!$('#Name').val()) {
-                        $('#Name').val(file.name);
-                    };
-                    RefreshGrid(currentPageIndex);
+                    $('<p/>').text(file.name).appendTo('#files');
                 });
             },
             progressall: function (e, data) {

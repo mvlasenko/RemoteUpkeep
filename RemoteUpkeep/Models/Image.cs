@@ -18,11 +18,11 @@ namespace RemoteUpkeep.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
-        public string Text { get; set; }
-
-        public string FileName { get; set; }
+        public string Name { get; set; }
 
         public byte[] Binary { get; set; }
+
+        public string Text { get; set; }
 
         public DateTime CreatedDateTime { get; set; }
 
