@@ -2,8 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using RemoteUpkeep.Models;
 
-namespace RemoteUpkeep.Models
+namespace RemoteUpkeep.ViewModels
 {
     public class IndexViewModel
     {

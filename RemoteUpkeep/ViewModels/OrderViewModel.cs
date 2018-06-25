@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using RemoteUpkeep.Models;
 
-namespace RemoteUpkeep.Models
+namespace RemoteUpkeep.ViewModels
 {
     public class OrderViewModel
     {

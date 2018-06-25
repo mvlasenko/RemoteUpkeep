@@ -1,0 +1,17 @@
+﻿@using RemoteUpkeep.Models
+@using RemoteUpkeep.Helpers
+
+@{
+    string id = ViewData.TemplateInfo.GetFullHtmlFieldName("");
+    int[] selectedLanguages = ViewData.TemplateInfo.FormattedModelValue as int[];
+}
+
+<ul id="@id">
+    @foreach (Language language in UIHelper.GetLanguages())
+    {
+        <li>
+            <input type="checkbox" name="@id" value="@language.Id" id="@language.Id" @{if (selectedLanguages != null && selectedLanguages.Contains(language.Id)) { <text> checked='checked' </text>  } } />
+            <label for="@language.Id">@language.Code</label>
+        </li>
+    }
+</ul>

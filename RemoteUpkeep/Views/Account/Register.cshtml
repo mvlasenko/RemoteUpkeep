@@ -1,11 +1,11 @@
-﻿@model RemoteUpkeep.Models.RegisterViewModel
+﻿@model RemoteUpkeep.ViewModels.RegisterViewModel
 @{
     ViewBag.Title = "Register";
 }
 
 <h2>@ViewBag.Title.</h2>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", id="frmRegister" }))
 {
     @Html.AntiForgeryToken()
 
@@ -42,6 +42,22 @@
     </div>
 
     <div class="form-group">
+        @Html.LabelFor(m => m.CountryId, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.CountryId, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.CountryId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Languages, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.EditorFor(m => m.Languages, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Languages, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
         @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
@@ -63,5 +79,22 @@
 }
 
 @section Scripts {
+
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+        jQuery.validator.addMethod("checkboxlistrequired", function(value, element, params) {
+            return $("#Languages input:checked").length > 0;
+        });
+
+        jQuery.validator.unobtrusive.adapters.add('checkboxlistrequired', function(options) {
+            options.messages['checkboxlistrequired'] = "Please select one or more checkboxes.";
+        });
+
+        $(document).ready(function() {
+            jQuery.validator.unobtrusive.parse('#frmRegister');
+        });
+
+    </script>
 }

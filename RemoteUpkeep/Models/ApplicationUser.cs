@@ -14,6 +14,7 @@ namespace RemoteUpkeep.Models
             this.ReceivedMessages = new List<Message>();
             this.Orders = new List<Order>();
             this.Services = new List<Service>();
+            this.Languages = new List<Language>();
         }
 
         public string FirstName { get; set; }
@@ -21,6 +22,15 @@ namespace RemoteUpkeep.Models
         public string LastName { get; set; }
 
         public UserType UserType { get; set; }
+
+        public int? CountryId { get; set; }
+
+        public virtual Country Country { get; set; }
+
+        public int? RegionId { get; set; }
+
+        public virtual Region Region { get; set; }
+
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -37,6 +47,8 @@ namespace RemoteUpkeep.Models
         public virtual ICollection<Order> Orders { get; set; }
 
         public virtual ICollection<Service> Services { get; set; }
+
+        public virtual ICollection<Language> Languages { get; set; }
 
     }
 }

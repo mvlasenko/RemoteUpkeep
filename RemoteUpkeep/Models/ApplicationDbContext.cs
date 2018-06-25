@@ -28,10 +28,39 @@ namespace RemoteUpkeep.Models
 
         public virtual DbSet<MessageAttachment> MessageAttachments { get; set; }
 
+        public virtual DbSet<Country> Countries { get; set; }
+
+        public virtual DbSet<Region> Regions { get; set; }
+
+        public virtual DbSet<Language> Languages { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            //users
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasOptional(e => e.Country)
+                .WithMany(e => e.Users)
+                .HasForeignKey(e => e.CountryId);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasOptional(e => e.Region)
+                .WithMany(e => e.Users)
+                .HasForeignKey(e => e.RegionId);
+
+            //many-to-many
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(e => e.Languages)
+                .WithMany(x => x.Users)
+                .Map(m =>
+                {
+                    m.MapLeftKey("UserId");
+                    m.MapRightKey("LanguageId");
+                    m.ToTable("UserLanguages");
+                });
 
             //services
 
