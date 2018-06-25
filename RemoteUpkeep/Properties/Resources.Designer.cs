@@ -68,5 +68,14 @@ namespace RemoteUpkeep.Properties {
                 return ResourceManager.GetString("SelectCountry", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Region.
+        /// </summary>
+        public static string SelectRegion {
+            get {
+                return ResourceManager.GetString("SelectRegion", resourceCulture);
+            }
+        }
     }
 }

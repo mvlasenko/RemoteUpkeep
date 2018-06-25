@@ -8,6 +8,7 @@ namespace RemoteUpkeep.Models
         public Target()
         {
             this.Services = new List<Service>();
+            this.Images = new List<Image>();
             this.Actions = new List<Action>();
             this.Messages = new List<Message>();
         }
@@ -21,6 +22,9 @@ namespace RemoteUpkeep.Models
 
         //many-to-many
         public virtual ICollection<Service> Services { get; set; }
+
+        //many-to-many
+        public virtual ICollection<Image> Images { get; set; }
 
         public virtual ICollection<Action> Actions { get; set; }
 

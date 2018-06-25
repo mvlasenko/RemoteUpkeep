@@ -8,7 +8,7 @@ namespace RemoteUpkeep.Models
     {
         public Message()
         {
-            this.Attachments = new List<MessageAttachment>();
+            this.Attachments = new List<Image>();
             this.Targets = new List<Target>();
         }
 
@@ -29,7 +29,7 @@ namespace RemoteUpkeep.Models
 
         public MessageType MessageType { get; set; }
 
-        public virtual ICollection<MessageAttachment> Attachments { get; set; }
+        public virtual ICollection<Image> Attachments { get; set; }
 
         public virtual ICollection<Target> Targets { get; set; }
     }

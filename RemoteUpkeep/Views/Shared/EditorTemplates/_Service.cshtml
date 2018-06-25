@@ -1,0 +1,11 @@
+@using RemoteUpkeep.Models
+@using RemoteUpkeep.Helpers
+
+@foreach (Service service in UIHelper.GetServices())
+{
+    <div class="col-md-10">
+        <label class="control-label col-md-2">
+            @Html.RadioButton("", service.Id, new { @class = "form-control" }) @service.Description
+        </label>
+    </div>
+}

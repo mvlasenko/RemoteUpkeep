@@ -1,0 +1,8 @@
+﻿@if (ViewData.ModelMetadata.IsReadOnly)
+{
+    @Html.TextArea("", @Html.Raw(HttpUtility.HtmlDecode(ViewData.TemplateInfo.FormattedModelValue.ToString())).ToString(), 4, 60, new { @class = "form-control", @style = "min-width: 100%;", @readonly = "readonly" })
+}
+else
+{
+    @Html.TextArea("", @Html.Raw(HttpUtility.HtmlDecode(ViewData.TemplateInfo.FormattedModelValue.ToString())).ToString(), 4, 60, new { @class = "form-control", @style = "min-width: 100%;" })
+}

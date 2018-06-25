@@ -11,7 +11,7 @@
     {
         <li>
             <input type="checkbox" name="@id" value="@language.Id" id="@language.Id" @{if (selectedLanguages != null && selectedLanguages.Contains(language.Id)) { <text> checked='checked' </text>  } } />
-            <label for="@language.Id">@language.Code</label>
+            <label for="@language.Id">@language.Title</label>
         </li>
     }
 </ul>

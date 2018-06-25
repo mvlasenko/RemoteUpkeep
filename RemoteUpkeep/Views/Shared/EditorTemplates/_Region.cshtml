@@ -1,0 +1,3 @@
+@using RemoteUpkeep.Helpers
+@using RemoteUpkeep.Properties
+@Html.DropDownList("", new SelectList(UIHelper.GetRegions(), "Id", "Title", ViewData.TemplateInfo.FormattedModelValue.ToString()), string.Format("< {0} >", Resources.SelectRegion), new { @class = "form-control" })

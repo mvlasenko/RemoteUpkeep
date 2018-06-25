@@ -26,7 +26,7 @@ namespace RemoteUpkeep.Models
 
         public virtual DbSet<Message> Messages { get; set; }
 
-        public virtual DbSet<MessageAttachment> MessageAttachments { get; set; }
+        public virtual DbSet<Image> Images { get; set; }
 
         public virtual DbSet<Country> Countries { get; set; }
 
@@ -125,12 +125,29 @@ namespace RemoteUpkeep.Models
                 .HasForeignKey(e => e.ReceiverId)
                 .WillCascadeOnDelete(false);
 
-            //message attachments
+            //images
 
-            modelBuilder.Entity<MessageAttachment>()
-                .HasRequired(e => e.Message)
-                .WithMany(e => e.Attachments)
-                .HasForeignKey(e => e.MessageId);
+            //many-to-many
+            modelBuilder.Entity<Image>()
+                .HasMany(e => e.Messages)
+                .WithMany(x => x.Attachments)
+                .Map(m =>
+                {
+                    m.MapLeftKey("ImageId");
+                    m.MapRightKey("MessageId");
+                    m.ToTable("Attachments");
+                });
+
+            //many-to-many
+            modelBuilder.Entity<Image>()
+                .HasMany(e => e.Targets)
+                .WithMany(x => x.Images)
+                .Map(m =>
+                {
+                    m.MapLeftKey("ImageId");
+                    m.MapRightKey("TargetId");
+                    m.ToTable("TargetImages");
+                });
 
         }
 

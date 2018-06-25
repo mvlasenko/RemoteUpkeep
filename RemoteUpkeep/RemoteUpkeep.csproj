@@ -236,7 +236,7 @@
     <Compile Include="Models\Location.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\Message.cs" />
-    <Compile Include="Models\MessageAttachment.cs" />
+    <Compile Include="Models\Image.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="Models\Region.cs" />
     <Compile Include="Models\Target.cs" />
@@ -310,6 +310,10 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\_Country.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\_Languages.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\_Service.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\_Region.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\MultilineText.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\_FileUpload.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

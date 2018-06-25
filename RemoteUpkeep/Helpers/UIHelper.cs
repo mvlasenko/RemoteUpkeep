@@ -14,6 +14,14 @@ namespace RemoteUpkeep.Helpers
             }
         }
 
+        public static List<Region> GetRegions()
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                return context.Regions.ToList();
+            }
+        }
+
         public static List<Language> GetLanguages()
         {
             using (var context = new ApplicationDbContext())
@@ -21,5 +29,14 @@ namespace RemoteUpkeep.Helpers
                 return context.Languages.ToList();
             }
         }
+
+        public static List<Service> GetServices()
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                return context.Services.ToList();
+            }
+        }
+
     }
 }
