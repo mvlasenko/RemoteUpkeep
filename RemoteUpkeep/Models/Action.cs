@@ -8,8 +8,10 @@ namespace RemoteUpkeep.Models
         [Key]
         public int Id { get; set; }
 
+        [UIHint("MultilineText")]
         public string Description { get; set; }
 
+        [UIHint("_DatePicker")]
         public DateTime? DueDate { get; set; }
 
         public int TargetId { get; set; }

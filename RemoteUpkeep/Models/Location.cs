@@ -17,6 +17,7 @@ namespace RemoteUpkeep.Models
 
         public string Title { get; set; }
 
+        [UIHint("MultilineText")]
         public string Description { get; set; }
 
         public DbGeography Geography { get; set; }

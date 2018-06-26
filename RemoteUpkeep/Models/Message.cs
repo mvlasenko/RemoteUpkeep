@@ -23,6 +23,7 @@ namespace RemoteUpkeep.Models
 
         public virtual ApplicationUser Receiver { get; set; }
 
+        [UIHint("MultilineText")]
         public string Text { get; set; }
 
         public DateTime Date { get; set; }

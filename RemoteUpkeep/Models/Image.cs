@@ -14,7 +14,6 @@ namespace RemoteUpkeep.Models
         }
 
         [Key]
-        [ScaffoldColumn(false)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
@@ -22,6 +21,7 @@ namespace RemoteUpkeep.Models
 
         public byte[] Binary { get; set; }
 
+        [UIHint("MultilineText")]
         public string Text { get; set; }
 
         public DateTime CreatedDateTime { get; set; }

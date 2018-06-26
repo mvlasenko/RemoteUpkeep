@@ -1,15 +1,23 @@
-﻿@model RemoteUpkeep.Models.Service
+﻿@model RemoteUpkeep.Models.Location
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Details</h2>
 
 <div>
-    <h4>Service</h4>
+    <h4>Location</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ChangedBy.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChangedBy.FirstName)
+        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Title)
@@ -28,11 +36,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CreatedDate)
+            @Html.DisplayNameFor(model => model.Geography)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CreatedDate)
+            @Html.DisplayFor(model => model.Geography)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChangedDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChangedDateTime)
         </dd>
 
     </dl>

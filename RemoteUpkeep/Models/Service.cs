@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
 
 namespace RemoteUpkeep.Models
 {
@@ -13,12 +12,11 @@ namespace RemoteUpkeep.Models
         }
 
         [Key]
-        [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
+        [UIHint("MultilineText")]
         public string Description { get; set; }
 
-        [HiddenInput(DisplayValue = false)]
         public string CreatedByUserId { get; set; }
 
         public virtual ApplicationUser CreatedBy { get; set; }

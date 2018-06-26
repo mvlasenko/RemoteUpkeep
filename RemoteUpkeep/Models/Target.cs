@@ -25,6 +25,7 @@ namespace RemoteUpkeep.Models
 
         public virtual Location Location { get; set; }
 
+        [UIHint("MultilineText")]
         public string Description { get; set; }
 
         public string ChangedByUserId { get; set; }

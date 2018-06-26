@@ -6,113 +6,105 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
 using RemoteUpkeep.Models;
 
-namespace RemoteUpkeep.Controllers
+namespace RemoteUpkeep.Areas.Admin.Controllers
 {
-    public class ServicesController : Controller
+    public class CountriesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Services
+        // GET: Admin/Countries
         public ActionResult Index()
         {
-            var services = db.Services.Include(s => s.CreatedBy);
-            return View(services.ToList());
+            return View(db.Countries.ToList());
         }
 
-        // GET: Services/Details/5
+        // GET: Admin/Countries/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Service service = db.Services.Find(id);
-            if (service == null)
+            Country country = db.Countries.Find(id);
+            if (country == null)
             {
                 return HttpNotFound();
             }
-            return View(service);
+            return View(country);
         }
 
-        // GET: Services/Create
+        // GET: Admin/Countries/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Services/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Service service)
+        public ActionResult Create(Country country)
         {
             if (ModelState.IsValid)
             {
-                service.CreatedDateTime = DateTime.Now;
-                service.CreatedByUserId = this.User.Identity.GetUserId();
-
-                db.Services.Add(service);
+                db.Countries.Add(country);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(service);
+
+            return View(country);
         }
 
-        // GET: Services/Edit/5
+        // GET: Admin/Countries/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Service service = db.Services.Find(id);
-            if (service == null)
+            Country country = db.Countries.Find(id);
+            if (country == null)
             {
                 return HttpNotFound();
             }
-            return View(service);
+            return View(country);
         }
 
-        // POST: Services/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Service service)
+        public ActionResult Edit(Country country)
         {
             if (ModelState.IsValid)
             {
-                service.CreatedByUserId = this.User.Identity.GetUserId();
-
-                db.Entry(service).State = EntityState.Modified;
+                db.Entry(country).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(service);
+            return View(country);
         }
 
-        // GET: Services/Delete/5
+        // GET: Admin/Countries/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Service service = db.Services.Find(id);
-            if (service == null)
+            Country country = db.Countries.Find(id);
+            if (country == null)
             {
                 return HttpNotFound();
             }
-            return View(service);
+            return View(country);
         }
 
-        // POST: Services/Delete/5
+        // POST: Admin/Countries/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Service service = db.Services.Find(id);
-            db.Services.Remove(service);
+            Country country = db.Countries.Find(id);
+            db.Countries.Remove(country);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

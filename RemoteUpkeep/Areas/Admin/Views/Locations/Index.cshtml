@@ -1,7 +1,8 @@
-﻿@model IEnumerable<RemoteUpkeep.Models.Service>
+﻿@model IEnumerable<RemoteUpkeep.Models.Location>
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Index</h2>
@@ -12,13 +13,19 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.ChangedBy.FirstName)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CreatedDate)
+            @Html.DisplayNameFor(model => model.Geography)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChangedDateTime)
         </th>
         <th></th>
     </tr>
@@ -26,13 +33,19 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.ChangedBy.FirstName)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CreatedDate)
+            @Html.DisplayFor(modelItem => item.Geography)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChangedDateTime)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
