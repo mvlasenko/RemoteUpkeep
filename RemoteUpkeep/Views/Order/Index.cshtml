@@ -7,11 +7,9 @@
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm("StepOne", "Order", FormMethod.Post))
+@using (Html.BeginForm("StepOne", "Order", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "frmOrder" }))
 {
     @Html.AntiForgeryToken()
-
-<div id="OrderForm" class="form-horizontal">
 
     <div class="form-group">
         @Html.EditorFor(model => model.ServiceId, new { htmlAttributes = new { @class = "form-control" } })
@@ -22,5 +20,4 @@
             <input type="submit" value="Next" class="btn btn-default" />
         </div>
     </div>
-</div>
 }

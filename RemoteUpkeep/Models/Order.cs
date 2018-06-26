@@ -8,18 +8,25 @@ namespace RemoteUpkeep.Models
     {
         public Order()
         {
-            this.Targets = new List<Target>();
+            this.Services = new List<Service>();
         }
 
         [Key]
         public int Id { get; set; }
 
+        public int TargetId { get; set; }
+
+        public virtual Target Target { get; set; }
+
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime CreatedDateTime { get; set; }
 
-        public virtual ICollection<Target> Targets { get; set; }
+        public OrderType OrderType { get; set; }
+
+        //many-to-many
+        public virtual ICollection<Service> Services { get; set; }
     }
 }

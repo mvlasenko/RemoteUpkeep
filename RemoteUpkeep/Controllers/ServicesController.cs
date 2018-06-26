@@ -50,7 +50,7 @@ namespace RemoteUpkeep.Controllers
         {
             if (ModelState.IsValid)
             {
-                service.CreatedDate = DateTime.Now;
+                service.CreatedDateTime = DateTime.Now;
                 service.CreatedByUserId = this.User.Identity.GetUserId();
 
                 db.Services.Add(service);

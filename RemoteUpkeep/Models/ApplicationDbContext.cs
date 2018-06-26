@@ -66,27 +66,45 @@ namespace RemoteUpkeep.Models
 
             modelBuilder.Entity<Service>()
                 .HasRequired(e => e.CreatedBy)
-                .WithMany(e => e.Services)
-                .HasForeignKey(e => e.CreatedByUserId);
+                .WithMany(e => e.ChangedServices)
+                .HasForeignKey(e => e.CreatedByUserId)
+                .WillCascadeOnDelete(false);
+
+            //many-to-many
+            modelBuilder.Entity<Service>()
+                .HasMany(e => e.Orders)
+                .WithMany(x => x.Services)
+                .Map(m =>
+                {
+                    m.MapLeftKey("ServiceId");
+                    m.MapRightKey("OrderId");
+                    m.ToTable("ServiceOrders");
+                });
 
             //orders
 
             modelBuilder.Entity<Order>()
-                .HasRequired(e => e.User)
+                .HasRequired(e => e.Target)
                 .WithMany(e => e.Orders)
-                .HasForeignKey(e => e.UserId);
+                .HasForeignKey(e => e.TargetId);
+
+            modelBuilder.Entity<Order>()
+                .HasRequired(e => e.User)
+                .WithMany(e => e.UserOrders)
+                .HasForeignKey(e => e.UserId)
+                .WillCascadeOnDelete(false);
 
             //targets
 
             //many-to-many
             modelBuilder.Entity<Target>()
-                .HasMany(e => e.Services)
+                .HasMany(e => e.Images)
                 .WithMany(x => x.Targets)
                 .Map(m =>
                 {
                     m.MapLeftKey("TargetId");
-                    m.MapRightKey("ServiceId");
-                    m.ToTable("ServiceTargets");
+                    m.MapRightKey("ImageId");
+                    m.ToTable("TargetImages");
                 });
 
             //many-to-many
@@ -97,13 +115,23 @@ namespace RemoteUpkeep.Models
                 {
                     m.MapLeftKey("TargetId");
                     m.MapRightKey("MessageId");
-                    m.ToTable("MessageTargets");
+                    m.ToTable("TargetMessages");
                 });
 
             modelBuilder.Entity<Target>()
-                .HasRequired(e => e.Location)
+                .HasRequired(e => e.Region)
+                .WithMany(e => e.Targets)
+                .HasForeignKey(e => e.RegionId);
+
+            modelBuilder.Entity<Target>()
+                .HasOptional(e => e.Location)
                 .WithMany(e => e.Targets)
                 .HasForeignKey(e => e.LocationId);
+
+            modelBuilder.Entity<Target>()
+                .HasOptional(e => e.ChangedBy)
+                .WithMany(e => e.ChangedTargets)
+                .HasForeignKey(e => e.ChangedByUserId);
 
             //actions
 
@@ -111,6 +139,23 @@ namespace RemoteUpkeep.Models
                 .HasRequired(e => e.Target)
                 .WithMany(e => e.Actions)
                 .HasForeignKey(e => e.TargetId);
+
+            modelBuilder.Entity<Action>()
+                .HasOptional(e => e.AssignedUser)
+                .WithMany(e => e.AssignedActions)
+                .HasForeignKey(e => e.AssignedUserId);
+
+            modelBuilder.Entity<Action>()
+                .HasOptional(e => e.ChangedBy)
+                .WithMany(e => e.ChangedActions)
+                .HasForeignKey(e => e.ChangedByUserId);
+
+            //locations
+
+            modelBuilder.Entity<Location>()
+                .HasOptional(e => e.ChangedBy)
+                .WithMany(e => e.ChangedLocations)
+                .HasForeignKey(e => e.ChangedByUserId);
 
             //messages
 
@@ -125,31 +170,17 @@ namespace RemoteUpkeep.Models
                 .HasForeignKey(e => e.ReceiverId)
                 .WillCascadeOnDelete(false);
 
-            //images
-
             //many-to-many
-            modelBuilder.Entity<Image>()
-                .HasMany(e => e.Messages)
-                .WithMany(x => x.Attachments)
+            modelBuilder.Entity<Message>()
+                .HasMany(e => e.Attachments)
+                .WithMany(x => x.Messages)
                 .Map(m =>
                 {
-                    m.MapLeftKey("ImageId");
-                    m.MapRightKey("MessageId");
-                    m.ToTable("Attachments");
-                });
-
-            //many-to-many
-            modelBuilder.Entity<Image>()
-                .HasMany(e => e.Targets)
-                .WithMany(x => x.Images)
-                .Map(m =>
-                {
-                    m.MapLeftKey("ImageId");
-                    m.MapRightKey("TargetId");
-                    m.ToTable("TargetImages");
+                    m.MapLeftKey("MessageId");
+                    m.MapRightKey("ImageId");
+                    m.ToTable("MessageAttachments");
                 });
 
         }
-
     }
 }

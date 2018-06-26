@@ -17,4 +17,12 @@ namespace RemoteUpkeep.Models
         Admin = 1,
         LocalDealer = 2
     }
+
+    public enum OrderType
+    {
+        New = 0,
+        Ongoing = 1,
+        Closed = 2
+    }
+
 }

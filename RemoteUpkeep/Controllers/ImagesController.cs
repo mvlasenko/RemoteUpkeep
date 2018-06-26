@@ -17,52 +17,56 @@ namespace Bionet4.Admin.Controllers
         {
             using (var context = new ApplicationDbContext())
             {
-                var imageEntity = context.Images.FirstOrDefault(x => x.Id == new Guid(id));
+                Image image = context.Images.FirstOrDefault(x => x.Id == new Guid(id));
 
                 string key = "File_" + id;
 
                 byte[] binary = this.HttpContext.Cache[key] as byte[];
                 if (binary == null)
                 {
-                    binary = ImageHelper.GetImageCroped(imageEntity.Binary, 100, 100, true);
+                    binary = ImageHelper.GetImageCroped(image.Binary, 100, 100, true);
                     this.HttpContext.Cache.Insert(key, binary);
                 }
 
-                return File(new MemoryStream(binary), ImageHelper.GetContentType(Path.GetExtension(imageEntity.Name)), imageEntity.Name);
+                return File(new MemoryStream(binary), ImageHelper.GetContentType(Path.GetExtension(image.Name)), image.Name);
             }
         }
 
         [HttpPost]
-        public virtual ActionResult FileUpload(HttpPostedFileBase[] httpFiles)
+        public virtual ActionResult FileUpload(HttpPostedFileBase[] files)
         {
-            List<PostedFile> files = new List<PostedFile>();
+            List<PostedFile> postedFiles = new List<PostedFile>();
 
-            foreach (HttpPostedFileBase httpFile in httpFiles)
+            foreach (HttpPostedFileBase file in files)
             {
                 var memStream = new MemoryStream();
-                httpFile.InputStream.CopyTo(memStream);
+                file.InputStream.CopyTo(memStream);
 
                 byte[] fileData = memStream.ToArray();
 
                 using (var context = new ApplicationDbContext())
                 {
-                    Image newImage = new Image { Binary = fileData, Name = httpFile.FileName, CreatedDateTime = DateTime.Now };
-                    newImage = context.Images.Add(newImage);
-                    context.SaveChanges();
-
-                    files.Add(new PostedFile
+                    Image image = context.Images.Where(x => x.Name == file.FileName).ToList().FirstOrDefault(x => x.Binary.Length == fileData.Length);
+                    if (image == null)
                     {
-                        id = newImage.Id.ToString(),
-                        url = "/admin/Images/Image/" + newImage.Id,
-                        type = ImageHelper.GetContentType(Path.GetExtension(newImage.Name)),
+                        image = new Image { Binary = fileData, Name = file.FileName, CreatedDateTime = DateTime.Now };
+                        image = context.Images.Add(image);
+                        context.SaveChanges();
+                    }
+
+                    postedFiles.Add(new PostedFile
+                    {
+                        id = image.Id.ToString(),
+                        url = "/Images/Image/" + image.Id,
+                        type = ImageHelper.GetContentType(Path.GetExtension(image.Name)),
                         thumbnailUrl = "/Content/images/image.png",
-                        size = newImage.Binary.Length,
-                        name = newImage.Name
+                        size = image.Binary.Length,
+                        name = image.Name
                     });
                 }
             }
 
-            return Json(new { files });
+            return Json(new { files = postedFiles });
         }
     }
 }

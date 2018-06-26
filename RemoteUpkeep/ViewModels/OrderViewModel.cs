@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Drawing;
 
 namespace RemoteUpkeep.ViewModels
 {
@@ -25,10 +23,12 @@ namespace RemoteUpkeep.ViewModels
 
         [Display(Name = "Images")]
         [UIHint("_FileUpload")]
-        public List<Image> Images { get; set; }
+        public string Images { get; set; }
 
-        [Display(Name = "DueDate")]
+        [Display(Name = "Due Date")]
         [UIHint("_DatePicker")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? DueDate { get; set; }
     }
 }

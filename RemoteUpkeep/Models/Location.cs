@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity.Spatial;
 
@@ -19,6 +20,12 @@ namespace RemoteUpkeep.Models
         public string Description { get; set; }
 
         public DbGeography Geography { get; set; }
+
+        public string ChangedByUserId { get; set; }
+
+        public virtual ApplicationUser ChangedBy { get; set; }
+
+        public DateTime ChangedDateTime { get; set; }
 
         public virtual ICollection<Target> Targets { get; set; }
     }

@@ -10,11 +10,22 @@ namespace RemoteUpkeep.Models
     {
         public ApplicationUser()
         {
+            this.Languages = new List<Language>();
+
             this.SentMessages = new List<Message>();
             this.ReceivedMessages = new List<Message>();
-            this.Orders = new List<Order>();
-            this.Services = new List<Service>();
-            this.Languages = new List<Language>();
+
+            //client-specific
+            this.UserOrders = new List<Order>();
+
+            //admin-specific
+            this.ChangedServices = new List<Service>();
+            this.ChangedTargets = new List<Target>();
+            this.ChangedActions = new List<Action>();
+            this.ChangedLocations = new List<Location>();
+
+            //dealer-specific
+            this.AssignedActions = new List<Action>();
         }
 
         public string FirstName { get; set; }
@@ -40,15 +51,23 @@ namespace RemoteUpkeep.Models
             return userIdentity;
         }
 
+        public virtual ICollection<Language> Languages { get; set; }
+
         public virtual ICollection<Message> SentMessages { get; set; }
 
         public virtual ICollection<Message> ReceivedMessages { get; set; }
 
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Order> UserOrders { get; set; }
 
-        public virtual ICollection<Service> Services { get; set; }
+        public virtual ICollection<Service> ChangedServices { get; set; }
 
-        public virtual ICollection<Language> Languages { get; set; }
+        public virtual ICollection<Target> ChangedTargets { get; set; }
+
+        public virtual ICollection<Action> ChangedActions { get; set; }
+
+        public virtual ICollection<Location> ChangedLocations { get; set; }
+
+        public virtual ICollection<Action> AssignedActions { get; set; }
 
     }
 }

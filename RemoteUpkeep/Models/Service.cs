@@ -9,28 +9,24 @@ namespace RemoteUpkeep.Models
     {
         public Service()
         {
-            this.Targets = new List<Target>();
+            this.Orders = new List<Order>();
         }
 
         [Key]
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
-        public string Title { get; set; }
-
         public string Description { get; set; }
 
         [HiddenInput(DisplayValue = false)]
         public string CreatedByUserId { get; set; }
 
-        [ScaffoldColumn(false)]
         public virtual ApplicationUser CreatedBy { get; set; }
 
-        [HiddenInput(DisplayValue = false)]
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreatedDateTime { get; set; }
 
         //many-to-many
-        public virtual ICollection<Target> Targets { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
 
     }
 }
