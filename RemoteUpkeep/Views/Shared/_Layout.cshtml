@@ -21,9 +21,9 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" })</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
 
-                    <li>@Html.ActionLink("Order", "Index", "Order", new { area = "" })</li>
+                    <li>@Html.ActionLink("Order", "Index", "Order", new { area = "" }, null)</li>
 
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -31,17 +31,15 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink("Services", "Index", "Services", new { area = "Admin" })</li>
-                                <li>@Html.ActionLink("Orders", "Index", "Orders", new { area = "Admin" })</li>
-                                <li>@Html.ActionLink("Targets", "Index", "Targets", new { area = "Admin" })</li>
-                                <li>@Html.ActionLink("Locations", "Index", "Locations", new { area = "Admin" })</li>
-                                <li>@Html.ActionLink("Actions", "Index", "Actions", new { area = "Admin" })</li>
-                                <li>@Html.ActionLink("Messages", "Index", "Messages", new { area = "Admin" })</li>
-                                <li>@Html.ActionLink("Countries", "Index", "Countries", new { area = "Admin" })</li>
-                                <li>@Html.ActionLink("Regions", "Index", "Regions", new { area = "Admin" })</li>
-                                <li>@Html.ActionLink("Languages", "Index", "Languages", new { area = "Admin" })</li>
-                            </ul>
+                            <li>@Html.ActionLink("Services", "Index", "Services", new { area = "Admin" }, null)</li>
+                            <li>@Html.ActionLink("Orders", "Index", "Orders", new { area = "Admin" }, null)</li>
+                            <li>@Html.ActionLink("Targets", "Index", "Targets", new { area = "Admin" }, null)</li>
+                            <li>@Html.ActionLink("Locations", "Index", "Locations", new { area = "Admin" }, null)</li>
+                            <li>@Html.ActionLink("Actions", "Index", "Actions", new { area = "Admin" }, null)</li>
+                            <li>@Html.ActionLink("Messages", "Index", "Messages", new { area = "Admin" }, null)</li>
+                            <li>@Html.ActionLink("Countries", "Index", "Countries", new { area = "Admin" }, null)</li>
+                            <li>@Html.ActionLink("Regions", "Index", "Regions", new { area = "Admin" }, null)</li>
+                            <li>@Html.ActionLink("Languages", "Index", "Languages", new { area = "Admin" }, null)</li>
                         </ul>
                     </li>
 
@@ -55,7 +53,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Remote Upkeep Service</p>
         </footer>
     </div>
 
