@@ -15,10 +15,12 @@ namespace RemoteUpkeep.Models
         [Key]
         public int Id { get; set; }
 
+        [UIHint("_User")]
         public string SenderId { get; set; }
 
         public virtual ApplicationUser Sender { get; set; }
 
+        [UIHint("_User")]
         public string ReceiverId { get; set; }
 
         public virtual ApplicationUser Receiver { get; set; }

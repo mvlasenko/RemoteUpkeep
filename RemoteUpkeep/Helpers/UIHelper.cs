@@ -38,6 +38,30 @@ namespace RemoteUpkeep.Helpers
             }
         }
 
+        public static List<Target> GetTargets()
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                return context.Targets.ToList();
+            }
+        }
+
+        public static List<ApplicationUser> GetUsers()
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                return context.Users.ToList();
+            }
+        }
+
+        public static List<Location> GetLocations()
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                return context.Locations.ToList();
+            }
+        }
+
         public static string GetDateFormat()
         {
             return "DD/MM/YYYY";

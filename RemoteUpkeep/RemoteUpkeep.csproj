@@ -334,51 +334,34 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\Services\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Services\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Services\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Services\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Services\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Targets\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Targets\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Targets\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Targets\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Targets\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Regions\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Regions\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Regions\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Regions\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Regions\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Countries\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Countries\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Countries\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Countries\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Countries\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Languages\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Languages\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Languages\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Languages\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Languages\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Orders\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Orders\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Orders\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Orders\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Orders\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Locations\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Locations\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Locations\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Locations\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Locations\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Messages\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Messages\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Messages\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Messages\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Messages\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Actions\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Actions\Delete.cshtml" />
-    <Content Include="Areas\Admin\Views\Actions\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Actions\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Actions\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AdminHome\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Delete.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
@@ -448,6 +431,9 @@
     <Content Include="Views\Shared\EditorTemplates\_FileUpload.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\_DatePicker.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\_DateTimePicker.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\_Target.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\_User.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\_Location.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -458,9 +444,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Areas\Admin\Views\Shared\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

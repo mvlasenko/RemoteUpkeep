@@ -14,10 +14,12 @@ namespace RemoteUpkeep.Models
         [UIHint("_DatePicker")]
         public DateTime? DueDate { get; set; }
 
+        [UIHint("_Target")]
         public int TargetId { get; set; }
 
         public virtual Target Target { get; set; }
 
+        [UIHint("_User")]
         public string AssignedUserId { get; set; }
 
         public virtual ApplicationUser AssignedUser { get; set; }

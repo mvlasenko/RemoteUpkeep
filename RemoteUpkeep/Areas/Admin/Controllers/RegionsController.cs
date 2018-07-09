@@ -16,21 +16,6 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
             return View(db.Regions.ToList());
         }
 
-        // GET: Admin/Regions/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Region region = db.Regions.Find(id);
-            if (region == null)
-            {
-                return HttpNotFound();
-            }
-            return View(region);
-        }
-
         // GET: Admin/Regions/Create
         public ActionResult Create()
         {

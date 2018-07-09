@@ -1,0 +1,3 @@
+@using RemoteUpkeep.Helpers
+@using RemoteUpkeep.Properties
+@Html.DropDownList("", new SelectList(UIHelper.GetUsers(), "Id", "FullName", ViewData.TemplateInfo.FormattedModelValue.ToString()), string.Format("< {0} >", Resources.SelectUser), new { @class = "form-control" })

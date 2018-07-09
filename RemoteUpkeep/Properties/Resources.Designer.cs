@@ -70,11 +70,38 @@ namespace RemoteUpkeep.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select Location.
+        /// </summary>
+        public static string SelectLocation {
+            get {
+                return ResourceManager.GetString("SelectLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select Region.
         /// </summary>
         public static string SelectRegion {
             get {
                 return ResourceManager.GetString("SelectRegion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Target.
+        /// </summary>
+        public static string SelectTarget {
+            get {
+                return ResourceManager.GetString("SelectTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select User.
+        /// </summary>
+        public static string SelectUser {
+            get {
+                return ResourceManager.GetString("SelectUser", resourceCulture);
             }
         }
     }

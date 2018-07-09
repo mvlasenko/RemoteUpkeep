@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -18,21 +16,6 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         {
             var orders = db.Orders.Include(o => o.Target).Include(o => o.User);
             return View(orders.ToList());
-        }
-
-        // GET: Admin/Orders/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Order order = db.Orders.Find(id);
-            if (order == null)
-            {
-                return HttpNotFound();
-            }
-            return View(order);
         }
 
         // GET: Admin/Orders/Create

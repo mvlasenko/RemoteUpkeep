@@ -17,10 +17,12 @@ namespace RemoteUpkeep.Models
         [Key]
         public int Id { get; set; }
 
+        [UIHint("_Region")]
         public int RegionId { get; set; }
 
         public virtual Region Region { get; set; }
 
+        [UIHint("_Location")]
         public int? LocationId { get; set; }
 
         public virtual Location Location { get; set; }

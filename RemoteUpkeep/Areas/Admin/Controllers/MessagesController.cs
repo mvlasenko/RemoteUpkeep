@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using RemoteUpkeep.Models;
@@ -20,21 +17,6 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         {
             var messages = db.Messages.Include(m => m.Receiver).Include(m => m.Sender);
             return View(messages.ToList());
-        }
-
-        // GET: Admin/Messages/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Message message = db.Messages.Find(id);
-            if (message == null)
-            {
-                return HttpNotFound();
-            }
-            return View(message);
         }
 
         // GET: Admin/Messages/Create

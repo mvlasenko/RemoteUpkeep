@@ -19,21 +19,6 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
             return View(targets.ToList());
         }
 
-        // GET: Admin/Targets/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Target target = db.Targets.Find(id);
-            if (target == null)
-            {
-                return HttpNotFound();
-            }
-            return View(target);
-        }
-
         // GET: Admin/Targets/Create
         public ActionResult Create()
         {

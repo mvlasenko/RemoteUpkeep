@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using RemoteUpkeep.Models;
 
@@ -18,21 +14,6 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         public ActionResult Index()
         {
             return View(db.Languages.ToList());
-        }
-
-        // GET: Admin/Languages/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Language language = db.Languages.Find(id);
-            if (language == null)
-            {
-                return HttpNotFound();
-            }
-            return View(language);
         }
 
         // GET: Admin/Languages/Create

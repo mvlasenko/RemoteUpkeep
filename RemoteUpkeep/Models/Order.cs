@@ -14,10 +14,12 @@ namespace RemoteUpkeep.Models
         [Key]
         public int Id { get; set; }
 
+        [UIHint("_Target")]
         public int TargetId { get; set; }
 
         public virtual Target Target { get; set; }
 
+        [UIHint("_User")]
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }

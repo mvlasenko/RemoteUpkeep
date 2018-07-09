@@ -42,6 +42,14 @@ namespace RemoteUpkeep.Models
 
         public virtual Region Region { get; set; }
 
+        public string FullName
+        {
+            get
+            {
+                return this.FirstName + " " + this.LastName;
+
+            }
+        }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

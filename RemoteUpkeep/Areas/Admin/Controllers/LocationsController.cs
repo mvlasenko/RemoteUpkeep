@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using RemoteUpkeep.Models;
@@ -20,21 +17,6 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         {
             var locations = db.Locations.Include(l => l.ChangedBy);
             return View(locations.ToList());
-        }
-
-        // GET: Admin/Locations/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Location location = db.Locations.Find(id);
-            if (location == null)
-            {
-                return HttpNotFound();
-            }
-            return View(location);
         }
 
         // GET: Admin/Locations/Create
