@@ -16,11 +16,13 @@ namespace RemoteUpkeep.Models
         public int Id { get; set; }
 
         [UIHint("_User")]
+        [Display(Name = "Sender")]
         public string SenderId { get; set; }
 
         public virtual ApplicationUser Sender { get; set; }
 
         [UIHint("_User")]
+        [Display(Name = "Receiver")]
         public string ReceiverId { get; set; }
 
         public virtual ApplicationUser Receiver { get; set; }
@@ -30,6 +32,7 @@ namespace RemoteUpkeep.Models
 
         public DateTime Date { get; set; }
 
+        [Display(Name = "Type")]
         public MessageType MessageType { get; set; }
 
         public virtual ICollection<Image> Attachments { get; set; }

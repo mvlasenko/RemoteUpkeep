@@ -22,7 +22,11 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         // GET: Admin/Messages/Create
         public ActionResult Create()
         {
-            return View();
+            Message message = new Message();
+            message.Date = DateTime.Now;
+            message.SenderId = this.User.Identity.GetUserId();
+
+            return View(message);
         }
 
         [HttpPost]
@@ -34,40 +38,11 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
                 message.Date = DateTime.Now;
                 message.SenderId = this.User.Identity.GetUserId();
 
+                //todo
+                message.MessageType = MessageType.Email;
+                //todo: send email
+
                 db.Messages.Add(message);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(message);
-        }
-
-        // GET: Admin/Messages/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Message message = db.Messages.Find(id);
-            if (message == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(message);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Message message)
-        {
-            if (ModelState.IsValid)
-            {
-                message.Date = DateTime.Now;
-                message.SenderId = this.User.Identity.GetUserId();
-
-                db.Entry(message).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

@@ -22,7 +22,11 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         // GET: Admin/Locations/Create
         public ActionResult Create()
         {
-            return View();
+            Location location = new Location();
+            location.ChangedDateTime = DateTime.Now;
+            location.ChangedByUserId = this.User.Identity.GetUserId();
+
+            return View(location);
         }
 
         [HttpPost]

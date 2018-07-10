@@ -18,11 +18,13 @@ namespace RemoteUpkeep.Models
         public int Id { get; set; }
 
         [UIHint("_Region")]
+        [Display(Name = "Region")]
         public int RegionId { get; set; }
 
         public virtual Region Region { get; set; }
 
         [UIHint("_Location")]
+        [Display(Name = "Location")]
         public int? LocationId { get; set; }
 
         public virtual Location Location { get; set; }
@@ -30,10 +32,12 @@ namespace RemoteUpkeep.Models
         [UIHint("MultilineText")]
         public string Description { get; set; }
 
+        [Display(Name = "Changed By")]
         public string ChangedByUserId { get; set; }
 
         public virtual ApplicationUser ChangedBy { get; set; }
 
+        [Display(Name = "Changed")]
         public DateTime ChangedDateTime { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }

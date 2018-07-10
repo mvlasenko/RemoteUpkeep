@@ -12,22 +12,27 @@ namespace RemoteUpkeep.Models
         public string Description { get; set; }
 
         [UIHint("_DatePicker")]
+        [Display(Name = "Due Date")]
         public DateTime? DueDate { get; set; }
 
         [UIHint("_Target")]
+        [Display(Name = "Target")]
         public int TargetId { get; set; }
 
         public virtual Target Target { get; set; }
 
         [UIHint("_User")]
+        [Display(Name = "Assigned User")]
         public string AssignedUserId { get; set; }
 
         public virtual ApplicationUser AssignedUser { get; set; }
 
+        [Display(Name = "Changed By")]
         public string ChangedByUserId { get; set; }
 
         public virtual ApplicationUser ChangedBy { get; set; }
 
+        [Display(Name = "Changed")]
         public DateTime ChangedDateTime { get; set; }
     }
 }

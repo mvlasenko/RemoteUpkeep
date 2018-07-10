@@ -21,7 +21,10 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         // GET: Admin/Orders/Create
         public ActionResult Create()
         {
-            return View();
+            Order order = new Order();
+            order.CreatedDateTime = DateTime.Now;
+
+            return View(order);
         }
 
         [HttpPost]
@@ -36,8 +39,6 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.TargetId = new SelectList(db.Targets, "Id", "Description", order.TargetId);
 
             return View(order);
         }
@@ -54,7 +55,6 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.TargetId = new SelectList(db.Targets, "Id", "Description", order.TargetId);
 
             return View(order);
         }
@@ -71,7 +71,6 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.TargetId = new SelectList(db.Targets, "Id", "Description", order.TargetId);
 
             return View(order);
         }

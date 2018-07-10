@@ -22,9 +22,11 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         // GET: Admin/Targets/Create
         public ActionResult Create()
         {
-            ViewBag.LocationId = new SelectList(db.Locations, "Id", "Title");
-            ViewBag.RegionId = new SelectList(db.Regions, "Id", "Title");
-            return View();
+            Target target = new Target();
+            target.ChangedDateTime = DateTime.Now;
+            target.ChangedByUserId = this.User.Identity.GetUserId();
+
+            return View(target);
         }
 
         [HttpPost]
@@ -41,8 +43,6 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.LocationId = new SelectList(db.Locations, "Id", "Title", target.LocationId);
-            ViewBag.RegionId = new SelectList(db.Regions, "Id", "Title", target.RegionId);
             return View(target);
         }
 
@@ -58,8 +58,7 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.LocationId = new SelectList(db.Locations, "Id", "Title", target.LocationId);
-            ViewBag.RegionId = new SelectList(db.Regions, "Id", "Title", target.RegionId);
+
             return View(target);
         }
 
@@ -76,8 +75,7 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.LocationId = new SelectList(db.Locations, "Id", "Title", target.LocationId);
-            ViewBag.RegionId = new SelectList(db.Regions, "Id", "Title", target.RegionId);
+
             return View(target);
         }
 

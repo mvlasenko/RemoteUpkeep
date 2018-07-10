@@ -24,6 +24,7 @@ namespace RemoteUpkeep.Models
         [UIHint("MultilineText")]
         public string Text { get; set; }
 
+        [Display(Name = "Created")]
         public DateTime CreatedDateTime { get; set; }
 
         public virtual ICollection<Message> Messages { get; set; }

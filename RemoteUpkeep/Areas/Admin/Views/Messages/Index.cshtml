@@ -13,10 +13,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Receiver.FirstName)
+            @Html.DisplayNameFor(model => model.ReceiverId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Sender.FirstName)
+            @Html.DisplayNameFor(model => model.SenderId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Text)
@@ -33,10 +33,10 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Receiver.FirstName)
+            @Html.DisplayFor(modelItem => item.Receiver.FullName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Sender.FirstName)
+            @Html.DisplayFor(modelItem => item.Sender.FullName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Text)
@@ -48,7 +48,6 @@
             @Html.DisplayFor(modelItem => item.MessageType)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>

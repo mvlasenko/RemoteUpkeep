@@ -355,7 +355,6 @@
     <Content Include="Areas\Admin\Views\Locations\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Locations\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Messages\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Messages\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Messages\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Actions\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Actions\Edit.cshtml" />

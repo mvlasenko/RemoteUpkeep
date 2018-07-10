@@ -13,16 +13,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ChangedBy.FirstName)
+            @Html.DisplayNameFor(model => model.LocationId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Location.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Region.Title)
+            @Html.DisplayNameFor(model => model.RegionId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChangedByUserId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ChangedDateTime)
@@ -33,9 +33,6 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.ChangedBy.FirstName)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Location.Title)
         </td>
         <td>
@@ -43,6 +40,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChangedBy.FullName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ChangedDateTime)

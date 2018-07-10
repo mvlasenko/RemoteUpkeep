@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -32,22 +33,27 @@ namespace RemoteUpkeep.Models
 
         public string LastName { get; set; }
 
+        [Display(Name = "Type")]
         public UserType UserType { get; set; }
 
+        [UIHint("_Country")]
+        [Display(Name = "Country")]
         public int? CountryId { get; set; }
 
         public virtual Country Country { get; set; }
 
+        [UIHint("_Region")]
+        [Display(Name = "Region")]
         public int? RegionId { get; set; }
 
         public virtual Region Region { get; set; }
 
+        [Display(Name = "Full Name")]
         public string FullName
         {
             get
             {
                 return this.FirstName + " " + this.LastName;
-
             }
         }
 

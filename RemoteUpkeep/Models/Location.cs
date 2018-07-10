@@ -20,12 +20,15 @@ namespace RemoteUpkeep.Models
         [UIHint("MultilineText")]
         public string Description { get; set; }
 
+        [UIHint("_Geography")]
         public DbGeography Geography { get; set; }
 
+        [Display(Name = "Changed By")]
         public string ChangedByUserId { get; set; }
 
         public virtual ApplicationUser ChangedBy { get; set; }
 
+        [Display(Name = "Changed")]
         public DateTime ChangedDateTime { get; set; }
 
         public virtual ICollection<Target> Targets { get; set; }

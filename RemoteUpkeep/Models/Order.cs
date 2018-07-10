@@ -15,17 +15,21 @@ namespace RemoteUpkeep.Models
         public int Id { get; set; }
 
         [UIHint("_Target")]
+        [Display(Name = "Target")]
         public int TargetId { get; set; }
 
         public virtual Target Target { get; set; }
 
         [UIHint("_User")]
+        [Display(Name = "User")]
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
 
+        [Display(Name = "Created")]
         public DateTime CreatedDateTime { get; set; }
 
+        [Display(Name = "Type")]
         public OrderType OrderType { get; set; }
 
         //many-to-many

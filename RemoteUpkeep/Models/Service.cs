@@ -17,10 +17,12 @@ namespace RemoteUpkeep.Models
         [UIHint("MultilineText")]
         public string Description { get; set; }
 
+        [Display(Name = "Created By")]
         public string CreatedByUserId { get; set; }
 
         public virtual ApplicationUser CreatedBy { get; set; }
 
+        [Display(Name = "Created")]
         public DateTime CreatedDateTime { get; set; }
 
         //many-to-many
