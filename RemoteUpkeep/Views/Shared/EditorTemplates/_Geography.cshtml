@@ -1,0 +1,63 @@
+﻿@using RemoteUpkeep.Helpers
+@{
+    var name = ViewData.ModelMetadata.PropertyName;
+    var val = ViewData.ModelMetadata.Model;
+    if (val == null) {
+        val = "(49.422196, 26.985674)";
+    }
+}
+
+@Html.TextBox("", val, new { @class = "form-control geography" })
+
+<div id="map"></div>
+
+<script>
+
+    var map;
+
+    function initMap() {
+
+        var myLatlng = new google.maps.LatLng(@val.ToString().Trim('(', ')'));
+
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: myLatlng,
+            zoom: 16
+        });
+
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            draggable: true,
+            animation: google.maps.Animation.DROP
+        });
+
+        marker.setIcon('https://maps.google.com/mapfiles/ms/icons/green-dot.png')
+
+        google.maps.event.addListener(marker, 'dragend', function () {
+            geocodePosition(marker.getPosition());
+        });
+
+        function geocodePosition(pos) {
+            geocoder = new google.maps.Geocoder();
+            geocoder.geocode
+            ({
+                latLng: pos
+            },
+            function (results, status) {
+                $('#@name').val(pos);
+            });
+        }
+
+        //var infowindow = new google.maps.InfoWindow({
+        //    content: "<div class='infoDiv'><h2>" + 'title' + "</h2>" + "<div><h4>" + 'description' + "</h4></div></div>"
+        //});
+
+        //google.maps.event.addListener(marker, 'click', function () {
+        //    infowindow.open(map, marker);
+        //});
+
+    }
+
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=@Keys.GoogleApiKey&callback=initMap" async defer></script>

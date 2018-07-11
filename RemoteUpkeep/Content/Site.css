@@ -22,3 +22,24 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#map {
+    width: 100%;
+    height: 400px;
+}
+
+#map img {
+    max-width: none
+}
+
+.infoDiv {
+    height: 200px;
+    width: 300px;
+    -webkit-user-select: none;
+    background-color: white;
+}
+
+.geography {
+    width: 100%;
+    margin-bottom: 6px;
+}
