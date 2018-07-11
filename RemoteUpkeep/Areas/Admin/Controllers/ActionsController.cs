@@ -15,7 +15,7 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         // GET: Admin/Actions
         public ActionResult Index()
         {
-            var actions = db.Actions.Include(a => a.AssignedUser).Include(a => a.ChangedBy).Include(a => a.Target);
+            var actions = db.Actions.Include(a => a.AssignedUser).Include(a => a.ChangedBy).Include(a => a.Order);
             return View(actions.ToList());
         }
 

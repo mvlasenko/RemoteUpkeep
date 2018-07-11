@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
@@ -49,27 +48,20 @@ namespace RemoteUpkeep.Controllers
             {
                 using (var context = new ApplicationDbContext())
                 {
-                    //create new target
-                    Target target = new Target
+                    //create new order
+                    Order order = new Order
                     {
-                        ChangedDateTime = DateTime.Now,
-                        Description = model.Description
+                        Description = model.Description,
+                        CreatedDateTime = DateTime.Now,
+                        OrderType = OrderType.New,
+                        UserId = this.User.Identity.GetUserId()
                     };
 
                     //set region
                     if (model.RegionId != null)
                     {
-                        target.RegionId = (int)model.RegionId;
+                        order.RegionId = (int)model.RegionId;
                     }
-
-                    //create new order
-                    Order order = new Order
-                    {
-                        CreatedDateTime = DateTime.Now,
-                        OrderType = OrderType.New,
-                        UserId = this.User.Identity.GetUserId()
-                    };
-                    target.Orders.Add(order);
 
                     //get service
                     Service service = context.Services.FirstOrDefault(x => x.Id == model.ServiceId);
@@ -85,7 +77,7 @@ namespace RemoteUpkeep.Controllers
                             {
                                 Image image = context.Images.FirstOrDefault(x => x.Id == new Guid(imageId));
                                 if (image != null)
-                                    target.Images.Add(context.Images.Single(x => x.Id == new Guid(imageId)));
+                                    order.Images.Add(context.Images.Single(x => x.Id == new Guid(imageId)));
                             }
                         }
                     }
@@ -97,10 +89,10 @@ namespace RemoteUpkeep.Controllers
                         DueDate = model.DueDate,
                         Description = model.Description
                     };
-                    target.Actions.Add(action);
+                    order.Actions.Add(action);
 
                     //save target
-                    context.Targets.Add(target);
+                    context.Orders.Add(order);
                     context.SaveChanges();
                 }
 

@@ -21,9 +21,8 @@ namespace RemoteUpkeep.Models
 
             //admin-specific
             this.ChangedServices = new List<Service>();
-            this.ChangedTargets = new List<Target>();
+            this.ChangedOrders = new List<Order>();
             this.ChangedActions = new List<Action>();
-            this.ChangedLocations = new List<Location>();
 
             //dealer-specific
             this.AssignedActions = new List<Action>();
@@ -75,11 +74,9 @@ namespace RemoteUpkeep.Models
 
         public virtual ICollection<Service> ChangedServices { get; set; }
 
-        public virtual ICollection<Target> ChangedTargets { get; set; }
+        public virtual ICollection<Order> ChangedOrders { get; set; }
 
         public virtual ICollection<Action> ChangedActions { get; set; }
-
-        public virtual ICollection<Location> ChangedLocations { get; set; }
 
         public virtual ICollection<Action> AssignedActions { get; set; }
 

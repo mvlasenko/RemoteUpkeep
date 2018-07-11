@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using RemoteUpkeep.Models;
 
 namespace RemoteUpkeep.Areas.Admin.Controllers
@@ -14,7 +15,7 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         // GET: Admin/Orders
         public ActionResult Index()
         {
-            var orders = db.Orders.Include(o => o.Target).Include(o => o.User);
+            var orders = db.Orders.Include(o => o.User).Include(o => o.ChangedBy).Include(o => o.Region);
             return View(orders.ToList());
         }
 
@@ -34,6 +35,8 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 order.CreatedDateTime = DateTime.Now;
+                order.ChangedDateTime = DateTime.Now;
+                order.ChangedByUserId = this.User.Identity.GetUserId();
 
                 db.Orders.Add(order);
                 db.SaveChanges();
@@ -65,7 +68,8 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                order.CreatedDateTime = DateTime.Now;
+                order.ChangedDateTime = DateTime.Now;
+                order.ChangedByUserId = this.User.Identity.GetUserId();
 
                 db.Entry(order).State = EntityState.Modified;
                 db.SaveChanges();

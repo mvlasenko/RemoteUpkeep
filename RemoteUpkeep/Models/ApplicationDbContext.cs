@@ -18,10 +18,6 @@ namespace RemoteUpkeep.Models
 
         public virtual DbSet<Order> Orders { get; set; }
 
-        public virtual DbSet<Target> Targets { get; set; }
-
-        public virtual DbSet<Location> Locations { get; set; }
-
         public virtual DbSet<Action> Actions { get; set; }
 
         public virtual DbSet<Message> Messages { get; set; }
@@ -38,6 +34,13 @@ namespace RemoteUpkeep.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            //regions
+
+            modelBuilder.Entity<Region>()
+                .HasOptional(e => e.Country)
+                .WithMany(e => e.Regions)
+                .HasForeignKey(e => e.CountryId);
 
             //users
 
@@ -84,61 +87,48 @@ namespace RemoteUpkeep.Models
             //orders
 
             modelBuilder.Entity<Order>()
-                .HasRequired(e => e.Target)
-                .WithMany(e => e.Orders)
-                .HasForeignKey(e => e.TargetId);
-
-            modelBuilder.Entity<Order>()
                 .HasRequired(e => e.User)
                 .WithMany(e => e.UserOrders)
                 .HasForeignKey(e => e.UserId)
                 .WillCascadeOnDelete(false);
 
-            //targets
-
-            //many-to-many
-            modelBuilder.Entity<Target>()
-                .HasMany(e => e.Images)
-                .WithMany(x => x.Targets)
-                .Map(m =>
-                {
-                    m.MapLeftKey("TargetId");
-                    m.MapRightKey("ImageId");
-                    m.ToTable("TargetImages");
-                });
-
-            //many-to-many
-            modelBuilder.Entity<Target>()
-                .HasMany(e => e.Messages)
-                .WithMany(x => x.Targets)
-                .Map(m =>
-                {
-                    m.MapLeftKey("TargetId");
-                    m.MapRightKey("MessageId");
-                    m.ToTable("TargetMessages");
-                });
-
-            modelBuilder.Entity<Target>()
+            modelBuilder.Entity<Order>()
                 .HasRequired(e => e.Region)
-                .WithMany(e => e.Targets)
+                .WithMany(e => e.Orders)
                 .HasForeignKey(e => e.RegionId);
 
-            modelBuilder.Entity<Target>()
-                .HasOptional(e => e.Location)
-                .WithMany(e => e.Targets)
-                .HasForeignKey(e => e.LocationId);
-
-            modelBuilder.Entity<Target>()
+            modelBuilder.Entity<Order>()
                 .HasOptional(e => e.ChangedBy)
-                .WithMany(e => e.ChangedTargets)
+                .WithMany(e => e.ChangedOrders)
                 .HasForeignKey(e => e.ChangedByUserId);
+
+            //many-to-many
+            modelBuilder.Entity<Order>()
+                .HasMany(e => e.Images)
+                .WithMany(x => x.Orders)
+                .Map(m =>
+                {
+                    m.MapLeftKey("OrderId");
+                    m.MapRightKey("ImageId");
+                    m.ToTable("OrderImages");
+                });
+
+            modelBuilder.Entity<Order>()
+                .HasMany(e => e.Messages)
+                .WithMany(x => x.Orders)
+                .Map(m =>
+                {
+                    m.MapLeftKey("OrderId");
+                    m.MapRightKey("MessageId");
+                    m.ToTable("OrderMessages");
+                });
 
             //actions
 
             modelBuilder.Entity<Action>()
-                .HasRequired(e => e.Target)
+                .HasRequired(e => e.Order)
                 .WithMany(e => e.Actions)
-                .HasForeignKey(e => e.TargetId);
+                .HasForeignKey(e => e.OrderId);
 
             modelBuilder.Entity<Action>()
                 .HasOptional(e => e.AssignedUser)
@@ -148,13 +138,6 @@ namespace RemoteUpkeep.Models
             modelBuilder.Entity<Action>()
                 .HasOptional(e => e.ChangedBy)
                 .WithMany(e => e.ChangedActions)
-                .HasForeignKey(e => e.ChangedByUserId);
-
-            //locations
-
-            modelBuilder.Entity<Location>()
-                .HasOptional(e => e.ChangedBy)
-                .WithMany(e => e.ChangedLocations)
                 .HasForeignKey(e => e.ChangedByUserId);
 
             //messages

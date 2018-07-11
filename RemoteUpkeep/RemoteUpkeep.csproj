@@ -208,12 +208,10 @@
     <Compile Include="Areas\Admin\Controllers\CountriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LanguagesController.cs" />
-    <Compile Include="Areas\Admin\Controllers\LocationsController.cs" />
     <Compile Include="Areas\Admin\Controllers\MessagesController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrdersController.cs" />
     <Compile Include="Areas\Admin\Controllers\RegionsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ServicesController.cs" />
-    <Compile Include="Areas\Admin\Controllers\TargetsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
@@ -241,13 +239,11 @@
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Enums.cs" />
-    <Compile Include="Models\Location.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="Models\Region.cs" />
-    <Compile Include="Models\Target.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Service.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -333,9 +329,6 @@
     <Content Include="Areas\Admin\Views\Services\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Services\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Services\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Targets\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Targets\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Targets\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Regions\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Regions\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Regions\Index.cshtml" />
@@ -348,9 +341,6 @@
     <Content Include="Areas\Admin\Views\Orders\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Orders\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Orders\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Locations\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Locations\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Locations\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Messages\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Messages\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Actions\Create.cshtml" />
