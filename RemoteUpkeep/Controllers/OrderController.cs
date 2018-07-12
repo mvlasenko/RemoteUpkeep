@@ -38,6 +38,8 @@ namespace RemoteUpkeep.Controllers
             if (model == null)
                 model = new OrderViewModel();
 
+            model.HasGeography = true;
+
             return View("StepTwo", model);
         }
 
@@ -52,6 +54,7 @@ namespace RemoteUpkeep.Controllers
                     Target target = new Target
                     {
                         ChangedDateTime = DateTime.Now,
+                        Geography = model.HasGeography ? model.Geography : null,
                         Description = model.Description
                     };
 

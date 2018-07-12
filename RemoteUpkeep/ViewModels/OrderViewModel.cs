@@ -17,6 +17,13 @@ namespace RemoteUpkeep.ViewModels
         [UIHint("_Region")]
         public int? RegionId { get; set; }
 
+        [UIHint("_Geography")]
+        [Display(Name = "Geography")]
+        public string Geography { get; set; }
+
+        [Display(Name = "I know exact location of the grave")]
+        public bool HasGeography { get; set; }
+
         [Required]
         [UIHint("MultilineText")]
         public string Description { get; set; }

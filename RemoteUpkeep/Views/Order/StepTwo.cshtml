@@ -23,6 +23,20 @@
     </div>
 
     <div class="form-group">
+        @Html.LabelFor(model => model.HasGeography, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.HasGeography, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group" id="geography-group">
+        @Html.LabelFor(model => model.Geography, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Geography, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
         @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
@@ -72,6 +86,16 @@
 
             $('.datepicker').datetimepicker({
                 format: '@UIHelper.GetDateFormat()'
+            });
+
+            $('#HasGeography').change(function () {
+                if (this.checked) {
+                    $('#geography-group').show('slow');
+
+                }
+                else {
+                    $('#geography-group').hide('slow');
+                }
             });
 
         });
