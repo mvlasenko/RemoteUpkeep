@@ -120,6 +120,9 @@
   <data name="SelectCountry" xml:space="preserve">
     <value>Select Country</value>
   </data>
+  <data name="SelectLocation" xml:space="preserve">
+    <value>Select Location</value>
+  </data>
   <data name="SelectRegion" xml:space="preserve">
     <value>Select Region</value>
   </data>

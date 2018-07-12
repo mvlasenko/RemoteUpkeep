@@ -3,100 +3,104 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using RemoteUpkeep.Models;
 
 namespace RemoteUpkeep.Areas.Admin.Controllers
 {
-    public class OrdersController : Controller
+    public class TargetsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Admin/Orders
+        // GET: Admin/Targets
         public ActionResult Index()
         {
-            var orders = db.Orders.Include(o => o.Target).Include(o => o.User);
-            return View(orders.ToList());
+            var targets = db.Targets.Include(t => t.ChangedBy).Include(t => t.Region);
+            return View(targets.ToList());
         }
 
-        // GET: Admin/Orders/Create
+        // GET: Admin/Targets/Create
         public ActionResult Create()
         {
-            Order order = new Order();
-            order.CreatedDateTime = DateTime.Now;
+            Target target = new Target();
+            target.ChangedDateTime = DateTime.Now;
+            target.ChangedByUserId = this.User.Identity.GetUserId();
 
-            return View(order);
+            return View(target);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Order order)
+        public ActionResult Create(Target target)
         {
             if (ModelState.IsValid)
             {
-                order.CreatedDateTime = DateTime.Now;
+                target.ChangedDateTime = DateTime.Now;
+                target.ChangedByUserId = this.User.Identity.GetUserId();
 
-                db.Orders.Add(order);
+                db.Targets.Add(target);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(order);
+            return View(target);
         }
 
-        // GET: Admin/Orders/Edit/5
+        // GET: Admin/Targets/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = db.Orders.Find(id);
-            if (order == null)
+            Target target = db.Targets.Find(id);
+            if (target == null)
             {
                 return HttpNotFound();
             }
 
-            return View(order);
+            return View(target);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Order order)
+        public ActionResult Edit(Target target)
         {
             if (ModelState.IsValid)
             {
-                order.CreatedDateTime = DateTime.Now;
+                target.ChangedDateTime = DateTime.Now;
+                target.ChangedByUserId = this.User.Identity.GetUserId();
 
-                db.Entry(order).State = EntityState.Modified;
+                db.Entry(target).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(order);
+            return View(target);
         }
 
-        // GET: Admin/Orders/Delete/5
+        // GET: Admin/Targets/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = db.Orders.Find(id);
-            if (order == null)
+            Target target = db.Targets.Find(id);
+            if (target == null)
             {
                 return HttpNotFound();
             }
-            return View(order);
+            return View(target);
         }
 
-        // POST: Admin/Orders/Delete/5
+        // POST: Admin/Targets/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Order order = db.Orders.Find(id);
-            db.Orders.Remove(order);
+            Target target = db.Targets.Find(id);
+            db.Targets.Remove(target);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

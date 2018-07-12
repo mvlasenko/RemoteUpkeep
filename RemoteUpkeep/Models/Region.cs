@@ -8,7 +8,7 @@ namespace RemoteUpkeep.Models
         public Region()
         {
             this.Users = new List<ApplicationUser>();
-            this.Orders = new List<Order>();
+            this.Targets = new List<Target>();
         }
 
         [Key]
@@ -16,14 +16,8 @@ namespace RemoteUpkeep.Models
 
         public string Title { get; set; }
 
-        [UIHint("_Country")]
-        [Display(Name = "Country")]
-        public int? CountryId { get; set; }
-
-        public virtual Country Country { get; set; }
-
         public virtual ICollection<ApplicationUser> Users { get; }
 
-        public virtual ICollection<Order> Orders { get; }
+        public virtual ICollection<Target> Targets { get; }
     }
 }

@@ -18,6 +18,8 @@ namespace RemoteUpkeep.Models
 
         public virtual DbSet<Order> Orders { get; set; }
 
+        public virtual DbSet<Target> Targets { get; set; }
+
         public virtual DbSet<Action> Actions { get; set; }
 
         public virtual DbSet<Message> Messages { get; set; }
@@ -34,13 +36,6 @@ namespace RemoteUpkeep.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            //regions
-
-            modelBuilder.Entity<Region>()
-                .HasOptional(e => e.Country)
-                .WithMany(e => e.Regions)
-                .HasForeignKey(e => e.CountryId);
 
             //users
 
@@ -87,48 +82,56 @@ namespace RemoteUpkeep.Models
             //orders
 
             modelBuilder.Entity<Order>()
+                .HasRequired(e => e.Target)
+                .WithMany(e => e.Orders)
+                .HasForeignKey(e => e.TargetId);
+
+            modelBuilder.Entity<Order>()
                 .HasRequired(e => e.User)
                 .WithMany(e => e.UserOrders)
                 .HasForeignKey(e => e.UserId)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Order>()
-                .HasRequired(e => e.Region)
-                .WithMany(e => e.Orders)
-                .HasForeignKey(e => e.RegionId);
-
-            modelBuilder.Entity<Order>()
-                .HasOptional(e => e.ChangedBy)
-                .WithMany(e => e.ChangedOrders)
-                .HasForeignKey(e => e.ChangedByUserId);
+            //targets
 
             //many-to-many
-            modelBuilder.Entity<Order>()
+            modelBuilder.Entity<Target>()
                 .HasMany(e => e.Images)
-                .WithMany(x => x.Orders)
+                .WithMany(x => x.Targets)
                 .Map(m =>
                 {
-                    m.MapLeftKey("OrderId");
+                    m.MapLeftKey("TargetId");
                     m.MapRightKey("ImageId");
-                    m.ToTable("OrderImages");
+                    m.ToTable("TargetImages");
                 });
 
-            modelBuilder.Entity<Order>()
+            //many-to-many
+            modelBuilder.Entity<Target>()
                 .HasMany(e => e.Messages)
-                .WithMany(x => x.Orders)
+                .WithMany(x => x.Targets)
                 .Map(m =>
                 {
-                    m.MapLeftKey("OrderId");
+                    m.MapLeftKey("TargetId");
                     m.MapRightKey("MessageId");
-                    m.ToTable("OrderMessages");
+                    m.ToTable("TargetMessages");
                 });
+
+            modelBuilder.Entity<Target>()
+                .HasRequired(e => e.Region)
+                .WithMany(e => e.Targets)
+                .HasForeignKey(e => e.RegionId);
+
+            modelBuilder.Entity<Target>()
+                .HasOptional(e => e.ChangedBy)
+                .WithMany(e => e.ChangedTargets)
+                .HasForeignKey(e => e.ChangedByUserId);
 
             //actions
 
             modelBuilder.Entity<Action>()
-                .HasRequired(e => e.Order)
+                .HasRequired(e => e.Target)
                 .WithMany(e => e.Actions)
-                .HasForeignKey(e => e.OrderId);
+                .HasForeignKey(e => e.TargetId);
 
             modelBuilder.Entity<Action>()
                 .HasOptional(e => e.AssignedUser)

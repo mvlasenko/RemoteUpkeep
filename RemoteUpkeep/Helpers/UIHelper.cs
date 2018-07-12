@@ -38,6 +38,14 @@ namespace RemoteUpkeep.Helpers
             }
         }
 
+        public static List<Target> GetTargets()
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                return context.Targets.ToList();
+            }
+        }
+
         public static List<ApplicationUser> GetUsers()
         {
             using (var context = new ApplicationDbContext())

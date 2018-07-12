@@ -8,7 +8,6 @@ namespace RemoteUpkeep.Models
         public Country()
         {
             this.Users = new List<ApplicationUser>();
-            this.Regions = new List<Region>();
         }
 
         [Key]
@@ -19,7 +18,5 @@ namespace RemoteUpkeep.Models
         public string Code { get; set; }
 
         public virtual ICollection<ApplicationUser> Users { get; }
-
-        public virtual ICollection<Region> Regions { get; }
     }
 }

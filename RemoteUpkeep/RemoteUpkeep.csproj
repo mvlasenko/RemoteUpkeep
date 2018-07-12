@@ -212,6 +212,7 @@
     <Compile Include="Areas\Admin\Controllers\OrdersController.cs" />
     <Compile Include="Areas\Admin\Controllers\RegionsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ServicesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TargetsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
@@ -244,6 +245,7 @@
     <Compile Include="Models\Image.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="Models\Region.cs" />
+    <Compile Include="Models\Target.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Service.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -329,6 +331,9 @@
     <Content Include="Areas\Admin\Views\Services\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Services\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Services\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Targets\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Targets\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Targets\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Regions\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Regions\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Regions\Index.cshtml" />
@@ -450,7 +455,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54708</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://remote-upkeep</IISUrl>
+          <IISUrl>http://remote-upkeep</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -9,7 +9,7 @@ namespace RemoteUpkeep.Models
         public Message()
         {
             this.Attachments = new List<Image>();
-            this.Orders = new List<Order>();
+            this.Targets = new List<Target>();
         }
 
         [Key]
@@ -37,6 +37,6 @@ namespace RemoteUpkeep.Models
 
         public virtual ICollection<Image> Attachments { get; set; }
 
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Target> Targets { get; set; }
     }
 }
