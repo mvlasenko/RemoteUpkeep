@@ -27,9 +27,6 @@
         <th>
             @Html.DisplayNameFor(model => model.ChangedByUserId)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TargetId)
-        </th>
         <th></th>
     </tr>
 
@@ -49,9 +46,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ChangedBy.FullName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Target.Description)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

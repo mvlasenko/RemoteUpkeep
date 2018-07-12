@@ -2,7 +2,6 @@
 
 namespace RemoteUpkeep.Models
 {
-    [Flags]
     public enum MessageType
     {
         None = 0,
@@ -18,7 +17,7 @@ namespace RemoteUpkeep.Models
         LocalDealer = 2
     }
 
-    public enum OrderType
+    public enum OrderStatus
     {
         New = 0,
         Ongoing = 1,

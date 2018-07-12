@@ -27,8 +27,10 @@ namespace RemoteUpkeep.Models
         [Display(Name = "Created")]
         public DateTime CreatedDateTime { get; set; }
 
+        //many-to-many
         public virtual ICollection<Message> Messages { get; set; }
 
+        //many-to-many
         public virtual ICollection<Target> Targets { get; set; }
     }
 }

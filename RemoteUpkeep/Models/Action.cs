@@ -15,11 +15,9 @@ namespace RemoteUpkeep.Models
         [Display(Name = "Due Date")]
         public DateTime? DueDate { get; set; }
 
-        [UIHint("_Target")]
-        [Display(Name = "Target")]
-        public int TargetId { get; set; }
+        public int OrderDetailsId { get; set; }
 
-        public virtual Target Target { get; set; }
+        public virtual OrderDetails OrderDetails { get; set; }
 
         [UIHint("_User")]
         [Display(Name = "Assigned User")]

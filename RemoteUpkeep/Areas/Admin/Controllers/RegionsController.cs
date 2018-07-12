@@ -13,7 +13,7 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         // GET: Admin/Regions
         public ActionResult Index()
         {
-            return View(db.Regions.ToList());
+            return View(db.Regions.Include(x=> x.Country).ToList());
         }
 
         // GET: Admin/Regions/Create

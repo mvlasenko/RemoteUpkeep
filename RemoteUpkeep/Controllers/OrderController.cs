@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
@@ -62,20 +61,6 @@ namespace RemoteUpkeep.Controllers
                         target.RegionId = (int)model.RegionId;
                     }
 
-                    //create new order
-                    Order order = new Order
-                    {
-                        CreatedDateTime = DateTime.Now,
-                        OrderType = OrderType.New,
-                        UserId = this.User.Identity.GetUserId()
-                    };
-                    target.Orders.Add(order);
-
-                    //get service
-                    Service service = context.Services.FirstOrDefault(x => x.Id == model.ServiceId);
-                    if (service != null)
-                        order.Services.Add(context.Services.Single(x => x.Id == model.ServiceId));
-                    
                     //get images
                     if (!String.IsNullOrEmpty(model.Images))
                     {
@@ -90,6 +75,18 @@ namespace RemoteUpkeep.Controllers
                         }
                     }
 
+                    //create new order details
+                    OrderDetails orderDetails = new OrderDetails
+                    {
+                        OrderStatus = OrderStatus.New,
+                        Target = target
+                    };
+
+                    //get service
+                    Service service = context.Services.FirstOrDefault(x => x.Id == model.ServiceId);
+                    if (service != null)
+                        orderDetails.Services.Add(context.Services.Single(x => x.Id == model.ServiceId));
+
                     //create new action
                     Models.Action action = new Models.Action
                     {
@@ -97,10 +94,18 @@ namespace RemoteUpkeep.Controllers
                         DueDate = model.DueDate,
                         Description = model.Description
                     };
-                    target.Actions.Add(action);
+                    orderDetails.Actions.Add(action);
 
-                    //save target
-                    context.Targets.Add(target);
+                    //create new order
+                    Order order = new Order
+                    {
+                        CreatedDateTime = DateTime.Now,
+                        UserId = this.User.Identity.GetUserId()
+                    };
+                    order.OrderDetails.Add(orderDetails);
+
+                    //save order
+                    context.Orders.Add(order);
                     context.SaveChanges();
                 }
 

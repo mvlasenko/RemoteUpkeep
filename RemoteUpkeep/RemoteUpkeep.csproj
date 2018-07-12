@@ -227,6 +227,7 @@
     <Compile Include="Helpers\Keys.cs" />
     <Compile Include="Helpers\UIHelper.cs" />
     <Compile Include="Helpers\XmlHelper.cs" />
+    <Compile Include="Models\OrderDetails.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

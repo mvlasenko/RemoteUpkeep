@@ -27,6 +27,9 @@
         <th>
             @Html.DisplayNameFor(model => model.MessageType)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderDetailsId)
+        </th>
         <th></th>
     </tr>
 
@@ -48,7 +51,10 @@
             @Html.DisplayFor(modelItem => item.MessageType)
         </td>
         <td>
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.DisplayFor(modelItem => item.OrderDetails.Order.CreatedDateTime)
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
     </tr>
 }

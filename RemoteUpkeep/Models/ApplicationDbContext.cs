@@ -60,6 +60,13 @@ namespace RemoteUpkeep.Models
                     m.ToTable("UserLanguages");
                 });
 
+            //regions
+
+            modelBuilder.Entity<Region>()
+                .HasRequired(e => e.Country)
+                .WithMany(e => e.Regions)
+                .HasForeignKey(e => e.CountryId);
+
             //services
 
             modelBuilder.Entity<Service>()
@@ -70,21 +77,16 @@ namespace RemoteUpkeep.Models
 
             //many-to-many
             modelBuilder.Entity<Service>()
-                .HasMany(e => e.Orders)
+                .HasMany(e => e.OrderDetails)
                 .WithMany(x => x.Services)
                 .Map(m =>
                 {
                     m.MapLeftKey("ServiceId");
-                    m.MapRightKey("OrderId");
-                    m.ToTable("ServiceOrders");
+                    m.MapRightKey("OrderDetailsId");
+                    m.ToTable("ServiceOrderDetails");
                 });
 
             //orders
-
-            modelBuilder.Entity<Order>()
-                .HasRequired(e => e.Target)
-                .WithMany(e => e.Orders)
-                .HasForeignKey(e => e.TargetId);
 
             modelBuilder.Entity<Order>()
                 .HasRequired(e => e.User)
@@ -92,7 +94,29 @@ namespace RemoteUpkeep.Models
                 .HasForeignKey(e => e.UserId)
                 .WillCascadeOnDelete(false);
 
+            //order datails
+
+            modelBuilder.Entity<OrderDetails>()
+                .HasRequired(e => e.Target)
+                .WithMany(e => e.OrderDetails)
+                .HasForeignKey(e => e.TargetId);
+
+            modelBuilder.Entity<OrderDetails>()
+                .HasRequired(e => e.Order)
+                .WithMany(e => e.OrderDetails)
+                .HasForeignKey(e => e.OrderId);
+
             //targets
+
+            modelBuilder.Entity<Target>()
+                .HasRequired(e => e.Region)
+                .WithMany(e => e.Targets)
+                .HasForeignKey(e => e.RegionId);
+
+            modelBuilder.Entity<Target>()
+                .HasOptional(e => e.ChangedBy)
+                .WithMany(e => e.ChangedTargets)
+                .HasForeignKey(e => e.ChangedByUserId);
 
             //many-to-many
             modelBuilder.Entity<Target>()
@@ -105,33 +129,12 @@ namespace RemoteUpkeep.Models
                     m.ToTable("TargetImages");
                 });
 
-            //many-to-many
-            modelBuilder.Entity<Target>()
-                .HasMany(e => e.Messages)
-                .WithMany(x => x.Targets)
-                .Map(m =>
-                {
-                    m.MapLeftKey("TargetId");
-                    m.MapRightKey("MessageId");
-                    m.ToTable("TargetMessages");
-                });
-
-            modelBuilder.Entity<Target>()
-                .HasRequired(e => e.Region)
-                .WithMany(e => e.Targets)
-                .HasForeignKey(e => e.RegionId);
-
-            modelBuilder.Entity<Target>()
-                .HasOptional(e => e.ChangedBy)
-                .WithMany(e => e.ChangedTargets)
-                .HasForeignKey(e => e.ChangedByUserId);
-
             //actions
 
             modelBuilder.Entity<Action>()
-                .HasRequired(e => e.Target)
+                .HasRequired(e => e.OrderDetails)
                 .WithMany(e => e.Actions)
-                .HasForeignKey(e => e.TargetId);
+                .HasForeignKey(e => e.OrderDetailsId);
 
             modelBuilder.Entity<Action>()
                 .HasOptional(e => e.AssignedUser)
@@ -155,6 +158,11 @@ namespace RemoteUpkeep.Models
                 .WithMany(e => e.ReceivedMessages)
                 .HasForeignKey(e => e.ReceiverId)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Message>()
+                .HasRequired(e => e.OrderDetails)
+                .WithMany(e => e.Messages)
+                .HasForeignKey(e => e.OrderDetailsId);
 
             //many-to-many
             modelBuilder.Entity<Message>()

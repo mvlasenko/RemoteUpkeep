@@ -8,7 +8,7 @@ namespace RemoteUpkeep.Models
     {
         public Service()
         {
-            this.Orders = new List<Order>();
+            this.OrderDetails = new List<OrderDetails>();
         }
 
         [Key]
@@ -26,7 +26,7 @@ namespace RemoteUpkeep.Models
         public DateTime CreatedDateTime { get; set; }
 
         //many-to-many
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<OrderDetails> OrderDetails { get; set; }
 
     }
 }

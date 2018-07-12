@@ -15,7 +15,7 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         // GET: Admin/Messages
         public ActionResult Index()
         {
-            var messages = db.Messages.Include(m => m.Receiver).Include(m => m.Sender);
+            var messages = db.Messages.Include(m => m.Receiver).Include(m => m.Sender).Include(m => m.OrderDetails.Order);
             return View(messages.ToList());
         }
 
