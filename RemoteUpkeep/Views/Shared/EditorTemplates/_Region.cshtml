@@ -1,3 +1,19 @@
 @using RemoteUpkeep.Helpers
 @using RemoteUpkeep.Properties
-@Html.DropDownList("", new SelectList(UIHelper.GetRegions(), "Id", "Title", ViewData.TemplateInfo.FormattedModelValue.ToString()), string.Format("< {0} >", Resources.SelectRegion), new { @class = "form-control" })
+@using RemoteUpkeep.Models
+@{
+    var name = ViewData.ModelMetadata.PropertyName;
+    var val = ViewData.ModelMetadata.Model;
+}
+
+<select name="@name" id="@name" class="form-control">
+    <option>@string.Format("< {0} >", Resources.SelectRegion)</option>
+    @foreach (Region region in UIHelper.GetRegions())
+    {
+        <option value="@region.Id" @(val != null && region.Id.ToString() == val.ToString() ? "selected" : "")
+                data-geo-lat="@region.Latitude"
+                data-geo-lng="@region.Longitude">
+            @region.Title
+        </option>
+    }
+</select>

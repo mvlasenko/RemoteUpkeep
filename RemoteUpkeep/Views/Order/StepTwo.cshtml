@@ -91,11 +91,17 @@
             $('#HasGeography').change(function () {
                 if (this.checked) {
                     $('#geography-group').show('slow');
-
                 }
                 else {
                     $('#geography-group').hide('slow');
                 }
+            });
+
+            $('#RegionId').change(function () {
+                var selected = $(this).find('option:selected');
+                var lat = selected.data('geo-lat'); 
+                var lng = selected.data('geo-lng');
+                moveMarker(lat, lng);
             });
 
         });
