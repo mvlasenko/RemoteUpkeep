@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using RemoteUpkeep.Models;
 
 namespace RemoteUpkeep.Areas.Admin.Controllers
@@ -50,7 +51,7 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = db.Orders.Find(id);
+            Order order = db.Orders.Include(x => x.OrderDetails).FirstOrDefault(x => x.Id == id);
             if (order == null)
             {
                 return HttpNotFound();
@@ -65,9 +66,17 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                order.CreatedDateTime = DateTime.Now;
-
                 db.Entry(order).State = EntityState.Modified;
+
+                foreach (OrderDetails details in db.OrderDetails)
+                {
+                    details.Target.ChangedDateTime = DateTime.Now;
+                    details.Target.ChangedByUserId = this.User.Identity.GetUserId();
+
+                    db.Entry(details).State = EntityState.Modified;
+                    db.Entry(details.Target).State = EntityState.Modified;
+                }
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

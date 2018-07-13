@@ -1,6 +1,7 @@
 ﻿@using RemoteUpkeep.Helpers
 @{
-    var name = ViewData.ModelMetadata.PropertyName;
+    var prefix = ViewData.TemplateInfo.HtmlFieldPrefix;
+    var name = prefix.Replace(".", "_");
     var val = ViewData.ModelMetadata.Model;
     if (val == null) {
         val = "(49.422196, 26.985674)";

@@ -23,6 +23,6 @@ namespace RemoteUpkeep.Models
         [Display(Name = "Created")]
         public DateTime CreatedDateTime { get; set; }
 
-        public virtual ICollection<OrderDetails> OrderDetails { get; set; }
+        public virtual List<OrderDetails> OrderDetails { get; set; }
     }
 }

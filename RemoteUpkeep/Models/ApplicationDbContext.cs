@@ -18,6 +18,8 @@ namespace RemoteUpkeep.Models
 
         public virtual DbSet<Order> Orders { get; set; }
 
+        public virtual DbSet<OrderDetails> OrderDetails { get; set; }
+
         public virtual DbSet<Target> Targets { get; set; }
 
         public virtual DbSet<Action> Actions { get; set; }
