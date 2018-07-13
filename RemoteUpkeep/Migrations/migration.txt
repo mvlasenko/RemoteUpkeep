@@ -1,0 +1,2 @@
+Enable-Migrations -EnableAutomaticMigrations -Force
+Update-Database -Force -Verbose

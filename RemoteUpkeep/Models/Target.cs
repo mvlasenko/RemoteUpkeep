@@ -27,9 +27,9 @@ namespace RemoteUpkeep.Models
         [UIHint("MultilineText")]
         public string Description { get; set; }
 
-        public double Latitude { get; set; }
+        public double? Latitude { get; set; }
 
-        public double Longitude { get; set; }
+        public double? Longitude { get; set; }
 
         [UIHint("_Geography")]
         [NotMapped]
@@ -38,7 +38,7 @@ namespace RemoteUpkeep.Models
         {
             get
             {
-                if (this.Latitude == 0 || this.Longitude == 0)
+                if (this.Latitude == 0 || this.Longitude == 0 || this.Latitude == null || this.Longitude == null)
                     return null;
                 return string.Format("({0}, {1})", this.Latitude, this.Longitude);
             }

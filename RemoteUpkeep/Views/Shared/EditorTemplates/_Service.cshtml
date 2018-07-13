@@ -3,8 +3,7 @@
 
 @foreach (Service service in UIHelper.GetServices())
 {
-    <div class="form-check">
-        @Html.RadioButton("", service.Id, new { @id = "service" + service.Id, @class = "form-check-input" })
-        <label class="form-check-label" for="service@(service.Id)">@service.Description</label>
+    <div class="radio">
+        <label>@Html.RadioButton("", service.Id) @service.Description</label>
     </div>
 }

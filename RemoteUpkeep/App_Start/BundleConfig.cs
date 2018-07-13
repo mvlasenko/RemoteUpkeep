@@ -25,7 +25,6 @@ namespace RemoteUpkeep
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
-                //"~/Content/awesome-bootstrap-checkbox.css",
                 "~/Content/site.css"));
 					  
             //datepicker
