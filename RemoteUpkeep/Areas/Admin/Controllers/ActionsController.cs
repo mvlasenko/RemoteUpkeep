@@ -12,13 +12,6 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Admin/Actions
-        public ActionResult Index()
-        {
-            var actions = db.Actions.Include(a => a.AssignedUser).Include(a => a.ChangedBy);
-            return View(actions.ToList());
-        }
-
         // GET: Admin/Actions/Create
         public ActionResult Create()
         {
@@ -31,19 +24,19 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Models.Action action)
+        public ActionResult Create(Models.Action model)
         {
             if (ModelState.IsValid)
             {
-                action.ChangedDateTime = DateTime.Now;
-                action.ChangedByUserId = this.User.Identity.GetUserId();
+                model.ChangedDateTime = DateTime.Now;
+                model.ChangedByUserId = this.User.Identity.GetUserId();
 
-                db.Actions.Add(action);
+                db.Actions.Add(model);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(action);
+            return View(model);
         }
 
         // GET: Admin/Actions/Edit/5
@@ -64,19 +57,19 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Models.Action action)
+        public ActionResult Edit(Models.Action model)
         {
             if (ModelState.IsValid)
             {
-                action.ChangedDateTime = DateTime.Now;
-                action.ChangedByUserId = this.User.Identity.GetUserId();
+                model.ChangedDateTime = DateTime.Now;
+                model.ChangedByUserId = this.User.Identity.GetUserId();
 
-                db.Entry(action).State = EntityState.Modified;
+                db.Entry(model).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(action);
+            return View(model);
         }
 
         // GET: Admin/Actions/Delete/5
@@ -103,6 +96,83 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
             db.Actions.Remove(action);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [HttpGet, ValidateInput(false)]
+        public ActionResult CreatePartial(int id)
+        {
+            Models.Action action = new Models.Action();
+
+            action.ChangedDateTime = DateTime.Now;
+            action.ChangedByUserId = this.User.Identity.GetUserId();
+
+            action.OrderDetailsId = id;
+
+            return PartialView("_CreatePartial", action);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult CreatePartial(Models.Action model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.ChangedDateTime = DateTime.Now;
+                model.ChangedByUserId = this.User.Identity.GetUserId();
+
+                db.Actions.Add(model);
+                db.SaveChanges();
+
+                var list = db.Actions.ToList();
+
+                return Json(new { totalCount = list.Count });
+            }
+
+            return Json(new { success = false });
+        }
+
+        [HttpGet, ValidateInput(false)]
+        public ActionResult UpdatePartial(int id)
+        {
+            Models.Action action = db.Actions.Find(id);
+
+            action.ChangedDateTime = DateTime.Now;
+            action.ChangedByUserId = this.User.Identity.GetUserId();
+
+            return PartialView("_EditPartial", action);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult UpdatePartial(Models.Action model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.ChangedDateTime = DateTime.Now;
+                model.ChangedByUserId = this.User.Identity.GetUserId();
+
+                db.Entry(model).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return Json(new { success = true });
+            }
+
+            return Json(new { success = false });
+        }
+
+        [HttpGet, ValidateInput(false)]
+        public ActionResult DeletePartial(int id)
+        {
+            Models.Action action = db.Actions.Find(id);
+            db.Actions.Remove(action);
+            db.SaveChanges();
+
+            return Json(new { detailsId = action.OrderDetailsId }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetListByDetails(int id)
+        {
+            var list = db.Actions.Include(a => a.AssignedUser).Include(a => a.ChangedBy).Where(x=> x.OrderDetailsId == id).ToList();
+            return Json(list, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

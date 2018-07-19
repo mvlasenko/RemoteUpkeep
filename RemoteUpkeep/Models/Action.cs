@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Script.Serialization;
 
 namespace RemoteUpkeep.Models
 {
@@ -17,6 +18,7 @@ namespace RemoteUpkeep.Models
 
         public int OrderDetailsId { get; set; }
 
+        [ScriptIgnore(ApplyToOverrides = true)]
         public virtual OrderDetails OrderDetails { get; set; }
 
         [UIHint("_User")]

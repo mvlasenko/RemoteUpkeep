@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -64,21 +65,28 @@ namespace RemoteUpkeep.Models
             return userIdentity;
         }
 
+        [ScriptIgnore(ApplyToOverrides = true)]
         public virtual ICollection<Language> Languages { get; set; }
 
+        [ScriptIgnore(ApplyToOverrides = true)]
         public virtual ICollection<Message> SentMessages { get; set; }
 
+        [ScriptIgnore(ApplyToOverrides = true)]
         public virtual ICollection<Message> ReceivedMessages { get; set; }
 
+        [ScriptIgnore(ApplyToOverrides = true)]
         public virtual ICollection<Order> UserOrders { get; set; }
 
+        [ScriptIgnore(ApplyToOverrides = true)]
         public virtual ICollection<Service> ChangedServices { get; set; }
 
+        [ScriptIgnore(ApplyToOverrides = true)]
         public virtual ICollection<Target> ChangedTargets { get; set; }
 
+        [ScriptIgnore(ApplyToOverrides = true)]
         public virtual ICollection<Action> ChangedActions { get; set; }
 
+        [ScriptIgnore(ApplyToOverrides = true)]
         public virtual ICollection<Action> AssignedActions { get; set; }
-
     }
 }

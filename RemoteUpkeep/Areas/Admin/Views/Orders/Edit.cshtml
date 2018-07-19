@@ -1,4 +1,6 @@
-﻿@using RemoteUpkeep.Models
+﻿@using RemoteUpkeep.Properties
+@using RemoteUpkeep.Helpers
+@using RemoteUpkeep.Models
 @model Order
 
 @{
@@ -15,119 +17,121 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>Order</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-horizontal">
+        <h4>Order</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    @Html.HiddenFor(model => model.Id)
-    @Html.HiddenFor(model => model.CreatedDateTime)
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <!-- order details -->
-
-    <div style="padding-bottom: 10px;">
-        <button type="button" class="btn btn-default pull-right create-details">New Target</button>
-    </div>
-
-    @{
-        int i = 0;
-        int count = Model.OrderDetails.Count;
-    }
-    @foreach (var details in Model.OrderDetails)
-    {
-        Target target = details.Target;
-
-        <h4>Task @(count > 1 ? i.ToString() : "")in @target.Region.Title</h4>
-
-        @Html.HiddenFor(model => Model.OrderDetails[i].Id)
-        @Html.HiddenFor(model => Model.OrderDetails[i].OrderId)
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.CreatedDateTime)
 
         <div class="form-group">
-            @Html.LabelFor(model => Model.OrderDetails[i].OrderStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => Model.OrderDetails[i].OrderStatus, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => Model.OrderDetails[i].OrderStatus, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        @Html.HiddenFor(model => Model.OrderDetails[i].Target.Id)
-        @Html.HiddenFor(model => Model.OrderDetails[i].TargetId)
-        @Html.HiddenFor(model => Model.OrderDetails[i].Target.ChangedDateTime)
-        @Html.HiddenFor(model => Model.OrderDetails[i].Target.ChangedByUserId)
-
-        <div class="form-group">
-            @Html.LabelFor(model => Model.OrderDetails[i].Target.RegionId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => Model.OrderDetails[i].Target.RegionId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => Model.OrderDetails[i].Target.RegionId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => Model.OrderDetails[i].Target.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => Model.OrderDetails[i].Target.Title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => Model.OrderDetails[i].Target.Title, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => Model.OrderDetails[i].Target.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => Model.OrderDetails[i].Target.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => Model.OrderDetails[i].Target.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => Model.OrderDetails[i].Target.Geography, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => Model.OrderDetails[i].Target.Geography, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => Model.OrderDetails[i].ServiceIds, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => Model.OrderDetails[i].ServiceIds, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-        </div>
-
-        <!-- actions -->
+        <!-- order details -->
 
         <div style="padding-bottom: 10px;">
-            <button type="button" class="btn btn-default pull-right create-action">New Action</button>
+            <button type="button" class="btn btn-default pull-right create-details">New Target</button>
         </div>
-        <h4>
-            Actions
-        </h4>
-        if (Model.OrderDetails[i].Actions != null && Model.OrderDetails[i].Actions.Count > 0)
-        {
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => Model.OrderDetails[i].Actions.First().Description)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => Model.OrderDetails[i].Actions.First().DueDate)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => Model.OrderDetails[i].Actions.First().ChangedDateTime)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => Model.OrderDetails[i].Actions.First().AssignedUserId)
-                    </th>
-                    <th></th>
-                </tr>
 
+        @{
+            int i = 0;
+            int count = Model.OrderDetails.Count;
+        }
+        @foreach (var details in Model.OrderDetails)
+        {
+            Target target = details.Target;
+
+            <h4>Task @(count > 1 ? i.ToString() : "")in @target.Region.Title</h4>
+
+            @Html.HiddenFor(model => Model.OrderDetails[i].Id)
+            @Html.HiddenFor(model => Model.OrderDetails[i].OrderId)
+
+            <div class="form-group">
+                @Html.LabelFor(model => Model.OrderDetails[i].OrderStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EnumDropDownListFor(model => Model.OrderDetails[i].OrderStatus, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => Model.OrderDetails[i].OrderStatus, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @Html.HiddenFor(model => Model.OrderDetails[i].Target.Id)
+            @Html.HiddenFor(model => Model.OrderDetails[i].TargetId)
+            @Html.HiddenFor(model => Model.OrderDetails[i].Target.ChangedDateTime)
+            @Html.HiddenFor(model => Model.OrderDetails[i].Target.ChangedByUserId)
+
+            <div class="form-group">
+                @Html.LabelFor(model => Model.OrderDetails[i].Target.RegionId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => Model.OrderDetails[i].Target.RegionId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => Model.OrderDetails[i].Target.RegionId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => Model.OrderDetails[i].Target.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => Model.OrderDetails[i].Target.Title, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => Model.OrderDetails[i].Target.Title, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => Model.OrderDetails[i].Target.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => Model.OrderDetails[i].Target.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => Model.OrderDetails[i].Target.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => Model.OrderDetails[i].Target.Geography, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => Model.OrderDetails[i].Target.Geography, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => Model.OrderDetails[i].ServiceIds, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => Model.OrderDetails[i].ServiceIds, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <!-- actions -->
+
+            <div style="padding-bottom: 10px;">
+                <button type="button" class="btn btn-default pull-right create-action" data-id="@details.Id">New Action</button>
+            </div>
+            <h4>
+                Actions
+            </h4>
+            if (Model.OrderDetails[i].Actions != null && Model.OrderDetails[i].Actions.Count > 0)
+            {
+            <table class="table" id="actions">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => Model.OrderDetails[i].Actions.First().Description)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => Model.OrderDetails[i].Actions.First().DueDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => Model.OrderDetails[i].Actions.First().ChangedDateTime)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => Model.OrderDetails[i].Actions.First().AssignedUserId)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
                 @{
                     int action_index = 0;
                 }
@@ -154,84 +158,208 @@
 
                     action_index++;
                 }
+                </tbody>
             </table>
+            }
+
+            <!-- messages -->
+
+            <div style="padding-bottom: 10px;">
+                <button type="button" class="btn btn-default pull-right create-message">New Message</button>
+            </div>
+            <h4>
+                Messages
+            </h4>
+            if (Model.OrderDetails[i].Messages != null && Model.OrderDetails[i].Messages.Count > 0)
+            {
+                <table class="table" id="messages">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => Model.OrderDetails[i].Messages.First().SenderId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => Model.OrderDetails[i].Messages.First().ReceiverId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => Model.OrderDetails[i].Messages.First().Text)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => Model.OrderDetails[i].Messages.First().Date)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => Model.OrderDetails[i].Messages.First().MessageType)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @{
+                        int message_index = 0;
+                    }
+                    @foreach (var message in Model.OrderDetails[i].Messages)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => message.SenderId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => message.ReceiverId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => message.Text)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => message.Date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => message.MessageType)
+                            </td>
+                            <td align="right">
+                                <button type="button" class="btn btn-default edit-message" data-id="@message.Id">Edit</button>
+                                <button type="button" class="btn btn-default delete-message" data-id="@message.Id">Delete</button>
+                            </td>
+                        </tr>
+
+                        message_index++;
+                    }
+                    </tbody>
+                </table>
+            }
+
+            i++;
         }
 
-        <!-- messages -->
-
-        <div style="padding-bottom: 10px;">
-            <button type="button" class="btn btn-default pull-right create-message">New Message</button>
+        <hr />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
         </div>
-        <h4>
-            Messages
-        </h4>
-        if (Model.OrderDetails[i].Messages != null && Model.OrderDetails[i].Messages.Count > 0)
-        {
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => Model.OrderDetails[i].Messages.First().SenderId)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => Model.OrderDetails[i].Messages.First().ReceiverId)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => Model.OrderDetails[i].Messages.First().Text)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => Model.OrderDetails[i].Messages.First().Date)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => Model.OrderDetails[i].Messages.First().MessageType)
-                    </th>
-                    <th></th>
-                </tr>
 
-                @{
-                    int message_index = 0;
-                }
-                @foreach (var message in Model.OrderDetails[i].Messages)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => message.SenderId)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => message.ReceiverId)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => message.Text)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => message.Date)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => message.MessageType)
-                        </td>
-                        <td align="right">
-                            <button type="button" class="btn btn-default edit-message" data-id="@message.Id">Edit</button>
-                            <button type="button" class="btn btn-default delete-message" data-id="@message.Id">Delete</button>
-                        </td>
-                    </tr>
-
-                    message_index++;
-                }
-            </table>
-        }
-
-        i++;
-    }
-
-    <hr />
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
-        </div>
     </div>
-
-</div>
 }
 
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" id="modal-content"></div>
+    </div>
+</div>
+
 @section Scripts {
+
+    @Styles.Render("~/Content/datetimepicker")
+    @Scripts.Render("~/bundles/datetimepicker")
+
+    @Scripts.Render("~/bundles/jquery.unobtrusive-ajax")
+
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+    function InitActionsModal() {
+
+        $('.create-action').unbind();
+        $('.create-action').click(function() {
+            var url = "@Url.Content("~/")Admin/Actions/CreatePartial";
+            var detailsId = $(this).attr('data-id');
+            $.get(url + '/' + detailsId, function(data) {
+                $('#modal-content').html(data);
+
+                $('#modal').modal('show');
+                jQuery.validator.unobtrusive.parse('#frmModal');
+
+                AddAsterisk();
+                InitDatePicker();
+            });
+        });
+
+        $('.edit-action').unbind();
+        $('.edit-action').click(function() {
+            var url = "@Url.Content("~/")Admin/Actions/UpdatePartial";
+            var id = $(this).attr('data-id');
+            $.get(url + '/' + id, function(data) {
+                $('#modal-content').html(data);
+
+                $('#modal').modal('show');
+                jQuery.validator.unobtrusive.parse('#frmModal');
+
+                AddAsterisk();
+                InitDatePicker();
+            });
+        });
+
+        $('.delete-action').unbind();
+        $('.delete-action').click(function () {
+            if (confirm('@Resources.DeleteConfirm'))
+            {
+                var url = "@Url.Content("~/")Admin/Actions/DeletePartial";
+                var id = $(this).attr('data-id');
+                $.get(url + '/' + id, function(data) {
+                    RefreshActions(data.detailsId);
+                });
+            }
+        });
+    }
+
+    function RefreshActions(detailsId) {
+        var url = "@Url.Content("~/")Admin/Actions/GetListByDetails/" + detailsId;
+        $.ajax({
+            type: 'GET',
+            dataType: 'Json',
+            url: url,
+            success: function(data) {
+
+                $('table#actions TBODY').empty();
+
+                $.each(data, function (idx, item) {
+                    var row = "<tr>";
+                    row += '<td>' + item.Description + '</td>';
+                    row += '<td>' + ((new Date(parseInt(item.DueDate.substr(6)))).toLocaleString()) + '</td>';
+                    row += '<td>' + ((new Date(parseInt(item.ChangedDateTime.substr(6)))).toLocaleString()) + '</td>';
+                    row += '<td>' + item.AssignedUser.FullName + '</td>';
+                    row += "<td align='right'><button type='button' class='btn btn-default edit-action' data-id='" + item.Id + "'>@Resources.Edit</button> <button type='button' class='btn btn-default delete-action' data-id='" + item.Id + "'>@Resources.Delete</button></td>";
+                    row += "</tr>";
+
+                    $('table#actions TBODY').append(row);
+                });
+
+                InitActionsModal();
+            },
+            processData: false,
+            async: true
+        });
+    }
+
+    function AddAsterisk() {
+        $('input[type=text]').each(function () {
+            var req = $(this).attr('data-val-required');
+            if (undefined != req) {
+                var label = $('label[for="' + $(this).attr('id') + '"]');
+                var text = label.text();
+                if (text.length > 0 && text.indexOf('*') === -1) {
+                    label.append('<span style="color:red"> *</span>');
+                }
+            }
+        });
+    }
+
+    function InitDatePicker() {
+        $('.datetimepicker').datetimepicker({
+            format: '@UIHelper.GetDateTimeFormat()'
+        });
+        $('.datepicker').datetimepicker({
+            format: '@UIHelper.GetDateFormat()'
+        });
+    }
+
+    $(document).ready(function () {
+
+        InitActionsModal();
+        RefreshActions();
+
+    });
+
+    </script>
 }
