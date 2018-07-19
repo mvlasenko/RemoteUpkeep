@@ -1,0 +1,20 @@
+@using RemoteUpkeep.Models
+@using RemoteUpkeep.Helpers
+
+@{
+    var name = ViewData.TemplateInfo.HtmlFieldPrefix;
+    var id = name.Replace(".", "_").Replace("[", "_").Replace("]", "_");
+    List<int> selectedServiceIds = ViewData.TemplateInfo.FormattedModelValue as List<int>;
+    int i = 0;
+}
+
+@foreach (Service service in UIHelper.GetServices())
+{
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" name="@name" value="@service.Id" id="@id" @{if (selectedServiceIds != null && selectedServiceIds.Any(x => x == service.Id)) { <text> checked='checked' </text>  }} />
+            @service.Description
+        </label>
+    </div>
+    i++;
+}

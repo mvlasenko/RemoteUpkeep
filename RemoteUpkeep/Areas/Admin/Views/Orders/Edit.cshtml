@@ -7,6 +7,9 @@
 }
 
 <h2>Edit</h2>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
 
 @using (Html.BeginForm())
 {
@@ -44,6 +47,7 @@
 
         <h4>Task @(count > 1 ? i.ToString() : "")in @target.Region.Title</h4>
 
+        @Html.HiddenFor(model => Model.OrderDetails[i].Id)
         @Html.HiddenFor(model => Model.OrderDetails[i].OrderId)
 
         <div class="form-group">
@@ -90,24 +94,143 @@
             </div>
         </div>
 
-        <!-- todo: activities -->
+        <div class="form-group">
+            @Html.LabelFor(model => Model.OrderDetails[i].ServiceIds, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => Model.OrderDetails[i].ServiceIds, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
 
-        <!-- todo: messages -->
+        <!-- actions -->
+
+        <div style="padding-bottom: 10px;">
+            <button type="button" class="btn btn-default pull-right create-action">New Action</button>
+        </div>
+        <h4>
+            Actions
+        </h4>
+        if (Model.OrderDetails[i].Actions != null && Model.OrderDetails[i].Actions.Count > 0)
+        {
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => Model.OrderDetails[i].Actions.First().Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => Model.OrderDetails[i].Actions.First().DueDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => Model.OrderDetails[i].Actions.First().ChangedDateTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => Model.OrderDetails[i].Actions.First().AssignedUserId)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @{
+                    int action_index = 0;
+                }
+                @foreach (var action in Model.OrderDetails[i].Actions)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => action.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => action.DueDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => action.ChangedDateTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => action.AssignedUser.FullName)
+                        </td>
+                        <td align="right">
+                            <button type="button" class="btn btn-default edit-action" data-id="@action.Id">Edit</button>
+                            <button type="button" class="btn btn-default delete-action" data-id="@action.Id">Delete</button>
+                        </td>
+                    </tr>
+
+                    action_index++;
+                }
+            </table>
+        }
+
+        <!-- messages -->
+
+        <div style="padding-bottom: 10px;">
+            <button type="button" class="btn btn-default pull-right create-message">New Message</button>
+        </div>
+        <h4>
+            Messages
+        </h4>
+        if (Model.OrderDetails[i].Messages != null && Model.OrderDetails[i].Messages.Count > 0)
+        {
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => Model.OrderDetails[i].Messages.First().SenderId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => Model.OrderDetails[i].Messages.First().ReceiverId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => Model.OrderDetails[i].Messages.First().Text)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => Model.OrderDetails[i].Messages.First().Date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => Model.OrderDetails[i].Messages.First().MessageType)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @{
+                    int message_index = 0;
+                }
+                @foreach (var message in Model.OrderDetails[i].Messages)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => message.SenderId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => message.ReceiverId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => message.Text)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => message.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => message.MessageType)
+                        </td>
+                        <td align="right">
+                            <button type="button" class="btn btn-default edit-message" data-id="@message.Id">Edit</button>
+                            <button type="button" class="btn btn-default delete-message" data-id="@message.Id">Delete</button>
+                        </td>
+                    </tr>
+
+                    message_index++;
+                }
+            </table>
+        }
 
         i++;
     }
 
+    <hr />
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Save" class="btn btn-default" />
         </div>
     </div>
+
 </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Data.Entity;
+using System.Linq;
 
 namespace RemoteUpkeep.Models
 {
@@ -77,17 +79,6 @@ namespace RemoteUpkeep.Models
                 .HasForeignKey(e => e.CreatedByUserId)
                 .WillCascadeOnDelete(false);
 
-            //many-to-many
-            modelBuilder.Entity<Service>()
-                .HasMany(e => e.OrderDetails)
-                .WithMany(x => x.Services)
-                .Map(m =>
-                {
-                    m.MapLeftKey("ServiceId");
-                    m.MapRightKey("OrderDetailsId");
-                    m.ToTable("ServiceOrderDetails");
-                });
-
             //orders
 
             modelBuilder.Entity<Order>()
@@ -107,6 +98,17 @@ namespace RemoteUpkeep.Models
                 .HasRequired(e => e.Order)
                 .WithMany(e => e.OrderDetails)
                 .HasForeignKey(e => e.OrderId);
+
+            //many-to-many
+            modelBuilder.Entity<OrderDetails>()
+                .HasMany(e => e.Services)
+                .WithMany(x => x.OrderDetails)
+                .Map(m =>
+                {
+                    m.MapLeftKey("OrderDetailsId");
+                    m.MapRightKey("ServiceId");
+                    m.ToTable("OrderDetailsServices");
+                });
 
             //targets
 
@@ -177,6 +179,12 @@ namespace RemoteUpkeep.Models
                     m.ToTable("MessageAttachments");
                 });
 
+        }
+
+        public override int SaveChanges()
+        {
+            var modifiedEntities = ChangeTracker.Entries().ToList();
+            return base.SaveChanges();
         }
     }
 }

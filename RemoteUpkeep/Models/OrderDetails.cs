@@ -34,5 +34,9 @@ namespace RemoteUpkeep.Models
 
         //many-to-many
         public virtual ICollection<Service> Services { get; set; }
+        
+        [UIHint("_Services")]
+        [Display(Name = "Services")]
+        public List<int> ServiceIds { get; set; }
     }
 }

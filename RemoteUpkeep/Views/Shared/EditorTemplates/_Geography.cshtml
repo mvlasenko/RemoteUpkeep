@@ -1,7 +1,7 @@
 ﻿@using RemoteUpkeep.Helpers
 @{
-    var prefix = ViewData.TemplateInfo.HtmlFieldPrefix;
-    var name = prefix.Replace(".", "_");
+    var name = ViewData.TemplateInfo.HtmlFieldPrefix;
+    var id = name.Replace(".", "_").Replace("[", "_").Replace("]", "_");
     var val = ViewData.ModelMetadata.Model;
     if (val == null) {
         val = "(49.422196, 26.985674)";
@@ -61,7 +61,7 @@
             latLng: pos
         },
         function (results, status) {
-            $('#@name').val(pos);
+            $('#@id').val(pos);
         });
     }
 

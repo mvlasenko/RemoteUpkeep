@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -51,10 +52,18 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = db.Orders.Include(x => x.OrderDetails).FirstOrDefault(x => x.Id == id);
+
+            Order order = db.Orders
+                .Include(x => x.OrderDetails)
+                .FirstOrDefault(x => x.Id == id);
             if (order == null)
             {
                 return HttpNotFound();
+            }
+
+            foreach (OrderDetails details in order.OrderDetails)
+            {
+                details.ServiceIds = details.Services.Select(x => x.Id).ToList();
             }
 
             return View(order);
@@ -66,18 +75,32 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                db.Configuration.ProxyCreationEnabled = false;
+
                 db.Entry(order).State = EntityState.Modified;
 
-                foreach (OrderDetails details in db.OrderDetails)
+                foreach (OrderDetails details in order.OrderDetails)
                 {
-                    details.Target.ChangedDateTime = DateTime.Now;
-                    details.Target.ChangedByUserId = this.User.Identity.GetUserId();
-
                     db.Entry(details).State = EntityState.Modified;
                     db.Entry(details.Target).State = EntityState.Modified;
+
+                    details.Target.ChangedDateTime = DateTime.Now;
+                    details.Target.ChangedByUserId = this.User.Identity.GetUserId();
                 }
 
                 db.SaveChanges();
+
+                //save many-to-many relation in separate transaction
+                foreach (OrderDetails details in order.OrderDetails)
+                {
+                    OrderDetails originalDetails = db.OrderDetails.Include(x => x.Services).Single(x => x.Id == details.Id);
+                    db.Entry(originalDetails).State = EntityState.Modified;
+
+                    originalDetails.Services = details.ServiceIds == null ? new List<Service>() : details.ServiceIds.Select(serviceId => db.Services.ToList().FirstOrDefault(x => x.Id == serviceId)).ToList();
+
+                    db.SaveChanges();
+                }
+
                 return RedirectToAction("Index");
             }
 

@@ -2,11 +2,12 @@
 @using RemoteUpkeep.Properties
 @using RemoteUpkeep.Models
 @{
-    var name = ViewData.ModelMetadata.PropertyName;
     var val = ViewData.ModelMetadata.Model;
+    var name = ViewData.TemplateInfo.HtmlFieldPrefix;
+    var id = name.Replace(".", "_").Replace("[", "_").Replace("]", "_");
 }
 
-<select name="@name" id="@name" class="form-control">
+<select name="@name" id="@id" class="form-control">
     <option>@string.Format("< {0} >", Resources.SelectRegion)</option>
     @foreach (Region region in UIHelper.GetRegions())
     {
