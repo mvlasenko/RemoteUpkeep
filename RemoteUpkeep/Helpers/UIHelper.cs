@@ -53,16 +53,5 @@ namespace RemoteUpkeep.Helpers
                 return context.Users.ToList();
             }
         }
-
-        public static string GetDateFormat()
-        {
-            return "DD/MM/YYYY";
-        }
-
-        public static string GetDateTimeFormat()
-        {
-            return "DD/MM/YYYY HH:mm";
-        }
-
     }
 }

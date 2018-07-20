@@ -105,6 +105,49 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet, ValidateInput(false)]
+        public ActionResult CreatePartial(int id)
+        {
+            Target target = new Target();
+            target.ChangedDateTime = DateTime.Now;
+            target.ChangedByUserId = this.User.Identity.GetUserId();
+            target.OrderId = id;
+
+            return PartialView("_CreatePartial", target);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult CreatePartial(Target model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.ChangedDateTime = DateTime.Now;
+                model.ChangedByUserId = this.User.Identity.GetUserId();
+                db.Targets.Add(model);
+
+                OrderDetails orderDetails = new OrderDetails();
+                orderDetails.Target = model;
+                orderDetails.OrderId = model.OrderId;
+                orderDetails.OrderStatus = OrderStatus.New;
+                db.OrderDetails.Add(orderDetails);
+
+                db.SaveChanges();
+
+                var list = db.OrderDetails.Where(x => x.OrderId == model.OrderId).ToList();
+
+                return Json(new { totalCount = list.Count });
+            }
+
+            return Json(new { success = false });
+        }
+
+        [HttpGet, ValidateInput(false)]
+        public ActionResult GetDetails(int id)
+        {
+            var model = db.OrderDetails.Where(x => x.OrderId == id).ToList();
+            return PartialView("_DetailsListPartial", model);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -61,6 +61,15 @@ namespace RemoteUpkeep.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Back to List.
+        /// </summary>
+        public static string BackToList {
+            get {
+                return ResourceManager.GetString("BackToList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
         public static string Close {
@@ -79,6 +88,24 @@ namespace RemoteUpkeep.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DD/MM/YYYY.
+        /// </summary>
+        public static string DateFormat {
+            get {
+                return ResourceManager.GetString("DateFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DD/MM/YYYY HH:mm.
+        /// </summary>
+        public static string DateTimeFormat {
+            get {
+                return ResourceManager.GetString("DateTimeFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string Delete {
@@ -88,7 +115,7 @@ namespace RemoteUpkeep.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete item?.
+        ///   Looks up a localized string similar to Are you sure you want to delete this?.
         /// </summary>
         public static string DeleteConfirm {
             get {
@@ -102,6 +129,42 @@ namespace RemoteUpkeep.Properties {
         public static string Edit {
             get {
                 return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Index.
+        /// </summary>
+        public static string Index {
+            get {
+                return ResourceManager.GetString("Index", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Action.
+        /// </summary>
+        public static string NewAction {
+            get {
+                return ResourceManager.GetString("NewAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Message.
+        /// </summary>
+        public static string NewMessage {
+            get {
+                return ResourceManager.GetString("NewMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Target.
+        /// </summary>
+        public static string NewTarget {
+            get {
+                return ResourceManager.GetString("NewTarget", resourceCulture);
             }
         }
         

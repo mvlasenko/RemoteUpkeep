@@ -1,16 +1,18 @@
-﻿@model RemoteUpkeep.Models.Target
+﻿@using RemoteUpkeep.Properties
+@using RemoteUpkeep.Helpers
+@model RemoteUpkeep.Models.Target
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = Resources.Edit;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>@Resources.Edit</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Target</h4>
         <hr />
@@ -53,16 +55,17 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="@Resources.Save" class="btn btn-primary" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(Resources.BackToList, "Index")
 </div>
 
 @section Scripts {
+    <script src="https://maps.googleapis.com/maps/api/js?key=@Keys.GoogleApiKey&callback=initMap" async defer></script>
     @Scripts.Render("~/bundles/jqueryval")
 }

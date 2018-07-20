@@ -64,5 +64,9 @@ namespace RemoteUpkeep.Models
 
         //many-to-many
         public virtual ICollection<Image> Images { get; set; }
+
+        //view only
+        [NotMapped]
+        public int OrderId { get; set; }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace RemoteUpkeep.Models
+﻿namespace RemoteUpkeep.Models
 {
     public enum MessageType
     {
@@ -9,7 +7,6 @@ namespace RemoteUpkeep.Models
         Viber = 2
     }
 
-    [Flags]
     public enum UserType
     {
         None = 0,
@@ -23,5 +20,4 @@ namespace RemoteUpkeep.Models
         Ongoing = 1,
         Closed = 2
     }
-
 }

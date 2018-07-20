@@ -1,11 +1,12 @@
-﻿@model IEnumerable<RemoteUpkeep.Models.Message>
+﻿@using RemoteUpkeep.Properties
+@model IEnumerable<RemoteUpkeep.Models.Message>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Resources.Index;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>@Resources.Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -33,30 +34,31 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Receiver.FullName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sender.FullName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Text)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MessageType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OrderDetails.Order.CreatedDateTime)
-        </td>
-        <td>
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Receiver.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sender.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Text)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MessageType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDetails.Order.CreatedDateTime)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>

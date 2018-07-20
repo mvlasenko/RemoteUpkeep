@@ -1,0 +1,172 @@
+﻿function InitActionsModal() {
+
+    $('.create-action').unbind();
+    $('.create-action').click(function () {
+        var url = "/Admin/Actions/CreatePartial";
+        var detailsId = $(this).attr('data-id');
+        $.get(url + '/' + detailsId, function (data) {
+            $('#modal-content').html(data);
+
+            $('#modal').modal('show');
+            jQuery.validator.unobtrusive.parse('#frmModal');
+
+            AddAsterisk();
+            InitDatePicker();
+        });
+    });
+
+    $('.edit-action').unbind();
+    $('.edit-action').click(function () {
+        var url = "/Admin/Actions/UpdatePartial";
+        var id = $(this).attr('data-id');
+        $.get(url + '/' + id, function (data) {
+            $('#modal-content').html(data);
+
+            $('#modal').modal('show');
+            jQuery.validator.unobtrusive.parse('#frmModal');
+
+            AddAsterisk();
+            InitDatePicker();
+        });
+    });
+
+    $('.delete-action').unbind();
+    $('.delete-action').click(function () {
+        if (confirm(resources.DeleteConfirm)) {
+            var url = "/Admin/Actions/DeletePartial";
+            var id = $(this).attr('data-id');
+            $.get(url + '/' + id, function (data) {
+                RefreshActions(data.detailsId);
+            });
+        }
+    });
+}
+
+function RefreshActions(detailsId) {
+    var url = "/Admin/Actions/GetListByDetails/" + detailsId;
+    $.ajax({
+        type: 'GET',
+        dataType: 'Json',
+        url: url,
+        success: function (data) {
+
+            $('table#actions TBODY').empty();
+
+            $.each(data, function (idx, item) {
+                var row = "<tr>";
+                row += '<td>' + item.Description + '</td>';
+                row += '<td>' + ((new Date(parseInt(item.DueDate.substr(6)))).toLocaleString()) + '</td>';
+                row += '<td>' + ((new Date(parseInt(item.ChangedDateTime.substr(6)))).toLocaleString()) + '</td>';
+                row += '<td>' + item.AssignedUser.FullName + '</td>';
+                row += "<td align='right'><button type='button' class='btn btn-default edit-action' data-id='" + item.Id + "'>" + resources.Edit + "</button> <button type='button' class='btn btn-default delete-action' data-id='" + item.Id + "'>" + resources.Delete + "</button></td>";
+                row += "</tr>";
+
+                $('table#actions TBODY').append(row);
+            });
+
+            InitActionsModal();
+        },
+        processData: false,
+        async: true
+    });
+}
+
+function InitMessagesModal() {
+
+    $('.create-message').unbind();
+    $('.create-message').click(function () {
+        var url = "/Admin/Messages/CreatePartial";
+        var detailsId = $(this).attr('data-id');
+        $.get(url + '/' + detailsId, function (data) {
+            $('#modal-content').html(data);
+
+            $('#modal').modal('show');
+            jQuery.validator.unobtrusive.parse('#frmModal');
+
+            AddAsterisk();
+            InitDatePicker();
+        });
+    });
+}
+
+function RefreshMessages(detailsId) {
+    var url = "/Admin/Messages/GetListByDetails/" + detailsId;
+    $.ajax({
+        type: 'GET',
+        dataType: 'Json',
+        url: url,
+        success: function (data) {
+
+            $('table#messages TBODY').empty();
+
+            $.each(data, function (idx, item) {
+                var row = "<tr>";
+                row += '<td>' + item.Sender.FullName + '</td>';
+                row += '<td>' + item.Receiver.FullName + '</td>';
+                row += '<td>' + item.Text + '</td>';
+                row += '<td>' + ((new Date(parseInt(item.Date.substr(6)))).toLocaleString()) + '</td>';
+                row += '<td>' + item.MessageTypeName + '</td>';
+                row += "</tr>";
+                $('table#messages TBODY').append(row);
+            });
+
+            InitMessagesModal();
+        },
+        processData: false,
+        async: true
+    });
+}
+
+function InitTargetsModal() {
+
+    $('.create-target').unbind();
+    $('.create-target').click(function () {
+        var url = "/Admin/Targets/CreatePartial";
+        var orderId = $(this).attr('data-id');
+        $.get(url + '/' + orderId, function (data) {
+            $('#modal-content').html(data);
+
+            $('#modal').modal('show');
+            jQuery.validator.unobtrusive.parse('#frmModal');
+
+            AddAsterisk();
+            InitDatePicker();
+        });
+    });
+}
+
+function RefreshTargets(orderId) {
+    var url = "/Admin/Targets/GetDetails/" + orderId;
+    $.ajax({
+        type: 'GET',
+        dataType: 'Json',
+        url: url,
+        success: function (data) {
+            $('#targetList').html(data);
+        },
+        processData: false,
+        async: true
+    });
+}
+
+function AddAsterisk() {
+    $('input[type=text]').each(function () {
+        var req = $(this).attr('data-val-required');
+        if (undefined != req) {
+            var label = $('label[for="' + $(this).attr('id') + '"]');
+            var text = label.text();
+            if (text.length > 0 && text.indexOf('*') === -1) {
+                label.append('<span style="color:red"> *</span>');
+            }
+        }
+    });
+}
+
+function InitDatePicker() {
+    $('.datetimepicker').datetimepicker({
+        format: resources.DateTimeFormat
+    });
+    $('.datepicker').datetimepicker({
+        format: resources.DateFormat
+    });
+}

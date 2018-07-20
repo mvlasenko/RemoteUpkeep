@@ -1,4 +1,5 @@
-﻿@using RemoteUpkeep.Helpers
+﻿@using RemoteUpkeep.Properties
+@using RemoteUpkeep.Helpers
 @model RemoteUpkeep.ViewModels.OrderViewModel
 
 @{
@@ -68,6 +69,8 @@
 
 @section Scripts {
 
+    <script src="https://maps.googleapis.com/maps/api/js?key=@Keys.GoogleApiKey&callback=initMap" async defer></script>
+
     @Styles.Render("~/Content/datetimepicker")
     @Scripts.Render("~/bundles/datetimepicker")
 
@@ -81,11 +84,11 @@
         $(document).ready(function () {
 
             $('.datetimepicker').datetimepicker({
-                format: '@UIHelper.GetDateTimeFormat()'
+                format: '@Resources.DateTimeFormat'
             });
 
             $('.datepicker').datetimepicker({
-                format: '@UIHelper.GetDateFormat()'
+                format: '@Resources.DateFormat'
             });
 
             $('#HasGeography').change(function () {
@@ -99,7 +102,7 @@
 
             $('#RegionId').change(function () {
                 var selected = $(this).find('option:selected');
-                var lat = selected.data('geo-lat'); 
+                var lat = selected.data('geo-lat');
                 var lng = selected.data('geo-lng');
                 moveMarker(lat, lng);
             });

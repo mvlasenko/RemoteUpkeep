@@ -1,5 +1,4 @@
-﻿@using RemoteUpkeep.Helpers
-@{
+﻿@{
     var name = ViewData.TemplateInfo.HtmlFieldPrefix;
     var id = name.Replace(".", "_").Replace("[", "_").Replace("]", "_");
     var val = ViewData.ModelMetadata.Model;
@@ -43,15 +42,6 @@
             marker.setPosition(event.latLng);
             geocodePosition(event.latLng);
         });
-
-        //var infowindow = new google.maps.InfoWindow({
-        //    content: "<div class='infoDiv'><h2>" + 'title' + "</h2>" + "<div><h4>" + 'description' + "</h4></div></div>"
-        //});
-
-        //google.maps.event.addListener(marker, 'click', function () {
-        //    infowindow.open(map, marker);
-        //});
-
     }
 
     function geocodePosition(pos) {
@@ -76,4 +66,3 @@
 
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=@Keys.GoogleApiKey&callback=initMap" async defer></script>

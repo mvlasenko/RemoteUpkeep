@@ -117,20 +117,41 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BackToList" xml:space="preserve">
+    <value>Back to List</value>
+  </data>
   <data name="Close" xml:space="preserve">
     <value>Close</value>
   </data>
   <data name="Create" xml:space="preserve">
     <value>Create</value>
   </data>
+  <data name="DateFormat" xml:space="preserve">
+    <value>DD/MM/YYYY</value>
+  </data>
+  <data name="DateTimeFormat" xml:space="preserve">
+    <value>DD/MM/YYYY HH:mm</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
   <data name="DeleteConfirm" xml:space="preserve">
-    <value>Delete item?</value>
+    <value>Are you sure you want to delete this?</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
+  </data>
+  <data name="Index" xml:space="preserve">
+    <value>Index</value>
+  </data>
+  <data name="NewAction" xml:space="preserve">
+    <value>New Action</value>
+  </data>
+  <data name="NewMessage" xml:space="preserve">
+    <value>New Message</value>
+  </data>
+  <data name="NewTarget" xml:space="preserve">
+    <value>New Target</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>

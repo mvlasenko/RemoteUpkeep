@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Script.Serialization;
 
 namespace RemoteUpkeep.Models
 {
@@ -26,7 +27,16 @@ namespace RemoteUpkeep.Models
         public virtual Order Order { get; set; }
 
         [Display(Name = "Status")]
+        [ScriptIgnore(ApplyToOverrides = true)]
         public OrderStatus OrderStatus { get; set; }
+
+        public string OrderStatusName
+        {
+            get
+            {
+                return this.OrderStatus.ToString();
+            }
+        }
 
         public virtual ICollection<Action> Actions { get; set; }
 

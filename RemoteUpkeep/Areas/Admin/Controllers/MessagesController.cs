@@ -31,23 +31,21 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Message message)
+        public ActionResult Create(Message model)
         {
             if (ModelState.IsValid)
             {
-                message.Date = DateTime.Now;
-                message.SenderId = this.User.Identity.GetUserId();
+                model.Date = DateTime.Now;
+                model.SenderId = this.User.Identity.GetUserId();
 
-                //todo
-                message.MessageType = MessageType.Email;
                 //todo: send email
 
-                db.Messages.Add(message);
+                db.Messages.Add(model);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(message);
+            return View(model);
         }
 
         // GET: Admin/Messages/Delete/5
@@ -74,6 +72,45 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
             db.Messages.Remove(message);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [HttpGet, ValidateInput(false)]
+        public ActionResult CreatePartial(int id)
+        {
+            Message message = new Message();
+            message.Date = DateTime.Now;
+            message.SenderId = this.User.Identity.GetUserId();
+            message.OrderDetailsId = id;
+
+            return PartialView("_CreatePartial", message);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult CreatePartial(Message model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.Date = DateTime.Now;
+                model.SenderId = this.User.Identity.GetUserId();
+
+                //todo: send email
+
+                db.Messages.Add(model);
+                db.SaveChanges();
+
+                var list = db.Messages.ToList();
+
+                return Json(new { totalCount = list.Count });
+            }
+
+            return Json(new { success = false });
+        }
+
+        [HttpGet]
+        public JsonResult GetListByDetails(int id)
+        {
+            var list = db.Messages.Include(m => m.Receiver).Include(m => m.Sender).Where(x => x.OrderDetailsId == id).ToList();
+            return Json(list, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

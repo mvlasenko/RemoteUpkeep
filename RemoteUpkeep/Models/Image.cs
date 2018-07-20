@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Script.Serialization;
 
 namespace RemoteUpkeep.Models
 {
@@ -28,9 +29,11 @@ namespace RemoteUpkeep.Models
         public DateTime CreatedDateTime { get; set; }
 
         //many-to-many
+        [ScriptIgnore(ApplyToOverrides = true)]
         public virtual ICollection<Message> Messages { get; set; }
 
         //many-to-many
+        [ScriptIgnore(ApplyToOverrides = true)]
         public virtual ICollection<Target> Targets { get; set; }
     }
 }

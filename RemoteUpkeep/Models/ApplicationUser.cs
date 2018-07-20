@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -34,7 +35,16 @@ namespace RemoteUpkeep.Models
         public string LastName { get; set; }
 
         [Display(Name = "Type")]
+        [ScriptIgnore(ApplyToOverrides = true)]
         public UserType UserType { get; set; }
+
+        public string UserTypeName
+        {
+            get
+            {
+                return this.UserType.ToString();
+            }
+        }
 
         [UIHint("_Country")]
         [Display(Name = "Country")]
@@ -88,5 +98,72 @@ namespace RemoteUpkeep.Models
 
         [ScriptIgnore(ApplyToOverrides = true)]
         public virtual ICollection<Action> AssignedActions { get; set; }
+
+        //base json ignores
+
+        [ScriptIgnore(ApplyToOverrides = true)]
+        public override ICollection<IdentityUserClaim> Claims => base.Claims;
+
+        [ScriptIgnore(ApplyToOverrides = true)]
+        public override ICollection<IdentityUserLogin> Logins => base.Logins;
+
+        [ScriptIgnore(ApplyToOverrides = true)]
+        public override ICollection<IdentityUserRole> Roles => base.Roles;
+
+        [ScriptIgnore(ApplyToOverrides = true)]
+        public override string PasswordHash
+        {
+            get { return base.PasswordHash; }
+            set { base.PasswordHash = value; }
+        }
+
+        [ScriptIgnore(ApplyToOverrides = true)]
+        public override string SecurityStamp
+        {
+            get { return base.SecurityStamp; }
+            set { base.SecurityStamp = value; }
+        }
+
+        [ScriptIgnore(ApplyToOverrides = true)]
+        public override bool EmailConfirmed
+        {
+            get { return base.EmailConfirmed; }
+            set { base.EmailConfirmed = value; }
+        }
+
+        [ScriptIgnore(ApplyToOverrides = true)]
+        public override bool PhoneNumberConfirmed
+        {
+            get { return base.PhoneNumberConfirmed; }
+            set { base.PhoneNumberConfirmed = value; }
+        }
+
+        [ScriptIgnore(ApplyToOverrides = true)]
+        public override bool TwoFactorEnabled
+        {
+            get { return base.TwoFactorEnabled; }
+            set { base.TwoFactorEnabled = value; }
+        }
+
+        [ScriptIgnore(ApplyToOverrides = true)]
+        public override bool LockoutEnabled
+        {
+            get { return base.LockoutEnabled; }
+            set { base.LockoutEnabled = value; }
+        }
+
+        [ScriptIgnore(ApplyToOverrides = true)]
+        public override DateTime? LockoutEndDateUtc
+        {
+            get { return base.LockoutEndDateUtc; }
+            set { base.LockoutEndDateUtc = value; }
+        }
+
+        [ScriptIgnore(ApplyToOverrides = true)]
+        public override int AccessFailedCount
+        {
+            get { return base.AccessFailedCount; }
+            set { base.AccessFailedCount = value; }
+        }
     }
 }

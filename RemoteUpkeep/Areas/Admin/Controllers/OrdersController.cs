@@ -39,7 +39,7 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
 
                 db.Orders.Add(order);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit", new { id = order.Id });
             }
 
             return View(order);

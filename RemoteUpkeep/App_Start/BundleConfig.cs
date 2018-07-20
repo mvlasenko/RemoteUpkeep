@@ -44,6 +44,10 @@ namespace RemoteUpkeep
                 "~/Scripts/jQuery.FileUpload/jquery.iframe-transport.js",
                 "~/Scripts/jQuery.FileUpload/jquery.fileupload.js"));
 
+            //admin area scripts
+            bundles.Add(new ScriptBundle("~/bundles/admin").Include(
+                "~/Scripts/admin.js"));
+
         }
     }
 }

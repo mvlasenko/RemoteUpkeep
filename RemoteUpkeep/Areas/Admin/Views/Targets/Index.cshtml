@@ -1,11 +1,12 @@
-﻿@model IEnumerable<RemoteUpkeep.Models.Target>
+﻿@using RemoteUpkeep.Properties
+@model IEnumerable<RemoteUpkeep.Models.Target>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Resources.Index;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>@Resources.Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -33,31 +34,32 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Region.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Geography)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ChangedBy.FullName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ChangedDateTime)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Region.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Geography)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChangedBy.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChangedDateTime)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Script.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace RemoteUpkeep.Models
 {
@@ -32,11 +35,21 @@ namespace RemoteUpkeep.Models
         public DateTime Date { get; set; }
 
         [Display(Name = "Type")]
+        [ScriptIgnore(ApplyToOverrides = true)]
         public MessageType MessageType { get; set; }
+
+        public string MessageTypeName
+        {
+            get
+            {
+                return this.MessageType.ToString();
+            }
+        }
 
         [Display(Name = "Order")]
         public int? OrderDetailsId { get; set; }
 
+        [ScriptIgnore(ApplyToOverrides = true)]
         public virtual OrderDetails OrderDetails { get; set; }
 
         //many-to-many

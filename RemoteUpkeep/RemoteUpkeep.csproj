@@ -218,6 +218,7 @@
     <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\ResourcesController.cs" />
     <Compile Include="EmailEngine\EmailHelper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -318,6 +319,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Migrations\migration.txt" />
+    <Content Include="Scripts\admin.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -357,6 +359,9 @@
     <Content Include="Areas\Admin\Views\Shared\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Actions\_EditPartial.cshtml" />
     <Content Include="Areas\Admin\Views\Actions\_CreatePartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Messages\_CreatePartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Orders\_DetailsListPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Targets\_CreatePartial.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
@@ -447,7 +452,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Resources\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

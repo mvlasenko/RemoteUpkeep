@@ -1,11 +1,12 @@
-﻿@model IEnumerable<RemoteUpkeep.Models.Region>
+﻿@using RemoteUpkeep.Properties
+@model IEnumerable<RemoteUpkeep.Models.Region>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Resources.Index;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>@Resources.Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -24,22 +25,23 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Country.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Geography)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Geography)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>
