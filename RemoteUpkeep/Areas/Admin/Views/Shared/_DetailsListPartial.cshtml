@@ -1,0 +1,184 @@
+﻿@using RemoteUpkeep.Properties
+@using RemoteUpkeep.Models
+@model List<OrderDetails>
+
+@{
+    ViewData.TemplateInfo.HtmlFieldPrefix = "OrderDetails";
+    int i = 0;
+    int count = Model.Count;
+}
+@foreach (var details in Model)
+{
+    Target target = details.Target;
+
+    <h4>Task @(count > 1 ? i.ToString() : "") in @target.Region.Title</h4>
+    <hr />
+
+    @Html.HiddenFor(model => Model[i].Id)
+    @Html.HiddenFor(model => Model[i].OrderId)
+
+    <div class="form-group">
+        @Html.LabelFor(model => Model[i].OrderStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(model => Model[i].OrderStatus, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => Model[i].OrderStatus, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @Html.HiddenFor(model => Model[i].Target.Id)
+    @Html.HiddenFor(model => Model[i].TargetId)
+    @Html.HiddenFor(model => Model[i].Target.ChangedDateTime)
+    @Html.HiddenFor(model => Model[i].Target.ChangedByUserId)
+
+    <div class="form-group">
+        @Html.LabelFor(model => Model[i].Target.RegionId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => Model[i].Target.RegionId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => Model[i].Target.RegionId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => Model[i].Target.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => Model[i].Target.Title, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => Model[i].Target.Title, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => Model[i].Target.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => Model[i].Target.Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => Model[i].Target.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => Model[i].Target.Geography, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => Model[i].Target.Geography, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => Model[i].ServiceIds, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => Model[i].ServiceIds, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <!-- actions -->
+    <hr />
+    <div style="padding-bottom: 10px;">
+        <button type="button" class="btn btn-default pull-right create-action" data-id="@details.Id">@Resources.NewAction</button>
+    </div>
+    <h4>
+        @Resources.Actions
+    </h4>
+    <table class="table" id="actions_@details.Id">
+        <thead>
+            <tr>
+                <th>
+                    @Resources.Description
+                </th>
+                <th>
+                    @Resources.DueDate
+                </th>
+                <th>
+                    @Resources.ChangedDateTime
+                </th>
+                <th>
+                    @Resources.AssignedUser
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @{
+            int action_index = 0;
+        }
+        @foreach (var action in Model[i].Actions)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => action.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => action.DueDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => action.ChangedDateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => action.AssignedUser.FullName)
+                </td>
+                <td align="right">
+                    <button type="button" class="btn btn-default edit-action" data-id="@action.Id">@Resources.Edit</button>
+                    <button type="button" class="btn btn-default delete-action" data-id="@action.Id">@Resources.Delete</button>
+                </td>
+            </tr>
+
+            action_index++;
+        }
+        </tbody>
+    </table>
+
+    <!-- messages -->
+    <hr />
+    <div style="padding-bottom: 10px;">
+        <button type="button" class="btn btn-default pull-right create-message" data-id="@details.Id">@Resources.NewMessage</button>
+    </div>
+    <h4>
+        @Resources.Messages
+    </h4>
+    <table class="table" id="messages_@details.Id">
+        <thead>
+            <tr>
+                <th>
+                    @Resources.Sender
+                </th>
+                <th>
+                    @Resources.Receiver
+                </th>
+                <th>
+                    @Resources.Text
+                </th>
+                <th>
+                    @Resources.Date
+                </th>
+                <th>
+                    @Resources.MessageType
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        @{
+            int message_index = 0;
+        }
+        @foreach (var message in Model[i].Messages)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => message.Sender.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => message.Receiver.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => message.Text)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => message.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => message.MessageType)
+                </td>
+            </tr>
+
+            message_index++;
+        }
+        </tbody>
+    </table>
+i++;
+}

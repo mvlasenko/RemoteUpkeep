@@ -59,8 +59,9 @@
 
 @section Scripts {
 
+    @Scripts.Render("~/bundles/geography")
     <script src="https://maps.googleapis.com/maps/api/js?key=@Keys.GoogleApiKey&callback=initMap" async defer></script>
-
+    
     @Styles.Render("~/Content/datetimepicker")
     @Scripts.Render("~/bundles/datetimepicker")
 
@@ -83,6 +84,7 @@
             $.getJSON("@Url.Action("", "Resources", new { area = "" })", function(data) {
                 resources = data;
             });
+
         });
 
     </script>

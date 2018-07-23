@@ -47,6 +47,10 @@ namespace RemoteUpkeep
             //admin area scripts
             bundles.Add(new ScriptBundle("~/bundles/admin").Include(
                 "~/Scripts/admin.js"));
+            
+            //geography scripts
+            bundles.Add(new ScriptBundle("~/bundles/geography").Include(
+                "~/Scripts/geography.js"));
 
         }
     }

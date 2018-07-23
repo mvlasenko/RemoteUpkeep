@@ -7,7 +7,7 @@
     var id = name.Replace(".", "_").Replace("[", "_").Replace("]", "_");
 }
 
-<select name="@name" id="@id" class="form-control">
+<select name="@name" id="@id" class="form-control region">
     <option>@string.Format("< {0} >", Resources.SelectRegion)</option>
     @foreach (Region region in UIHelper.GetRegions())
     {

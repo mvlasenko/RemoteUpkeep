@@ -50,7 +50,7 @@ function RefreshActions(detailsId) {
         url: url,
         success: function (data) {
 
-            $('table#actions TBODY').empty();
+            $('table#actions_' + detailsId + ' TBODY').empty();
 
             $.each(data, function (idx, item) {
                 var row = "<tr>";
@@ -61,7 +61,7 @@ function RefreshActions(detailsId) {
                 row += "<td align='right'><button type='button' class='btn btn-default edit-action' data-id='" + item.Id + "'>" + resources.Edit + "</button> <button type='button' class='btn btn-default delete-action' data-id='" + item.Id + "'>" + resources.Delete + "</button></td>";
                 row += "</tr>";
 
-                $('table#actions TBODY').append(row);
+                $('table#actions_' + detailsId + ' TBODY').append(row);
             });
 
             InitActionsModal();
@@ -97,7 +97,7 @@ function RefreshMessages(detailsId) {
         url: url,
         success: function (data) {
 
-            $('table#messages TBODY').empty();
+            $('table#messages_' + detailsId + ' TBODY').empty();
 
             $.each(data, function (idx, item) {
                 var row = "<tr>";
@@ -107,7 +107,7 @@ function RefreshMessages(detailsId) {
                 row += '<td>' + ((new Date(parseInt(item.Date.substr(6)))).toLocaleString()) + '</td>';
                 row += '<td>' + item.MessageTypeName + '</td>';
                 row += "</tr>";
-                $('table#messages TBODY').append(row);
+                $('table#messages_' + detailsId + ' TBODY').append(row);
             });
 
             InitMessagesModal();
@@ -130,7 +130,15 @@ function InitTargetsModal() {
             jQuery.validator.unobtrusive.parse('#frmModal');
 
             AddAsterisk();
-            InitDatePicker();
+
+            initMap();
+
+            $('.region').change(function () {
+                var selected = $(this).find('option:selected');
+                var lat = selected.data('geo-lat');
+                var lng = selected.data('geo-lng');
+                moveMarker(maps[maps.length - 1], markers[maps.length - 1], lat, lng);
+            });
         });
     });
 }
@@ -139,10 +147,15 @@ function RefreshTargets(orderId) {
     var url = "/Admin/Targets/GetDetails/" + orderId;
     $.ajax({
         type: 'GET',
-        dataType: 'Json',
+        dataType: 'Html',
         url: url,
         success: function (data) {
-            $('#targetList').html(data);
+            $('#targetList').empty();
+            $('#targetList').append(data);
+
+            InitActionsModal();
+            InitMessagesModal();
+            initMap();
         },
         processData: false,
         async: true
