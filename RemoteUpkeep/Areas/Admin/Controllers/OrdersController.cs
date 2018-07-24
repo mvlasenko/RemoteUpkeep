@@ -64,7 +64,7 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
             foreach (OrderDetails details in order.OrderDetails)
             {
                 details.ServiceIds = details.Services.Select(x => x.Id).ToList();
-                details.Target.ImageIds2 = String.Join("|", details.Target.Images.Select(x => x.Id));
+                details.Target.ImageIds = String.Join("|", details.Target.Images.Select(x => x.Id));
             }
 
             return View(order);
@@ -105,9 +105,9 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
                         new List<Service>() : 
                         details.ServiceIds.Select(serviceId => db.Services.FirstOrDefault(x => x.Id == serviceId)).ToList();
 
-                    originalDetails.Target.Images = details.Target == null || details.Target.ImageIds2 == null ? 
+                    originalDetails.Target.Images = details.Target == null || details.Target.ImageIds == null ? 
                         new List<Image>() : 
-                        details.Target.ImageIds2.Trim('|').Split('|').Distinct().Select(imageId => db.Images.FirstOrDefault(x => x.Id == new Guid(imageId))).ToList();
+                        details.Target.ImageIds.Trim('|').Split('|').Distinct().Select(imageId => db.Images.FirstOrDefault(x => x.Id == new Guid(imageId))).ToList();
 
                     db.SaveChanges();
                 }

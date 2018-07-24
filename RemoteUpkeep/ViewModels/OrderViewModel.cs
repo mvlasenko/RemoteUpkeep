@@ -31,7 +31,7 @@ namespace RemoteUpkeep.ViewModels
 
         [Display(Name = "Images")]
         [UIHint("_FileUpload")]
-        public string ImageIds { get; set; }
+        public string FileIds { get; set; }
 
         [Display(Name = "Due Date")]
         [UIHint("_DatePicker")]

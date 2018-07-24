@@ -7,15 +7,22 @@ function InitDropzone() {
         var id = $(this).attr('id');
         var val = $(this).val();
 
+        //console.log(id);
+
         var options = Dropzone.options.imageDrop = {
             url: '/Images/FileUpload',
             paramName: "files",
             maxFiles: 10,
             acceptedFiles: "image/*",
+            addRemoveLinks: true,
 
             init: function () {
 
-                imageDrop = this;
+                this.on('removedfile', function (file) {
+                    var idRemoved = file.name;
+                    var newVal = $("#" + id).val().replace(idRemoved, "").replace("||", "|");
+                    $("#" + id).val(newVal);
+                });
 
                 if (val) {
                     var fileIds = val.split('|');
@@ -33,16 +40,11 @@ function InitDropzone() {
 
             success: function (files, response) {
                 var idNew = response.files[0].id;
-
-                console.log(idNew);
-
                 $("#" + id).val($("#" + id).val() + "|" + idNew);
-
-                console.log($("#" + id).val());
-            }
-
+            },
         };
 
+        $("div#imageDrop_" + id).empty();
         $("div#imageDrop_" + id).dropzone(options);
 
     });

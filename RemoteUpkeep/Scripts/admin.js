@@ -131,7 +131,7 @@ function InitTargetsModal() {
 
             AddAsterisk();
             initMap();
-            InitFileUpload("/Images/FileUpload", "ImageIds");
+            InitFileUpload("/Images/FileUpload", "FileIds");
 
             $('.region').change(function () {
                 var selected = $(this).find('option:selected');

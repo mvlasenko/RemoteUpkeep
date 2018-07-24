@@ -122,9 +122,9 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 //get images
-                if (!String.IsNullOrEmpty(model.ImageIds))
+                if (!String.IsNullOrEmpty(model.FileIds))
                 {
-                    foreach (string imageId in model.ImageIds.Trim('|').Split('|'))
+                    foreach (string imageId in model.FileIds.Trim('|').Split('|'))
                     {
                         if (!String.IsNullOrEmpty(imageId))
                         {
@@ -159,6 +159,13 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         public ActionResult GetDetails(int id)
         {
             var model = db.OrderDetails.Where(x => x.OrderId == id).ToList();
+
+            foreach (OrderDetails details in model)
+            {
+                details.ServiceIds = details.Services.Select(x => x.Id).ToList();
+                details.Target.ImageIds = String.Join("|", details.Target.Images.Select(x => x.Id));
+            }
+
             return PartialView("_DetailsListPartial", model);
         }
 
