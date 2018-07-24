@@ -36,13 +36,14 @@ namespace RemoteUpkeep
                 "~/Scripts/bootstrap-datetimepicker.js"));
 			
 			//file upload
-            bundles.Add(new StyleBundle("~/Content/jQuery-File-Upload").Include(
+            bundles.Add(new StyleBundle("~/Content/fileupload").Include(
                 "~/Content/jQuery.FileUpload/css/jquery.fileupload.css"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jQuery-File-Upload").Include(
+            bundles.Add(new ScriptBundle("~/bundles/fileupload").Include(
                 "~/Scripts/jquery-ui-{version}.js",
                 "~/Scripts/jQuery.FileUpload/jquery.iframe-transport.js",
-                "~/Scripts/jQuery.FileUpload/jquery.fileupload.js"));
+                "~/Scripts/jQuery.FileUpload/jquery.fileupload.js",
+                "~/Scripts/fileupload.js"));
 
             //admin area scripts
             bundles.Add(new ScriptBundle("~/bundles/admin").Include(
@@ -52,10 +53,13 @@ namespace RemoteUpkeep
             bundles.Add(new ScriptBundle("~/bundles/geography").Include(
                 "~/Scripts/geography.js"));
 
-            //fileupload
-            bundles.Add(new ScriptBundle("~/bundles/fileupload").Include(
-                "~/Scripts/fileupload.js"));
+            //dropzone
+            bundles.Add(new StyleBundle("~/Content/dropzone").Include(
+                "~/Scripts/dropzone/dropzone.css"));
 
+            bundles.Add(new ScriptBundle("~/bundles/dropzone").Include(
+                "~/Scripts/dropzone/dropzone.js",
+                "~/Scripts/dropzone.js"));
         }
     }
 }

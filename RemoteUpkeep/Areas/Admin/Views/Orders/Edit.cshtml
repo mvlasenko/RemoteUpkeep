@@ -65,9 +65,11 @@
     @Styles.Render("~/Content/datetimepicker")
     @Scripts.Render("~/bundles/datetimepicker")
 
-    @Styles.Render("~/Content/jQuery-File-Upload")
-    @Scripts.Render("~/bundles/jQuery-File-Upload")
+    @Styles.Render("~/Content/fileupload")
     @Scripts.Render("~/bundles/fileupload")
+
+    @Styles.Render("~/Content/dropzone")
+    @Scripts.Render("~/bundles/dropzone")
 
     @Scripts.Render("~/bundles/jquery.unobtrusive-ajax")
 
@@ -84,6 +86,7 @@
             InitTargetsModal();
             InitActionsModal();
             InitMessagesModal();
+            InitDropzone();
 
             $.getJSON("@Url.Action("", "Resources", new { area = "" })", function(data) {
                 resources = data;

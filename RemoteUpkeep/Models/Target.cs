@@ -74,5 +74,11 @@ namespace RemoteUpkeep.Models
         [UIHint("_FileUpload")]
         [NotMapped]
         public string ImageIds { get; set; }
+
+        //view only
+        [Display(Name = "Images")]
+        [UIHint("_Image")]
+        [NotMapped]
+        public string ImageIds2 { get; set; }
     }
 }

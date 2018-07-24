@@ -156,6 +156,7 @@ function RefreshTargets(orderId) {
             InitActionsModal();
             InitMessagesModal();
             initMap();
+            InitDropzone();
         },
         processData: false,
         async: true

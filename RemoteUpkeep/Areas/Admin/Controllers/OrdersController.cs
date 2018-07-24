@@ -64,6 +64,7 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
             foreach (OrderDetails details in order.OrderDetails)
             {
                 details.ServiceIds = details.Services.Select(x => x.Id).ToList();
+                details.Target.ImageIds2 = String.Join("|", details.Target.Images.Select(x => x.Id));
             }
 
             return View(order);
@@ -93,10 +94,20 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
                 //save many-to-many relation in separate transaction
                 foreach (OrderDetails details in order.OrderDetails)
                 {
-                    OrderDetails originalDetails = db.OrderDetails.Include(x => x.Services).Single(x => x.Id == details.Id);
+                    OrderDetails originalDetails = db.OrderDetails
+                        .Include(x => x.Services)
+                        .Include(x => x.Target.Images)
+                        .Single(x => x.Id == details.Id);
+
                     db.Entry(originalDetails).State = EntityState.Modified;
 
-                    originalDetails.Services = details.ServiceIds == null ? new List<Service>() : details.ServiceIds.Select(serviceId => db.Services.ToList().FirstOrDefault(x => x.Id == serviceId)).ToList();
+                    originalDetails.Services = details.ServiceIds == null ? 
+                        new List<Service>() : 
+                        details.ServiceIds.Select(serviceId => db.Services.FirstOrDefault(x => x.Id == serviceId)).ToList();
+
+                    originalDetails.Target.Images = details.Target == null || details.Target.ImageIds2 == null ? 
+                        new List<Image>() : 
+                        details.Target.ImageIds2.Trim('|').Split('|').Distinct().Select(imageId => db.Images.FirstOrDefault(x => x.Id == new Guid(imageId))).ToList();
 
                     db.SaveChanges();
                 }

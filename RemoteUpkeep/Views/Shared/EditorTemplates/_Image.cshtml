@@ -1,0 +1,9 @@
+﻿@{
+    var name = ViewData.TemplateInfo.HtmlFieldPrefix;
+    var id = name.Replace(".", "_").Replace("[", "_").Replace("]", "_");
+    var val = ViewData.ModelMetadata.Model;
+}
+
+@Html.Hidden("", val, new { @class = "dropzone-val" })
+
+<div id="imageDrop_@id" class="dropzone"></div>
