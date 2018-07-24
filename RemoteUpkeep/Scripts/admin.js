@@ -130,8 +130,8 @@ function InitTargetsModal() {
             jQuery.validator.unobtrusive.parse('#frmModal');
 
             AddAsterisk();
-
             initMap();
+            InitFileUpload("/Images/FileUpload", "ImageIds");
 
             $('.region').change(function () {
                 var selected = $(this).find('option:selected');

@@ -1,6 +1,6 @@
 ﻿@{
-    var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
-    var name = ViewData.ModelMetadata.PropertyName;
+    var name = ViewData.TemplateInfo.HtmlFieldPrefix;
+    var id = name.Replace(".", "_").Replace("[", "_").Replace("]", "_");
     var val = ViewData.ModelMetadata.Model;
 }
 
@@ -11,13 +11,13 @@
     <i class="glyphicon glyphicon-plus"></i>
     <span>Select files...</span>
     <!-- The file input field used as target for the file upload widget -->
-    <input id="fileupload" type="file" name="files" multiple>
+    <input id="fileupload_@id" type="file" name="files" multiple>
 </span>
 <br>
 <br>
 <!-- The global progress bar -->
-<div id="progress" class="progress">
+<div id="progress_@id" class="progress">
     <div class="progress-bar progress-bar-success"></div>
 </div>
 <!-- The container for the uploaded files -->
-<div id="files" class="files"></div>
+<div id="files_@id" class="files"></div>

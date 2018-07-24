@@ -319,6 +319,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Migrations\migration.txt" />
+    <Content Include="Scripts\fileupload.js" />
     <Content Include="Scripts\geography.js" />
     <Content Include="Scripts\admin.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />

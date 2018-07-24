@@ -68,5 +68,11 @@ namespace RemoteUpkeep.Models
         //view only
         [NotMapped]
         public int OrderId { get; set; }
+
+        //view only
+        [Display(Name = "Images")]
+        [UIHint("_FileUpload")]
+        [NotMapped]
+        public string ImageIds { get; set; }
     }
 }

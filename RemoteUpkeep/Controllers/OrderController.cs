@@ -65,9 +65,9 @@ namespace RemoteUpkeep.Controllers
                     }
 
                     //get images
-                    if (!String.IsNullOrEmpty(model.Images))
+                    if (!String.IsNullOrEmpty(model.ImageIds))
                     {
-                        foreach (string imageId in model.Images.Trim('|').Split('|'))
+                        foreach (string imageId in model.ImageIds.Trim('|').Split('|'))
                         {
                             if (!String.IsNullOrEmpty(imageId))
                             {

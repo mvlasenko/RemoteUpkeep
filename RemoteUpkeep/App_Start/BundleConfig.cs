@@ -52,6 +52,10 @@ namespace RemoteUpkeep
             bundles.Add(new ScriptBundle("~/bundles/geography").Include(
                 "~/Scripts/geography.js"));
 
+            //fileupload
+            bundles.Add(new ScriptBundle("~/bundles/fileupload").Include(
+                "~/Scripts/fileupload.js"));
+
         }
     }
 }

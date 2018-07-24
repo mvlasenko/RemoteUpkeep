@@ -13,6 +13,7 @@ namespace RemoteUpkeep.ViewModels
 
         //destination info
 
+        [Required]
         [Display(Name = "Region")]
         [UIHint("_Region")]
         public int? RegionId { get; set; }
@@ -30,7 +31,7 @@ namespace RemoteUpkeep.ViewModels
 
         [Display(Name = "Images")]
         [UIHint("_FileUpload")]
-        public string Images { get; set; }
+        public string ImageIds { get; set; }
 
         [Display(Name = "Due Date")]
         [UIHint("_DatePicker")]

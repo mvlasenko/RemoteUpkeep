@@ -121,6 +121,20 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                //get images
+                if (!String.IsNullOrEmpty(model.ImageIds))
+                {
+                    foreach (string imageId in model.ImageIds.Trim('|').Split('|'))
+                    {
+                        if (!String.IsNullOrEmpty(imageId))
+                        {
+                            Image image = db.Images.FirstOrDefault(x => x.Id == new Guid(imageId));
+                            if (image != null)
+                                model.Images.Add(db.Images.Single(x => x.Id == new Guid(imageId)));
+                        }
+                    }
+                }
+
                 model.ChangedDateTime = DateTime.Now;
                 model.ChangedByUserId = this.User.Identity.GetUserId();
                 db.Targets.Add(model);
