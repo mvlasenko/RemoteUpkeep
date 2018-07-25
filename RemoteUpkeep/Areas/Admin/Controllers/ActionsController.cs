@@ -16,9 +16,6 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         public ActionResult Create()
         {
             Models.Action action = new Models.Action();
-            action.ChangedDateTime = DateTime.Now;
-            action.ChangedByUserId = this.User.Identity.GetUserId();
-
             return View(action);
         }
 
@@ -26,11 +23,11 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Models.Action model)
         {
+            model.ChangedDateTime = DateTime.Now;
+            model.ChangedByUserId = this.User.Identity.GetUserId();
+
             if (ModelState.IsValid)
             {
-                model.ChangedDateTime = DateTime.Now;
-                model.ChangedByUserId = this.User.Identity.GetUserId();
-
                 db.Actions.Add(model);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -59,11 +56,11 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Models.Action model)
         {
+            model.ChangedDateTime = DateTime.Now;
+            model.ChangedByUserId = this.User.Identity.GetUserId();
+
             if (ModelState.IsValid)
             {
-                model.ChangedDateTime = DateTime.Now;
-                model.ChangedByUserId = this.User.Identity.GetUserId();
-
                 db.Entry(model).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -102,10 +99,6 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         public ActionResult CreatePartial(int id)
         {
             Models.Action action = new Models.Action();
-
-            action.ChangedDateTime = DateTime.Now;
-            action.ChangedByUserId = this.User.Identity.GetUserId();
-
             action.OrderDetailsId = id;
 
             return PartialView("_CreatePartial", action);
@@ -114,11 +107,11 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult CreatePartial(Models.Action model)
         {
+            model.ChangedDateTime = DateTime.Now;
+            model.ChangedByUserId = this.User.Identity.GetUserId();
+
             if (ModelState.IsValid)
             {
-                model.ChangedDateTime = DateTime.Now;
-                model.ChangedByUserId = this.User.Identity.GetUserId();
-
                 db.Actions.Add(model);
                 db.SaveChanges();
 
@@ -134,21 +127,17 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         public ActionResult UpdatePartial(int id)
         {
             Models.Action action = db.Actions.Find(id);
-
-            action.ChangedDateTime = DateTime.Now;
-            action.ChangedByUserId = this.User.Identity.GetUserId();
-
             return PartialView("_EditPartial", action);
         }
 
         [HttpPost, ValidateInput(false)]
         public ActionResult UpdatePartial(Models.Action model)
         {
+            model.ChangedDateTime = DateTime.Now;
+            model.ChangedByUserId = this.User.Identity.GetUserId();
+
             if (ModelState.IsValid)
             {
-                model.ChangedDateTime = DateTime.Now;
-                model.ChangedByUserId = this.User.Identity.GetUserId();
-
                 db.Entry(model).State = EntityState.Modified;
                 db.SaveChanges();
 

@@ -105,7 +105,7 @@
                 var selected = $(this).find('option:selected');
                 var lat = selected.data('geo-lat');
                 var lng = selected.data('geo-lng');
-                moveMarker(maps[0], markers[0], lat, lng);
+                moveMarker(maps[0], markers[0], lat, lng, 'Geography');
             });
 
         });
@@ -115,6 +115,12 @@
 
             InitFileUpload('@Url.Action("FileUpload", "Images")', '@Html.IdFor(model => model.FileIds)');
         });
+
+        $.validator.methods.date = function (value, element) {
+            return this.optional(element)
+                || moment(value, '@Resources.DateFormat').format('@Resources.DateFormat') === value
+                || moment(value, '@Resources.DateTimeFormat').format('@Resources.DateTimeFormat') === value;
+        }
 
     </script>
 }

@@ -23,9 +23,6 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         public ActionResult Create()
         {
             Message message = new Message();
-            message.Date = DateTime.Now;
-            message.SenderId = this.User.Identity.GetUserId();
-
             return View(message);
         }
 
@@ -33,11 +30,11 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Message model)
         {
+            model.Date = DateTime.Now;
+            model.SenderId = this.User.Identity.GetUserId();
+
             if (ModelState.IsValid)
             {
-                model.Date = DateTime.Now;
-                model.SenderId = this.User.Identity.GetUserId();
-
                 //todo: send email
 
                 db.Messages.Add(model);
@@ -78,8 +75,6 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         public ActionResult CreatePartial(int id)
         {
             Message message = new Message();
-            message.Date = DateTime.Now;
-            message.SenderId = this.User.Identity.GetUserId();
             message.OrderDetailsId = id;
 
             return PartialView("_CreatePartial", message);
@@ -88,11 +83,11 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult CreatePartial(Message model)
         {
+            model.Date = DateTime.Now;
+            model.SenderId = this.User.Identity.GetUserId();
+
             if (ModelState.IsValid)
             {
-                model.Date = DateTime.Now;
-                model.SenderId = this.User.Identity.GetUserId();
-
                 //todo: send email
 
                 db.Messages.Add(model);

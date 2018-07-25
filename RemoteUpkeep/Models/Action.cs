@@ -12,8 +12,8 @@ namespace RemoteUpkeep.Models
         [UIHint("MultilineText")]
         public string Description { get; set; }
 
-        [UIHint("_DatePicker")]
         [Display(Name = "Due Date")]
+        [UIHint("_DatePicker")]
         public DateTime? DueDate { get; set; }
 
         public int OrderDetailsId { get; set; }

@@ -35,8 +35,6 @@ namespace RemoteUpkeep.ViewModels
 
         [Display(Name = "Due Date")]
         [UIHint("_DatePicker")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? DueDate { get; set; }
     }
 }

@@ -1,3 +1,4 @@
+@using System.Globalization
 @using RemoteUpkeep.Helpers
 @using RemoteUpkeep.Properties
 @using RemoteUpkeep.Models
@@ -12,8 +13,8 @@
     @foreach (Region region in UIHelper.GetRegions())
     {
         <option value="@region.Id" @(val != null && region.Id.ToString() == val.ToString() ? "selected" : "")
-                data-geo-lat="@region.Latitude"
-                data-geo-lng="@region.Longitude">
+            data-geo-lat="@string.Format(new CultureInfo("en-US"), "{0}", region.Latitude)"
+            data-geo-lng="@string.Format(new CultureInfo("en-US"), "{0}", region.Longitude)">
             @region.Title
         </option>
     }

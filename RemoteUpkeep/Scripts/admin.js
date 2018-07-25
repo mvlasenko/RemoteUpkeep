@@ -137,7 +137,7 @@ function InitTargetsModal() {
                 var selected = $(this).find('option:selected');
                 var lat = selected.data('geo-lat');
                 var lng = selected.data('geo-lng');
-                moveMarker(maps[maps.length - 1], markers[maps.length - 1], lat, lng);
+                moveMarker(maps[0], markers[0], lat, lng, 'Geography');
             });
         });
     });
@@ -183,4 +183,10 @@ function InitDatePicker() {
     $('.datepicker').datetimepicker({
         format: resources.DateFormat
     });
+
+    $.validator.methods.date = function (value, element) {
+        return this.optional(element)
+            || moment(value, resources.DateFormat).format(resources.DateFormat) === value
+            || moment(value, resources.DateTimeFormat).format(resources.DateTimeFormat) === value;
+    }
 }

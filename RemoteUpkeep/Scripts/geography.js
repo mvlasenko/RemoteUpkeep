@@ -49,11 +49,11 @@ function geocodePosition(pos, id) {
         });
 }
 
-function moveMarker(map, marker, lat, lng) {
+function moveMarker(map, marker, lat, lng, id) {
     if (map && lat && lng) {
         var pos = new google.maps.LatLng(lat, lng);
         map.panTo(pos);
         marker.setPosition(pos);
-        geocodePosition(pos);
+        geocodePosition(pos, id);
     }
 }

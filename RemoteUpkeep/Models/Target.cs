@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
 
 namespace RemoteUpkeep.Models
 {
@@ -40,14 +41,14 @@ namespace RemoteUpkeep.Models
             {
                 if (this.Latitude == 0 || this.Longitude == 0 || this.Latitude == null || this.Longitude == null)
                     return null;
-                return string.Format("({0}, {1})", this.Latitude, this.Longitude);
+                return string.Format(new CultureInfo("en-US"), "({0}, {1})", this.Latitude, this.Longitude);
             }
             set
             {
                 if (!string.IsNullOrEmpty(value))
                 {
-                    this.Latitude = double.Parse(value.Split(',')[0].Trim('(', ')', ' '));
-                    this.Longitude = double.Parse(value.Split(',')[1].Trim('(', ')', ' '));
+                    this.Latitude = double.Parse(value.Split(',')[0].Trim('(', ')', ' '), new CultureInfo("en-US"));
+                    this.Longitude = double.Parse(value.Split(',')[1].Trim('(', ')', ' '), new CultureInfo("en-US"));
                 }
             }
         }
