@@ -1,0 +1,58 @@
+<style type="text/css">
+
+    td.email table {
+        border-collapse: collapse;
+    }
+
+    td.email p {
+        margin: 20px 0 20px 0;
+    }
+
+    td.email a:link {
+        color: #14c37b;
+    }
+        
+    td.email a:visited{
+        color: grey;
+    }
+        
+    td.email a:hover {
+        color: red;
+    }
+
+</style>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+        <td class="email" align="center" style="margin: 0; background: #fbfbfb;">
+
+            &nbsp;
+
+            <div id="logo">
+                <a href="@Model.Link" target="_blank"><img src="@Model.Logo" style="display: block;" border="0" height="32" width="270"></a>
+            </div>
+
+            &nbsp;
+
+            <table class="bodyWidth" style="background:#ffffff; border-style: solid; border-color: #d0d0d0; border-width: 1px; box-shadow: 3px 3px 2px #d0d0d0;" border="0" cellpadding="0" cellspacing="0" width="600">
+                <tr>
+                    <td style="padding: 30px; font-family: Arial, Helvetica, sans-serif; color: #ffffff; font-size: 20px; background-color: #0096d6;" valign="middle">
+                        @Model.Subject
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:25px; font-family:Arial,Helvetica,sans-serif;color:#5C6E7E;font-size:14px; line-height:19px;" align="left" valign="top">
+
+                        @Raw(Model.Body)
+
+                    </td>
+                </tr>
+            </table>
+
+            <div id="footer" style="font-family: Arial, sans-serif; font-size: 11px; line-height: 15px; color: #5C6E7E; padding: 0 25px 30px 25px;">
+                &copy; @Model.Year @Model.Copyright <a href="@Model.ContactUsLink" target="_blank">@Model.ContactUs</a><br>
+            </div>
+
+        </td>
+    </tr>
+</table>

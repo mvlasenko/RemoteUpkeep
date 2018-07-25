@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using RemoteUpkeep.EmailEngine;
 using RemoteUpkeep.Models;
 
 namespace RemoteUpkeep.Areas.Admin.Controllers
@@ -35,10 +36,14 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                //todo: send email
-
                 db.Messages.Add(model);
                 db.SaveChanges();
+
+                //todo: send email
+                ApplicationUser sender = db.Users.Find(model.SenderId);
+                ApplicationUser receiver = db.Users.Find(model.ReceiverId);
+                EmailHelper.SendEmail(new ViewModels.EmailViewModel { Sender = sender, Receiver = receiver }, model.Text, "Private Email Message");
+
                 return RedirectToAction("Index");
             }
 
@@ -88,13 +93,15 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                //todo: send email
-
                 db.Messages.Add(model);
                 db.SaveChanges();
 
-                var list = db.Messages.ToList();
+                //todo: send email
+                ApplicationUser sender = db.Users.Find(model.SenderId);
+                ApplicationUser receiver = db.Users.Find(model.ReceiverId);
+                EmailHelper.SendEmail(new ViewModels.EmailViewModel { Sender = sender, Receiver = receiver }, model.Text, "Private Email Message");
 
+                var list = db.Messages.ToList();
                 return Json(new { totalCount = list.Count });
             }
 

@@ -204,4 +204,22 @@
   <data name="Text" xml:space="preserve">
     <value>Text</value>
   </data>
+  <data name="EmailNoReply" xml:space="preserve">
+    <value>noreply@remote-upkeep.com.ua</value>
+  </data>
+  <data name="EmailNoReplyName" xml:space="preserve">
+    <value>No-Reply</value>
+  </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>Contact Us</value>
+  </data>
+  <data name="ContactUsLink" xml:space="preserve">
+    <value>http://remote-upkeep.com.ua</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>Copyright</value>
+  </data>
+  <data name="Link" xml:space="preserve">
+    <value>http://remote-upkeep.com.ua</value>
+  </data>
 </root>

@@ -106,6 +106,33 @@ namespace RemoteUpkeep.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contact Us.
+        /// </summary>
+        public static string ContactUs {
+            get {
+                return ResourceManager.GetString("ContactUs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://remote-upkeep.com.ua.
+        /// </summary>
+        public static string ContactUsLink {
+            get {
+                return ResourceManager.GetString("ContactUsLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copyright.
+        /// </summary>
+        public static string Copyright {
+            get {
+                return ResourceManager.GetString("Copyright", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create.
         /// </summary>
         public static string Create {
@@ -187,11 +214,38 @@ namespace RemoteUpkeep.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to noreply@remote-upkeep.com.ua.
+        /// </summary>
+        public static string EmailNoReply {
+            get {
+                return ResourceManager.GetString("EmailNoReply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No-Reply.
+        /// </summary>
+        public static string EmailNoReplyName {
+            get {
+                return ResourceManager.GetString("EmailNoReplyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Index.
         /// </summary>
         public static string Index {
             get {
                 return ResourceManager.GetString("Index", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://remote-upkeep.com.ua.
+        /// </summary>
+        public static string Link {
+            get {
+                return ResourceManager.GetString("Link", resourceCulture);
             }
         }
         
