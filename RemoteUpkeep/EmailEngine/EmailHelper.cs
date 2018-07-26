@@ -14,14 +14,14 @@ namespace RemoteUpkeep.EmailEngine
 {
     public static class EmailHelper
     {
-        public static string GetHtmlBody(EmailViewModel model, string bodyTemplate, string subject, string logo = null)
+        public static string GetHtmlBody(EmailViewModel model, string body, string subject, string logo = null)
         {
-            string body = Engine.Razor.RunCompile(bodyTemplate, Guid.NewGuid().ToString(), typeof(EmailViewModel), model);
+            //string body = Engine.Razor.RunCompile(bodyTemplate, Guid.NewGuid().ToString(), typeof(EmailViewModel), model);
 
             EmailLayoutViewModel layoutModel = new EmailLayoutViewModel
             {
                 Subject = subject,
-                Body = body,
+                Body = body.TextToHtml(),
                 Logo = logo,
                 Link = Resources.Link,
                 Year = DateTime.Now.Year.ToString(),

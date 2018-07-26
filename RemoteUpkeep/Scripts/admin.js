@@ -87,6 +87,16 @@ function InitMessagesModal() {
             InitDatePicker();
         });
     });
+
+    $('.view-message').unbind();
+    $('.view-message').click(function () {
+        var url = "/Admin/Messages/ViewPartial";
+        var id = $(this).attr('data-id');
+        $.get(url + '/' + id, function (data) {
+            $('#modal-content').html(data);
+            $('#modal').modal('show');
+        });
+    });
 }
 
 function RefreshMessages(detailsId) {
@@ -106,6 +116,7 @@ function RefreshMessages(detailsId) {
                 row += '<td>' + item.Text + '</td>';
                 row += '<td>' + ((new Date(parseInt(item.Date.substr(6)))).toLocaleString()) + '</td>';
                 row += '<td>' + item.MessageTypeName + '</td>';
+                row += "<td align='right'><button type='button' class='btn btn-default view-message' data-id='" + item.Id + "'>" + resources.View + "</button></td>";
                 row += "</tr>";
                 $('table#messages_' + detailsId + ' TBODY').append(row);
             });

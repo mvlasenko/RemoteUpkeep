@@ -376,6 +376,7 @@
     <Content Include="Areas\Admin\Views\Messages\_CreatePartial.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_DetailsListPartial.cshtml" />
     <Content Include="Areas\Admin\Views\Targets\_CreatePartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Messages\_ViewPartial.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
@@ -458,7 +459,6 @@
     <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\_Services.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\_Image.cshtml" />
-    <Content Include="Views\Shared\Email_layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

@@ -5,7 +5,9 @@ using System.Net;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using RemoteUpkeep.EmailEngine;
+using RemoteUpkeep.Helpers;
 using RemoteUpkeep.Models;
+using RemoteUpkeep.ViewModels;
 
 namespace RemoteUpkeep.Areas.Admin.Controllers
 {
@@ -18,36 +20,6 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         {
             var messages = db.Messages.Include(m => m.Receiver).Include(m => m.Sender).Include(m => m.OrderDetails.Order);
             return View(messages.ToList());
-        }
-
-        // GET: Admin/Messages/Create
-        public ActionResult Create()
-        {
-            Message message = new Message();
-            return View(message);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Message model)
-        {
-            model.Date = DateTime.Now;
-            model.SenderId = this.User.Identity.GetUserId();
-
-            if (ModelState.IsValid)
-            {
-                db.Messages.Add(model);
-                db.SaveChanges();
-
-                //todo: send email
-                ApplicationUser sender = db.Users.Find(model.SenderId);
-                ApplicationUser receiver = db.Users.Find(model.ReceiverId);
-                EmailHelper.SendEmail(new ViewModels.EmailViewModel { Sender = sender, Receiver = receiver }, model.Text, "Private Email Message");
-
-                return RedirectToAction("Index");
-            }
-
-            return View(model);
         }
 
         // GET: Admin/Messages/Delete/5
@@ -99,7 +71,7 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
                 //todo: send email
                 ApplicationUser sender = db.Users.Find(model.SenderId);
                 ApplicationUser receiver = db.Users.Find(model.ReceiverId);
-                EmailHelper.SendEmail(new ViewModels.EmailViewModel { Sender = sender, Receiver = receiver }, model.Text, "Private Email Message");
+                EmailHelper.SendEmail(new EmailViewModel { Sender = sender, Receiver = receiver }, model.Text, "Email Message");
 
                 var list = db.Messages.ToList();
                 return Json(new { totalCount = list.Count });
@@ -108,10 +80,26 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
             return Json(new { success = false });
         }
 
+        [HttpGet, ValidateInput(false)]
+        public ActionResult ViewPartial(int id)
+        {
+            Message message = db.Messages.Find(id);
+
+            string body = EmailHelper.GetHtmlBody(new EmailViewModel { Sender = message.Sender, Receiver = message.Receiver }, message.Text, "Email Message", "/Content/Images/logo_email.png");
+            message.Text = body;
+
+            return PartialView("_ViewPartial", message);
+        }
+
         [HttpGet]
         public JsonResult GetListByDetails(int id)
         {
             var list = db.Messages.Include(m => m.Receiver).Include(m => m.Sender).Where(x => x.OrderDetailsId == id).ToList();
+            foreach (Message item in list)
+            {
+                item.Text = item.Text.Cut(50);
+            }
+
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 

@@ -1,5 +1,6 @@
 ﻿@using RemoteUpkeep.Properties
 @using RemoteUpkeep.Models
+@using RemoteUpkeep.Helpers
 @model List<OrderDetails>
 
 @{
@@ -157,6 +158,7 @@
                 <th>
                     @Resources.MessageType
                 </th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -173,13 +175,16 @@
                         @Html.DisplayFor(modelItem => message.Receiver.FullName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => message.Text)
+                        @message.Text.Cut(50)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => message.Date)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => message.MessageType)
+                    </td>
+                    <td align="right">
+                        <button type="button" class="btn btn-default view-message" data-id="@message.Id">@Resources.View</button>
                     </td>
                 </tr>
 

@@ -38,8 +38,8 @@
                 @Html.DisplayFor(modelItem => item.Geography)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @Html.ActionLink(Resources.Edit, "Edit", new { id = item.Id }) |
+                @Html.ActionLink(Resources.Delete, "Delete", new { id = item.Id })
             </td>
         </tr>
     }

@@ -222,4 +222,10 @@
   <data name="Link" xml:space="preserve">
     <value>http://remote-upkeep.com.ua</value>
   </data>
+  <data name="View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
 </root>

@@ -50,6 +50,12 @@ namespace RemoteUpkeep.Helpers
             return str.StripTags();
         }
 
+        public static string TextToHtml(this string str)
+        {
+            str = str.Replace("\r\n", "<br />");
+            return str;
+        }
+
         public static int ToInt(this int? value, int defaultInt)
         {
             if (value == null)

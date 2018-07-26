@@ -1,4 +1,5 @@
 ﻿@using RemoteUpkeep.Properties
+@using RemoteUpkeep.Helpers
 @model IEnumerable<RemoteUpkeep.Models.Message>
 
 @{
@@ -8,9 +9,6 @@
 
 <h2>@Resources.Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -44,7 +42,7 @@
                 @Html.DisplayFor(modelItem => item.Sender.FullName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Text)
+                @item.Text.Cut(50)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Date)
@@ -55,10 +53,39 @@
             <td>
                 @Html.DisplayFor(modelItem => item.OrderDetails.Order.CreatedDateTime)
             </td>
-            <td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            <td align="right">
+                <button type="button" class="btn btn-default view-message" data-id="@item.Id">@Resources.View</button>
+                @Html.ActionLink(Resources.Delete, "Delete", new { id = item.Id, @class = "btn btn-default" })
             </td>
         </tr>
     }
 
 </table>
+
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" id="modal-content"></div>
+    </div>
+</div>
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/admin")
+
+    <script type="text/javascript">
+
+        var resources = {};
+
+        $(document).ready(function () {
+
+            InitMessagesModal();
+
+            $.getJSON("@Url.Action("", "Resources", new { area = "" })", function(data) {
+                resources = data;
+            });
+
+        });
+
+    </script>
+}
