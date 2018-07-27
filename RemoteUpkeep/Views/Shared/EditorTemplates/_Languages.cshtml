@@ -2,16 +2,19 @@
 @using RemoteUpkeep.Helpers
 
 @{
-    string id = ViewData.TemplateInfo.GetFullHtmlFieldName("");
-    int[] selectedLanguages = ViewData.TemplateInfo.FormattedModelValue as int[];
+    var name = ViewData.TemplateInfo.HtmlFieldPrefix;
+    var id = name.Replace(".", "_").Replace("[", "_").Replace("]", "_");
+    List<int> selectedLanguageIds = ViewData.TemplateInfo.FormattedModelValue as List<int>;
+    int i = 0;
 }
 
-<ul id="@id">
-    @foreach (Language language in UIHelper.GetLanguages())
-    {
-        <li>
-            <input type="checkbox" name="@id" value="@language.Id" id="@language.Id" @{if (selectedLanguages != null && selectedLanguages.Contains(language.Id)) { <text> checked='checked' </text>  } } />
-            <label for="@language.Id">@language.Title</label>
-        </li>
-    }
-</ul>
+@foreach (Language language in UIHelper.GetLanguages())
+{
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" name="@name" value="@language.Id" id="@id" @{if (selectedLanguageIds != null && selectedLanguageIds.Any(x => x == language.Id)) { <text> checked='checked' </text>  }} />
+            @language.Title
+        </label>
+    </div>
+    i++;
+}

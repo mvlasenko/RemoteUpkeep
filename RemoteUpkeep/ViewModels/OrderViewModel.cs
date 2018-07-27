@@ -18,6 +18,10 @@ namespace RemoteUpkeep.ViewModels
         [UIHint("_Region")]
         public int? RegionId { get; set; }
 
+        [Display(Name = "Languages")]
+        [UIHint("_Language")]
+        public string LanguageIds { get; set; }
+
         [UIHint("_Geography")]
         [Display(Name = "Geography")]
         public string Geography { get; set; }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
@@ -66,6 +67,12 @@ namespace RemoteUpkeep.Models
                 return this.FirstName + " " + this.LastName;
             }
         }
+
+        //view only
+        [Display(Name = "Languages")]
+        [UIHint("_Language")]
+        [NotMapped]
+        public string LanguageIds { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

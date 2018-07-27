@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
@@ -123,8 +124,13 @@ namespace RemoteUpkeep.Controllers
                     context.SaveChanges();
 
                     //send message
-                    ApplicationUser receiver = context.Users.Find(message.ReceiverId);
-                    EmailHelper.SendEmail(receiver, message.Text, "Email Message"); //todo check status
+                    ApplicationUser user = context.Users.Find(message.ReceiverId);
+                    EmailHelper.SendEmail(user, message.Text, "Email Message"); //todo check status
+
+                    //edit languages
+                    context.Entry(user).State = EntityState.Modified;
+                    user.Languages = user.LanguageIds.Select(languageId => context.Languages.FirstOrDefault(x => x.Id == languageId)).ToList();
+                    context.SaveChanges();
                 }
 
                 return PartialView("StepComplete", model);
