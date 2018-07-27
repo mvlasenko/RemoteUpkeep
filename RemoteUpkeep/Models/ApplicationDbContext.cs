@@ -153,7 +153,7 @@ namespace RemoteUpkeep.Models
             //messages
 
             modelBuilder.Entity<Message>()
-                .HasRequired(e => e.Sender)
+                .HasOptional(e => e.Sender)
                 .WithMany(e => e.SentMessages)
                 .HasForeignKey(e => e.SenderId);
 

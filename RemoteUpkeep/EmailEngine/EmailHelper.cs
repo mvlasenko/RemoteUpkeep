@@ -83,9 +83,9 @@ namespace RemoteUpkeep.EmailEngine
             }
         }
 
-        public static void SendEmail(ApplicationUser user, string bodyTemplate, string subject)
+        public static void SendEmail(ApplicationUser receiver, string bodyTemplate, string subject)
         {
-            SendEmail(new EmailViewModel { Receiver = user }, bodyTemplate, subject);
+            SendEmail(new EmailViewModel { Receiver = receiver }, bodyTemplate, subject);
         }
 
         public static void SendConfirmEmail(ApplicationUser user, string callbackUrl)
