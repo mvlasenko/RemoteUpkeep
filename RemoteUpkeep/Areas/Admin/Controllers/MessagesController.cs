@@ -11,6 +11,7 @@ using RemoteUpkeep.ViewModels;
 
 namespace RemoteUpkeep.Areas.Admin.Controllers
 {
+    [Authorize(Users = "mark.vlasenko@gmail.com")] //todo: user type based security
     public class MessagesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

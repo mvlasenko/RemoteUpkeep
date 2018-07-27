@@ -9,8 +9,12 @@ using RemoteUpkeep.Models;
 
 namespace RemoteUpkeep.Areas.Admin.Controllers
 {
+    [Authorize( Users = "mark.vlasenko@gmail.com" )] //todo: user type based security
     public class OrdersController : Controller
     {
+        //todo: add user management
+
+
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Admin/Orders

@@ -228,4 +228,7 @@
   <data name="Message" xml:space="preserve">
     <value>Message</value>
   </data>
+  <data name="Admin" xml:space="preserve">
+    <value>Admin</value>
+  </data>
 </root>

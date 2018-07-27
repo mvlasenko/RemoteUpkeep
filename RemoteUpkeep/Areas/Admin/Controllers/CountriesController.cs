@@ -6,6 +6,7 @@ using RemoteUpkeep.Models;
 
 namespace RemoteUpkeep.Areas.Admin.Controllers
 {
+    [Authorize(Users = "mark.vlasenko@gmail.com")] //todo: user type based security
     public class CountriesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

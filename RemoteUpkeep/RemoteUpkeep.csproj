@@ -226,6 +226,7 @@
     <Compile Include="Helpers\ExtensionHelpers.cs" />
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Helpers\Keys.cs" />
+    <Compile Include="Helpers\SecurityHelper.cs" />
     <Compile Include="Helpers\UIHelper.cs" />
     <Compile Include="Helpers\XmlHelper.cs" />
     <Compile Include="Migrations\Configuration.cs" />
