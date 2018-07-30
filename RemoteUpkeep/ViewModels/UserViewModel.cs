@@ -4,8 +4,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RemoteUpkeep.ViewModels
 {
-    public class ExternalLoginConfirmationViewModel
+    public class UserViewModel
     {
+        public string Id { get; set; }
+
         [Required]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
@@ -14,13 +16,13 @@ namespace RemoteUpkeep.ViewModels
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Display(Name = "Phone")]
         public string Phone { get; set; }
 
+        [Required]
         [Display(Name = "Country")]
         [UIHint("_Country")]
         public int? CountryId { get; set; }

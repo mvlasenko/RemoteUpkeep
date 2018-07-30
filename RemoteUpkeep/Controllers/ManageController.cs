@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -57,6 +59,7 @@ namespace RemoteUpkeep.Controllers
         {
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
+                : message == ManageMessageId.ChangeProfileSuccess ? "Your profile has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : "";
@@ -66,10 +69,15 @@ namespace RemoteUpkeep.Controllers
             {
                 HasPassword = HasPassword(),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = true
             };
 
-            model.Profile = UserManager.FindById(User.Identity.GetUserId());
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            model.FirstName = user.FirstName;
+            model.LastName = user.LastName;
+            model.Phone = user.PhoneNumber;
+            model.CountryId = user.CountryId;
+            model.LanguageIds = user.Languages.Select(x => x.Id).ToList();
 
             return View(model);
         }
@@ -85,11 +93,21 @@ namespace RemoteUpkeep.Controllers
                 return View("Index", model);
             }
 
-            //todo: Model.Logins.Count
+            var context = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
+            string userId = User.Identity.GetUserId();
 
-            var result = await UserManager.UpdateAsync(model.Profile);
+            var user = context.Users.Include(x => x.Languages).FirstOrDefault(x => x.Id == userId);
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            user.PhoneNumber = model.Phone;
+            user.CountryId = model.CountryId;
+            user.Languages = model.LanguageIds == null ? new List<Language>() :
+                model.LanguageIds.Select(languageId => context.Languages.FirstOrDefault(x => x.Id == languageId)).ToList();
 
-            return View("Index", model);
+            context.Entry(user).State = EntityState.Modified;
+            await context.SaveChangesAsync();
+
+            return RedirectToAction("Index", new { Message = ManageMessageId.ChangeProfileSuccess });
         }
 
         //
@@ -269,7 +287,7 @@ namespace RemoteUpkeep.Controllers
         public enum ManageMessageId
         {
             ChangePasswordSuccess,
-            SetTwoFactorSuccess,
+            ChangeProfileSuccess,
             SetPasswordSuccess,
             RemoveLoginSuccess,
             Error

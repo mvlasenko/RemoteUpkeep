@@ -1,11 +1,12 @@
-﻿@model RemoteUpkeep.ViewModels.RegisterViewModel
+﻿@using RemoteUpkeep.Properties
+@model RemoteUpkeep.ViewModels.RegisterViewModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = Resources.Register;
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id="frmRegister" }))
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "frmRegister" }))
 {
     @Html.AntiForgeryToken()
 
@@ -50,10 +51,10 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(m => m.Languages, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.LanguageIds, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.EditorFor(m => m.Languages, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Languages, "", new { @class = "text-danger" })
+            @Html.EditorFor(m => m.LanguageIds, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.LanguageIds, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -84,15 +85,15 @@
 
     <script type="text/javascript">
 
-        jQuery.validator.addMethod("checkboxlistrequired", function(value, element, params) {
+        jQuery.validator.addMethod("checkboxlistrequired", function (value, element, params) {
             return $("#Languages input:checked").length > 0;
         });
 
-        jQuery.validator.unobtrusive.adapters.add('checkboxlistrequired', function(options) {
+        jQuery.validator.unobtrusive.adapters.add('checkboxlistrequired', function (options) {
             options.messages['checkboxlistrequired'] = "Please select one or more checkboxes.";
         });
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             jQuery.validator.unobtrusive.parse('#frmRegister');
         });
 

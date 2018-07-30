@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using RemoteUpkeep.Validation;
 
 namespace RemoteUpkeep.Models
 {
@@ -31,8 +32,10 @@ namespace RemoteUpkeep.Models
             this.AssignedActions = new List<Action>();
         }
 
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         [Display(Name = "Type")]
@@ -69,10 +72,11 @@ namespace RemoteUpkeep.Models
         }
 
         //view only
-        [Display(Name = "Languages")]
-        [UIHint("_Language")]
         [NotMapped]
-        public string LanguageIds { get; set; }
+        [Display(Name = "Languages")]
+        [UIHint("_Languages")]
+        [CheckboxListRequired]
+        public ICollection<int> LanguageIds { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

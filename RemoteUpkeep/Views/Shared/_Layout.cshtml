@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Remote Upkeep Service</title>
+    <title>@ViewBag.Title - @Resources.SiteName</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -33,14 +33,14 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink("Countries", "Index", "Countries", new { area = "Admin" }, null)</li>
-                                <li>@Html.ActionLink("Regions", "Index", "Regions", new { area = "Admin" }, null)</li>
-                                <li>@Html.ActionLink("Languages", "Index", "Languages", new { area = "Admin" }, null)</li>
-                                <li>@Html.ActionLink("Services", "Index", "Services", new { area = "Admin" }, null)</li>
-                                <li>@Html.ActionLink("Orders", "Index", "Orders", new { area = "Admin" }, null)</li>
-                                <li>@Html.ActionLink("Targets", "Index", "Targets", new { area = "Admin" }, null)</li>
-                                <li>@Html.ActionLink("Messages", "Index", "Messages", new { area = "Admin" }, null)</li>
-                                <li>@Html.ActionLink("Users", "Index", "Users", new { area = "Admin" }, null)</li>
+                                <li>@Html.ActionLink(Resources.Countries, "Index", "Countries", new { area = "Admin" }, null)</li>
+                                <li>@Html.ActionLink(Resources.Regions, "Index", "Regions", new { area = "Admin" }, null)</li>
+                                <li>@Html.ActionLink(Resources.Languages, "Index", "Languages", new { area = "Admin" }, null)</li>
+                                <li>@Html.ActionLink(Resources.Services, "Index", "Services", new { area = "Admin" }, null)</li>
+                                <li>@Html.ActionLink(Resources.Orders, "Index", "Orders", new { area = "Admin" }, null)</li>
+                                <li>@Html.ActionLink(Resources.Targets, "Index", "Targets", new { area = "Admin" }, null)</li>
+                                <li>@Html.ActionLink(Resources.Messages, "Index", "Messages", new { area = "Admin" }, null)</li>
+                                <li>@Html.ActionLink(Resources.Users, "Index", "Users", new { area = "Admin" }, null)</li>
                             </ul>
                         </li>
                     }
@@ -55,7 +55,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Remote Upkeep Service</p>
+            <p>&copy; @DateTime.Now.Year - @Resources.SiteName</p>
         </footer>
     </div>
 

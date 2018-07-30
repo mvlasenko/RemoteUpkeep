@@ -23,12 +23,16 @@ namespace RemoteUpkeep.ViewModels
 
         [Display(Name = "Country")]
         [UIHint("_Country")]
-        public string CountryId { get; set; }
+        public int? CountryId { get; set; }
+
+        [Display(Name = "Region")]
+        [UIHint("_Region")]
+        public int? RegionId { get; set; }
 
         [Display(Name = "Languages")]
         [UIHint("_Languages")]
         [CheckboxListRequired]
-        public ICollection<int> Languages { get; set; }
+        public ICollection<int> LanguageIds { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

@@ -9,8 +9,6 @@
 {
     @Html.AntiForgeryToken()
 
-    <h4>Association Form</h4>
-    <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <p class="text-info">
@@ -60,10 +58,9 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(m => m.Languages, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.LanguageIds, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.EditorFor(m => m.Languages, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Languages, "", new { @class = "text-danger" })
+            @Html.EditorFor(m => m.LanguageIds, new { @class = "form-control" })
         </div>
     </div>
 
