@@ -8,7 +8,7 @@ using RemoteUpkeep.Models;
 
 namespace RemoteUpkeep.Areas.Admin.Controllers
 {
-    [Authorize(Users = "mark.vlasenko@gmail.com")] //todo: user type based security
+    [Authorize(Roles="admin")]
     public class ActionsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

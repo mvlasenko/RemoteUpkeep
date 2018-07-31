@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using RemoteUpkeep.EmailEngine;
@@ -153,6 +154,14 @@ namespace RemoteUpkeep.Controllers
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     EmailHelper.SendConfirmEmail(user, Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = UserManager.GenerateEmailConfirmationToken(user.Id) }, protocol: Request.Url.Scheme));
+
+                    //first registration only
+                    if (user.Id == "mark.vlasenko@gmail.com")
+                    {
+                        EnsureRoleExists("admin");
+                        EnsureRoleExists("dealer");
+                        UserManager.AddToRole(user.Id, "admin");
+                    }
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -421,6 +430,18 @@ namespace RemoteUpkeep.Controllers
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
         }
+
+        private void EnsureRoleExists(string roleName)
+        {
+            var context = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+
+            if (!roleManager.RoleExists(roleName))
+            {
+                roleManager.Create(new IdentityRole(roleName));
+            }
+        }
+
         #endregion
     }
 }

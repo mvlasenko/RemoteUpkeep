@@ -2,7 +2,7 @@
 
 namespace RemoteUpkeep.Areas.Admin.Controllers
 {
-    [Authorize(Users = "mark.vlasenko@gmail.com")] //todo: user type based security
+    [Authorize(Roles="admin")]
     public class AdminHomeController : Controller
     {
         // GET: Admin/Home

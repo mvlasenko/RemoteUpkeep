@@ -38,18 +38,6 @@ namespace RemoteUpkeep.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Display(Name = "Type")]
-        [ScriptIgnore(ApplyToOverrides = true)]
-        public UserType UserType { get; set; }
-
-        public string UserTypeName
-        {
-            get
-            {
-                return this.UserType.ToString();
-            }
-        }
-
         [UIHint("_Country")]
         [Display(Name = "Country")]
         public int? CountryId { get; set; }

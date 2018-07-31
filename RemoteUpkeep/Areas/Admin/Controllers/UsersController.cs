@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using RemoteUpkeep.EmailEngine;
 using RemoteUpkeep.Models;
@@ -13,7 +14,7 @@ using RemoteUpkeep.ViewModels;
 
 namespace RemoteUpkeep.Areas.Admin.Controllers
 {
-    [Authorize(Users = "mark.vlasenko@gmail.com")] //todo: user type based security
+    [Authorize(Roles="admin")]
     public class UsersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -66,9 +67,20 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
                 user.Languages = model.LanguageIds == null ? new List<Language>() :
                     model.LanguageIds.Select(languageId => context.Languages.FirstOrDefault(x => x.Id == languageId)).ToList();
 
-                var result = await UserManager.CreateAsync(user, "Qwerty@123");
+                var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
+                    if (model.UserType == UserType.Admin)
+                    {
+                        EnsureRoleExists("admin");
+                        await UserManager.AddToRoleAsync(user.Id, "admin");
+                    }
+                    else if (model.UserType == UserType.LocalDealer)
+                    {
+                        EnsureRoleExists("dealer");
+                        await UserManager.AddToRoleAsync(user.Id, "dealer");
+                    }
+
                     EmailHelper.SendConfirmEmail(user, Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = UserManager.GenerateEmailConfirmationToken(user.Id) }, protocol: Request.Url.Scheme));
                     return RedirectToAction("Index");
                 }
@@ -99,6 +111,19 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
             model.RegionId = user.RegionId;
             model.LanguageIds = user.Languages.Select(x => x.Id).ToList();
 
+            if (UserManager.IsInRole(id, "admin"))
+            {
+                model.UserType = UserType.Admin;
+            }
+            else if (UserManager.IsInRole(id, "dealer"))
+            {
+                model.UserType = UserType.LocalDealer;
+            }
+            else
+            {
+                model.UserType = UserType.None;
+            }
+
             return View(model);
         }
 
@@ -108,8 +133,20 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var context = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
                 string userId = model.Id;
+
+                if (model.UserType == UserType.Admin)
+                {
+                    EnsureRoleExists("admin");
+                    await UserManager.AddToRoleAsync(userId, "admin");
+                }
+                else if (model.UserType == UserType.LocalDealer)
+                {
+                    EnsureRoleExists("dealer");
+                    await UserManager.AddToRoleAsync(userId, "dealer");
+                }
+
+                var context = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
 
                 var user = context.Users.Include(x => x.Languages).FirstOrDefault(x => x.Id == userId);
                 user.FirstName = model.FirstName;
@@ -154,6 +191,17 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
             db.Users.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        private void EnsureRoleExists(string roleName)
+        {
+            var context = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+
+            if (!roleManager.RoleExists(roleName))
+            {
+                roleManager.Create(new IdentityRole(roleName));
+            }
         }
 
         protected override void Dispose(bool disposing)

@@ -1,4 +1,5 @@
-﻿using RemoteUpkeep.Validation;
+﻿using RemoteUpkeep.Models;
+using RemoteUpkeep.Validation;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -35,5 +36,9 @@ namespace RemoteUpkeep.ViewModels
         [UIHint("_Languages")]
         [CheckboxListRequired]
         public ICollection<int> LanguageIds { get; set; }
+
+        [Required]
+        [Display(Name = "Type")]
+        public UserType UserType { get; set; }
     }
 }
