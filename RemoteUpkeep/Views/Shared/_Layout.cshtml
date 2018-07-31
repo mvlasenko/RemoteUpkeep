@@ -10,23 +10,22 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
+    @if (SecurityHelper.AdminVisible())
+    {
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
 
-                    <li>@Html.ActionLink("Order", "Index", "Order", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("Order", "Index", "Order", new { area = "" }, null)</li>
 
-                    @if (SecurityHelper.AdminVisible())
-                    {
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 @Resources.Admin
@@ -43,14 +42,14 @@
                                 <li>@Html.ActionLink(Resources.Users, "Index", "Users", new { area = "Admin" }, null)</li>
                             </ul>
                         </li>
-                    }
+                    </ul>
 
-                </ul>
-
-                @Html.Partial("_LoginPartial")
+                    @Html.Partial("_LoginPartial")
+                </div>
             </div>
         </div>
-    </div>
+    }
+    
     <div class="container body-content">
         @RenderBody()
         <hr />
