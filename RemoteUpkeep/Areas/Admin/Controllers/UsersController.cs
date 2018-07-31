@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using RemoteUpkeep.EmailEngine;
 using RemoteUpkeep.Models;
@@ -72,12 +71,10 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
                 {
                     if (model.UserType == UserType.Admin)
                     {
-                        EnsureRoleExists("admin");
                         await UserManager.AddToRoleAsync(user.Id, "admin");
                     }
                     else if (model.UserType == UserType.LocalDealer)
                     {
-                        EnsureRoleExists("dealer");
                         await UserManager.AddToRoleAsync(user.Id, "dealer");
                     }
 
@@ -137,12 +134,10 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
 
                 if (model.UserType == UserType.Admin)
                 {
-                    EnsureRoleExists("admin");
                     await UserManager.AddToRoleAsync(userId, "admin");
                 }
                 else if (model.UserType == UserType.LocalDealer)
                 {
-                    EnsureRoleExists("dealer");
                     await UserManager.AddToRoleAsync(userId, "dealer");
                 }
 
@@ -191,17 +186,6 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
             db.Users.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
-
-        private void EnsureRoleExists(string roleName)
-        {
-            var context = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-
-            if (!roleManager.RoleExists(roleName))
-            {
-                roleManager.Create(new IdentityRole(roleName));
-            }
         }
 
         protected override void Dispose(bool disposing)

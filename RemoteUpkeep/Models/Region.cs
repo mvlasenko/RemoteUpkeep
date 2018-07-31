@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Globalization;
+using System.Web.Script.Serialization;
 
 namespace RemoteUpkeep.Models
 {
@@ -49,8 +50,10 @@ namespace RemoteUpkeep.Models
             }
         }
 
+        [ScriptIgnore(ApplyToOverrides = true)]
         public virtual ICollection<ApplicationUser> Users { get; }
 
+        [ScriptIgnore(ApplyToOverrides = true)]
         public virtual ICollection<Target> Targets { get; }
     }
 }

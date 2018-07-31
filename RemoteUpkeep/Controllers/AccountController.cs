@@ -156,7 +156,7 @@ namespace RemoteUpkeep.Controllers
                     EmailHelper.SendConfirmEmail(user, Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = UserManager.GenerateEmailConfirmationToken(user.Id) }, protocol: Request.Url.Scheme));
 
                     //first registration only
-                    if (user.Id == "mark.vlasenko@gmail.com")
+                    if (user.UserName == "mark.vlasenko@gmail.com")
                     {
                         EnsureRoleExists("admin");
                         EnsureRoleExists("dealer");
@@ -325,6 +325,15 @@ namespace RemoteUpkeep.Controllers
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                        //first registration only
+                        if (user.UserName == "mark.vlasenko@gmail.com")
+                        {
+                            EnsureRoleExists("admin");
+                            EnsureRoleExists("dealer");
+                            UserManager.AddToRole(user.Id, "admin");
+                        }
+
                         return RedirectToLocal(returnUrl);
                     }
                 }
