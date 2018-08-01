@@ -57,7 +57,7 @@ function RefreshActions(detailsId) {
                 row += '<td>' + item.Description + '</td>';
                 row += '<td>' + ((new Date(parseInt(item.DueDate.substr(6)))).toLocaleString()) + '</td>';
                 row += '<td>' + ((new Date(parseInt(item.ChangedDateTime.substr(6)))).toLocaleString()) + '</td>';
-                row += '<td>' + item.AssignedUser.FullName + '</td>';
+                row += '<td>' + (item.AssignedUser ? item.AssignedUser.FullName : '') + '</td>';
                 row += "<td align='right'><button type='button' class='btn btn-default edit-action' data-id='" + item.Id + "'>" + resources.Edit + "</button> <button type='button' class='btn btn-default delete-action' data-id='" + item.Id + "'>" + resources.Delete + "</button></td>";
                 row += "</tr>";
 
@@ -72,7 +72,6 @@ function RefreshActions(detailsId) {
 }
 
 function InitMessagesModal() {
-
     $('.create-message').unbind();
     $('.create-message').click(function () {
         var url = "/Admin/Messages/CreatePartial";
@@ -111,8 +110,8 @@ function RefreshMessages(detailsId) {
 
             $.each(data, function (idx, item) {
                 var row = "<tr>";
-                row += '<td>' + item.Sender.FullName + '</td>';
-                row += '<td>' + item.Receiver.FullName + '</td>';
+                row += '<td>' + (item.Sender ? item.Sender.FullName : '') + '</td>';
+                row += '<td>' + (item.Receiver ? item.Receiver.FullName : '') + '</td>';
                 row += '<td>' + item.Text + '</td>';
                 row += '<td>' + ((new Date(parseInt(item.Date.substr(6)))).toLocaleString()) + '</td>';
                 row += '<td>' + item.MessageTypeName + '</td>';
@@ -129,7 +128,6 @@ function RefreshMessages(detailsId) {
 }
 
 function InitTargetsModal() {
-
     $('.create-target').unbind();
     $('.create-target').click(function () {
         var url = "/Admin/Targets/CreatePartial";
@@ -143,13 +141,7 @@ function InitTargetsModal() {
             AddAsterisk();
             initMap();
             InitFileUpload("/Images/FileUpload", "FileIds");
-
-            $('.region').change(function () {
-                var selected = $(this).find('option:selected');
-                var lat = selected.data('geo-lat');
-                var lng = selected.data('geo-lng');
-                moveMarker(maps[0], markers[0], lat, lng, 'Geography');
-            });
+            InitRegionChange();
         });
     });
 }

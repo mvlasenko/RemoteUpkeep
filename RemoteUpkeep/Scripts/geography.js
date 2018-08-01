@@ -57,3 +57,12 @@ function moveMarker(map, marker, lat, lng, id) {
         geocodePosition(pos, id);
     }
 }
+
+function InitRegionChange() {
+    $('.region').change(function () {
+        var selected = $(this).find('option:selected');
+        var lat = selected.data('geo-lat');
+        var lng = selected.data('geo-lng');
+        moveMarker(maps[maps.length - 1], markers[markers.length - 1], lat, lng, 'Geography');
+    });
+}

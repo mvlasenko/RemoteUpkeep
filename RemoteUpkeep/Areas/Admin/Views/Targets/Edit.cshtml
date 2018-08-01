@@ -71,4 +71,12 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=@Keys.GoogleApiKey&callback=initMap" async defer></script>
 
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            InitRegionChange();
+        });
+
+    </script>
 }

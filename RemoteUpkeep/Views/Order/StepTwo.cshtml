@@ -101,13 +101,7 @@
                 }
             });
 
-            $('.region').change(function () {
-                var selected = $(this).find('option:selected');
-                var lat = selected.data('geo-lat');
-                var lng = selected.data('geo-lng');
-                moveMarker(maps[0], markers[0], lat, lng, 'Geography');
-            });
-
+            InitRegionChange();
         });
 
         $(function () {
