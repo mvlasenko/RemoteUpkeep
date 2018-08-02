@@ -12,10 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ReceiverId)
+            @Html.DisplayNameFor(model => model.SenderId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SenderId)
+            @Html.DisplayNameFor(model => model.ReceiverId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Text)
@@ -36,10 +36,10 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Receiver.FullName)
+                @Html.DisplayFor(modelItem => item.Sender.FullName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Sender.FullName)
+                @Html.DisplayFor(modelItem => item.Receiver.FullName)
             </td>
             <td>
                 @item.Text.Cut(50)

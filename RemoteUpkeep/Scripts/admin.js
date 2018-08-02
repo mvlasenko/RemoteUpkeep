@@ -55,8 +55,8 @@ function RefreshActions(detailsId) {
             $.each(data, function (idx, item) {
                 var row = "<tr>";
                 row += '<td>' + item.Description + '</td>';
-                row += '<td>' + ((new Date(parseInt(item.DueDate.substr(6)))).toLocaleString()) + '</td>';
-                row += '<td>' + ((new Date(parseInt(item.ChangedDateTime.substr(6)))).toLocaleString()) + '</td>';
+                row += '<td>' + (new Date(parseInt(item.DueDate.substr(6)))).toLocaleString() + '</td>';
+                row += '<td>' + (new Date(parseInt(item.ChangedDateTime.substr(6)))).toLocaleString() + '</td>';
                 row += '<td>' + (item.AssignedUser ? item.AssignedUser.FullName : '') + '</td>';
                 row += "<td align='right'><button type='button' class='btn btn-default edit-action' data-id='" + item.Id + "'>" + resources.Edit + "</button> <button type='button' class='btn btn-default delete-action' data-id='" + item.Id + "'>" + resources.Delete + "</button></td>";
                 row += "</tr>";
@@ -113,7 +113,7 @@ function RefreshMessages(detailsId) {
                 row += '<td>' + (item.Sender ? item.Sender.FullName : '') + '</td>';
                 row += '<td>' + (item.Receiver ? item.Receiver.FullName : '') + '</td>';
                 row += '<td>' + item.Text + '</td>';
-                row += '<td>' + ((new Date(parseInt(item.Date.substr(6)))).toLocaleString()) + '</td>';
+                row += '<td>' + (new Date(parseInt(item.Date.substr(6)))).toLocaleString() + '</td>';
                 row += '<td>' + item.MessageTypeName + '</td>';
                 row += "<td align='right'><button type='button' class='btn btn-default view-message' data-id='" + item.Id + "'>" + resources.View + "</button></td>";
                 row += "</tr>";

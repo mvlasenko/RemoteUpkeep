@@ -69,10 +69,10 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
                 db.Messages.Add(model);
                 db.SaveChanges();
 
-                //todo: send email
                 ApplicationUser sender = db.Users.Find(model.SenderId);
                 ApplicationUser receiver = db.Users.Find(model.ReceiverId);
                 EmailHelper.SendEmail(new EmailViewModel { Sender = sender, Receiver = receiver }, model.Text, "Email Message");
+                //todo: save status
 
                 var list = db.Messages.ToList();
                 return Json(new { totalCount = list.Count });
