@@ -59,6 +59,14 @@ namespace RemoteUpkeep
             bundles.Add(new ScriptBundle("~/bundles/dropzone").Include(
                 "~/Scripts/dropzone/dropzone.js",
                 "~/Scripts/dropzone.js"));
+
+            //accordion - scripts
+            bundles.Add(new ScriptBundle("~/bundles/accordion").Include(
+                "~/Scripts/accordion.js"));
+
+            //accordion - css
+            bundles.Add(new StyleBundle("~/Content/accordion").Include(
+                "~/Content/accordion.css"));
         }
     }
 }

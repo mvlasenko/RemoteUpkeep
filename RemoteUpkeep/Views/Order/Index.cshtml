@@ -1,23 +1,51 @@
 ﻿@model RemoteUpkeep.ViewModels.OrderViewModel
-
+@using RemoteUpkeep.Models
+@using RemoteUpkeep.Helpers
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Please select an option";
 }
 
-<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Title</h3>
 
 @using (Html.BeginForm("StepOne", "Order", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "frmOrder" }))
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-group">
-        @Html.EditorFor(model => model.ServiceId)
+    <div class="container">
+        <div class="panel-group wrap" id="bs-collapse">
+
+            @foreach (Service service in UIHelper.GetServices())
+            {
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#bs-collapse" href="#service_@service.Id">
+                                @Html.RadioButtonFor(model => model.ServiceId, service.Id) @service.Title
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="service_@service.Id" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            @service.Description
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
     </div>
 
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Next" class="btn btn-default" />
+        <div class="col-md-10">
+            <input type="submit" value="Next" class="btn btn-primary" />
         </div>
     </div>
+}
+
+@section Scripts {
+
+    @Styles.Render("~/Content/accordion")
+    @Scripts.Render("~/bundles/accordion")
+
 }

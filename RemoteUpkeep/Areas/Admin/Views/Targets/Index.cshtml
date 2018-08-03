@@ -1,6 +1,6 @@
 ﻿@using RemoteUpkeep.Properties
+@using RemoteUpkeep.Helpers
 @model IEnumerable<RemoteUpkeep.Models.Target>
-
 @{
     ViewBag.Title = Resources.Index;
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -44,7 +44,7 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                @item.Description.Cut(50)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Geography)
