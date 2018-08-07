@@ -7,6 +7,9 @@ namespace RemoteUpkeep.Helpers
     {
         public static string Cut(this string str, int maxLength)
         {
+            if (string.IsNullOrEmpty(str))
+                return string.Empty;
+
             if (maxLength < 5)
                 maxLength = 5;
 
@@ -20,6 +23,9 @@ namespace RemoteUpkeep.Helpers
 
         public static string StripTags(this string str)
         {
+            if (string.IsNullOrEmpty(str))
+                return str;
+
             str = HttpUtility.HtmlDecode(str);
             str = HttpUtility.HtmlDecode(str);
             return Regex.Replace(str, "<.*?>", string.Empty);
@@ -43,6 +49,9 @@ namespace RemoteUpkeep.Helpers
 
         public static string HtmlToText(this string str)
         {
+            if (string.IsNullOrEmpty(str))
+                return str;
+
             str = HttpUtility.HtmlDecode(str);
             str = str.StripDoubleSpaces();
             str = str.Replace("</p>", "\r\n");
