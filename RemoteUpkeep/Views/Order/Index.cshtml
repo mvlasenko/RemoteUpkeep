@@ -1,9 +1,10 @@
-﻿@model RemoteUpkeep.ViewModels.OrderViewModel
-@using RemoteUpkeep.Models
+﻿@using RemoteUpkeep.Models
 @using RemoteUpkeep.Helpers
+@using RemoteUpkeep.Properties
+@model RemoteUpkeep.ViewModels.OrderViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Please select an option";
+    ViewBag.Title = Resources.Order_Step1_Title;
 }
 
 <h3>@ViewBag.Title</h3>
@@ -38,7 +39,7 @@
 
     <div class="form-group">
         <div class="col-md-10">
-            <input type="submit" value="Next" class="btn btn-primary" />
+            <input type="submit" value="@Resources.Next" class="btn btn-primary" />
         </div>
     </div>
 }

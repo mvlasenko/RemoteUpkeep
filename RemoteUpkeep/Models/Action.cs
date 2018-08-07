@@ -10,10 +10,11 @@ namespace RemoteUpkeep.Models
         public int Id { get; set; }
 
         [UIHint("MultilineText")]
+        [Display(Name = "Description", ResourceType = typeof(Properties.Resources))]
         public string Description { get; set; }
 
-        [Display(Name = "Due Date")]
         [UIHint("_DatePicker")]
+        [Display(Name = "DueDate", ResourceType = typeof(Properties.Resources))]
         public DateTime? DueDate { get; set; }
 
         public int OrderDetailsId { get; set; }
@@ -22,17 +23,17 @@ namespace RemoteUpkeep.Models
         public virtual OrderDetails OrderDetails { get; set; }
 
         [UIHint("_User")]
-        [Display(Name = "Assigned User")]
+        [Display(Name = "AssignedUser", ResourceType = typeof(Properties.Resources))]
         public string AssignedUserId { get; set; }
 
         public virtual ApplicationUser AssignedUser { get; set; }
 
-        [Display(Name = "Changed By")]
+        [Display(Name = "ChangedBy", ResourceType = typeof(Properties.Resources))]
         public string ChangedByUserId { get; set; }
 
         public virtual ApplicationUser ChangedBy { get; set; }
 
-        [Display(Name = "Changed")]
+        [Display(Name = "Changed", ResourceType = typeof(Properties.Resources))]
         public DateTime ChangedDateTime { get; set; }
     }
 }

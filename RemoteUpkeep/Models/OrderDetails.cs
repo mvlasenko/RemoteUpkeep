@@ -17,7 +17,7 @@ namespace RemoteUpkeep.Models
         public int Id { get; set; }
 
         [UIHint("_Target")]
-        [Display(Name = "Target")]
+        [Display(Name = "Target", ResourceType = typeof(Properties.Resources))]
         public int TargetId { get; set; }
 
         public virtual Target Target { get; set; }
@@ -26,7 +26,7 @@ namespace RemoteUpkeep.Models
 
         public virtual Order Order { get; set; }
 
-        [Display(Name = "Status")]
+        [Display(Name = "OrderStatus", ResourceType = typeof(Properties.Resources))]
         [ScriptIgnore(ApplyToOverrides = true)]
         public OrderStatus OrderStatus { get; set; }
 
@@ -46,7 +46,7 @@ namespace RemoteUpkeep.Models
         public virtual ICollection<Service> Services { get; set; }
         
         [UIHint("_Services")]
-        [Display(Name = "Services")]
+        [Display(Name = "Services", ResourceType = typeof(Properties.Resources))]
         public List<int> ServiceIds { get; set; }
     }
 }

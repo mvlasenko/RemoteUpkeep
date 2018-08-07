@@ -16,23 +16,25 @@ namespace RemoteUpkeep.Models
         public int Id { get; set; }
 
         [UIHint("_User")]
-        [Display(Name = "Sender")]
+        [Display(Name = "Sender", ResourceType = typeof(Properties.Resources))]
         public string SenderId { get; set; }
 
         public virtual ApplicationUser Sender { get; set; }
 
         [UIHint("_User")]
-        [Display(Name = "Receiver")]
+        [Display(Name = "Receiver", ResourceType = typeof(Properties.Resources))]
         public string ReceiverId { get; set; }
 
         public virtual ApplicationUser Receiver { get; set; }
 
         [UIHint("MultilineText")]
+        [Display(Name = "Text", ResourceType = typeof(Properties.Resources))]
         public string Text { get; set; }
 
+        [Display(Name = "Date", ResourceType = typeof(Properties.Resources))]
         public DateTime Date { get; set; }
 
-        [Display(Name = "Type")]
+        [Display(Name = "MessageType", ResourceType = typeof(Properties.Resources))]
         [ScriptIgnore(ApplyToOverrides = true)]
         public MessageType MessageType { get; set; }
 
@@ -44,7 +46,7 @@ namespace RemoteUpkeep.Models
             }
         }
 
-        [Display(Name = "Order")]
+        [Display(Name = "Order", ResourceType = typeof(Properties.Resources))]
         public int? OrderDetailsId { get; set; }
 
         [ScriptIgnore(ApplyToOverrides = true)]

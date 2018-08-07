@@ -1,10 +1,9 @@
 ﻿@using RemoteUpkeep.Properties
 @using RemoteUpkeep.Helpers
 @model RemoteUpkeep.ViewModels.OrderViewModel
-
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Please enter more information";
+    ViewBag.Title = Resources.Order_Step2_Title;
 }
 
 <h2>@ViewBag.Title</h2>
@@ -62,7 +61,7 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Finish Order" class="btn btn-default" />
+            <input type="submit" value="@Resources.Order_Step2_submit" class="btn btn-primary" />
         </div>
     </div>
 }

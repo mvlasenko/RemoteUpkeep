@@ -17,10 +17,11 @@ namespace RemoteUpkeep.Models
         [Key]
         public int Id { get; set; }
 
+        [Display(Name = "Title", ResourceType = typeof(Properties.Resources))]
         public string Title { get; set; }
 
         [UIHint("_Country")]
-        [Display(Name = "Country")]
+        [Display(Name = "Country", ResourceType = typeof(Properties.Resources))]
         public int CountryId { get; set; }
 
         public virtual Country Country { get; set; }
@@ -31,7 +32,7 @@ namespace RemoteUpkeep.Models
 
         [UIHint("_Geography")]
         [NotMapped]
-        [Display(Name = "Geography")]
+        [Display(Name = "Geography", ResourceType = typeof(Properties.Resources))]
         public string Geography
         {
             get

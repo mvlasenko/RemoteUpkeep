@@ -14,8 +14,10 @@ namespace RemoteUpkeep.Models
         [Key]
         public int Id { get; set; }
 
+        [Display(Name = "Title", ResourceType = typeof(Properties.Resources))]
         public string Title { get; set; }
 
+        [Display(Name = "Code", ResourceType = typeof(Properties.Resources))]
         public string Code { get; set; }
 
         [ScriptIgnore(ApplyToOverrides = true)]

@@ -13,22 +13,22 @@ namespace RemoteUpkeep.ViewModels
         public bool BrowserRemembered { get; set; }
 
         [Required]
-        [Display(Name = "First Name")]
+        [Display(Name = "FirstName", ResourceType = typeof(Properties.Resources))]
         public string FirstName { get; set; }
 
         [Required]
-        [Display(Name = "Last Name")]
+        [Display(Name = "LastName", ResourceType = typeof(Properties.Resources))]
         public string LastName { get; set; }
 
-        [Display(Name = "Phone")]
+        [Display(Name = "Phone", ResourceType = typeof(Properties.Resources))]
         public string Phone { get; set; }
 
-        [Display(Name = "Country")]
         [UIHint("_Country")]
+        [Display(Name = "Country", ResourceType = typeof(Properties.Resources))]
         public int? CountryId { get; set; }
 
-        [Display(Name = "Languages")]
         [UIHint("_Languages")]
+        [Display(Name = "Languages", ResourceType = typeof(Properties.Resources))]
         [CheckboxListRequired]
         public ICollection<int> LanguageIds { get; set; }
     }
@@ -44,11 +44,11 @@ namespace RemoteUpkeep.ViewModels
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [Display(Name = "NewPassword", ResourceType = typeof(Properties.Resources))]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
+        [Display(Name = "ConfirmPassword", ResourceType = typeof(Properties.Resources))]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
@@ -57,17 +57,17 @@ namespace RemoteUpkeep.ViewModels
     {
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
+        [Display(Name = "CurrentPassword", ResourceType = typeof(Properties.Resources))]
         public string OldPassword { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [Display(Name = "NewPassword", ResourceType = typeof(Properties.Resources))]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
+        [Display(Name = "ConfirmPassword", ResourceType = typeof(Properties.Resources))]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }

@@ -32,25 +32,25 @@ namespace RemoteUpkeep.Models
             this.AssignedActions = new List<Action>();
         }
 
-        [Display(Name = "First Name")]
+        [Display(Name = "FirstName", ResourceType = typeof(Properties.Resources))]
         public string FirstName { get; set; }
 
-        [Display(Name = "Last Name")]
+        [Display(Name = "LastName", ResourceType = typeof(Properties.Resources))]
         public string LastName { get; set; }
 
         [UIHint("_Country")]
-        [Display(Name = "Country")]
+        [Display(Name = "Country", ResourceType = typeof(Properties.Resources))]
         public int? CountryId { get; set; }
 
         public virtual Country Country { get; set; }
 
         [UIHint("_Region")]
-        [Display(Name = "Region")]
+        [Display(Name = "Region", ResourceType = typeof(Properties.Resources))]
         public int? RegionId { get; set; }
 
         public virtual Region Region { get; set; }
 
-        [Display(Name = "Full Name")]
+        [Display(Name = "FullName", ResourceType = typeof(Properties.Resources))]
         public string FullName
         {
             get
@@ -61,7 +61,7 @@ namespace RemoteUpkeep.Models
 
         //view only
         [NotMapped]
-        [Display(Name = "Languages")]
+        [Display(Name = "Languages", ResourceType = typeof(Properties.Resources))]
         [UIHint("_Languages")]
         [CheckboxListRequired]
         public ICollection<int> LanguageIds { get; set; }

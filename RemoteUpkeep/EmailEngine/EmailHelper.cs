@@ -7,7 +7,6 @@ using RazorEngine;
 using RazorEngine.Configuration;
 using RazorEngine.Templating;
 using RemoteUpkeep.ViewModels;
-using RemoteUpkeep.Properties;
 using System.IO;
 
 namespace RemoteUpkeep.EmailEngine
@@ -23,11 +22,11 @@ namespace RemoteUpkeep.EmailEngine
                 Subject = subject,
                 Body = body.TextToHtml(),
                 Logo = logo,
-                Link = Resources.Link,
+                Link = Properties.Resources.Link,
                 Year = DateTime.Now.Year.ToString(),
-                Copyright = Resources.Copyright,
-                ContactUsLink = Resources.ContactUsLink,
-                ContactUs = Resources.ContactUs
+                Copyright = Properties.Resources.Copyright,
+                ContactUsLink = Properties.Resources.ContactUsLink,
+                ContactUs = Properties.Resources.ContactUs
             };
 
             return Engine.Razor.RunCompile(File.ReadAllText(HttpContext.Current.Server.MapPath("~/Views/Shared/Email_layout.html")), Guid.NewGuid().ToString(), typeof(EmailLayoutViewModel), layoutModel);
@@ -62,7 +61,7 @@ namespace RemoteUpkeep.EmailEngine
             //client.Timeout = 500000;
 
             MailAddress from = model.Sender == null || model.Sender.Email == model.Receiver.Email ?
-                new MailAddress(Resources.EmailNoReply, Resources.EmailNoReplyName, System.Text.Encoding.UTF8) :
+                new MailAddress(Properties.Resources.EmailNoReply, Properties.Resources.EmailNoReplyName, System.Text.Encoding.UTF8) :
                 new MailAddress(model.Sender.Email, model.Sender.FullName, System.Text.Encoding.UTF8);
 
             MailAddress to = new MailAddress(model.Receiver.Email, model.Receiver.FullName, System.Text.Encoding.UTF8);

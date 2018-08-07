@@ -1,6 +1,7 @@
-﻿@model RemoteUpkeep.ViewModels.LoginViewModel
+﻿@using RemoteUpkeep.Properties
+@model RemoteUpkeep.ViewModels.LoginViewModel
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.Title = Resources.Login_Title;
 }
 
 <h2>@ViewBag.Title</h2>
@@ -10,7 +11,7 @@
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <h4>Use a local account to log in</h4>
+                <h4>@Resources.Login_h4</h4>
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
@@ -29,24 +30,22 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
+                        @Html.CheckBoxFor(m => m.RememberMe)
+                        @Html.LabelFor(m => m.RememberMe)
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
+                        <input type="submit" value="@Resources.Login_submit" class="btn btn-primary" />
                     </div>
                 </div>
-                <p>
-                    @Html.ActionLink("This is your first login or you forgot your password?", "ForgotPassword")
-                </p>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        @Html.ActionLink(Resources.Login_forgot, "ForgotPassword")
+                    </div>
+                </div>
             }
         </section>
-    </div>
-    <div class="col-md-4">
         <section id="socialLoginForm">
             @Html.Partial("_ExternalLoginsListPartial", new RemoteUpkeep.ViewModels.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
         </section>

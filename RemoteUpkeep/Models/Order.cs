@@ -15,12 +15,12 @@ namespace RemoteUpkeep.Models
         public int Id { get; set; }
 
         [UIHint("_User")]
-        [Display(Name = "User")]
+        [Display(Name = "User", ResourceType = typeof(Properties.Resources))]
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
 
-        [Display(Name = "Created")]
+        [Display(Name = "Created", ResourceType = typeof(Properties.Resources))]
         public DateTime CreatedDateTime { get; set; }
 
         public virtual List<OrderDetails> OrderDetails { get; set; }

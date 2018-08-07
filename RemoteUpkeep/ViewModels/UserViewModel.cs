@@ -10,35 +10,35 @@ namespace RemoteUpkeep.ViewModels
         public string Id { get; set; }
 
         [Required]
-        [Display(Name = "First Name")]
+        [Display(Name = "FirstName", ResourceType = typeof(Properties.Resources))]
         public string FirstName { get; set; }
 
         [Required]
-        [Display(Name = "Last Name")]
+        [Display(Name = "LastName", ResourceType = typeof(Properties.Resources))]
         public string LastName { get; set; }
 
-        [Display(Name = "Email")]
+        [Display(Name = "Email", ResourceType = typeof(Properties.Resources))]
         public string Email { get; set; }
 
-        [Display(Name = "Phone")]
+        [Display(Name = "Phone", ResourceType = typeof(Properties.Resources))]
         public string Phone { get; set; }
 
         [Required]
-        [Display(Name = "Country")]
+        [Display(Name = "Country", ResourceType = typeof(Properties.Resources))]
         [UIHint("_Country")]
         public int? CountryId { get; set; }
 
-        [Display(Name = "Region")]
+        [Display(Name = "Region", ResourceType = typeof(Properties.Resources))]
         [UIHint("_Region")]
         public int? RegionId { get; set; }
 
-        [Display(Name = "Languages")]
+        [Display(Name = "Languages", ResourceType = typeof(Properties.Resources))]
         [UIHint("_Languages")]
         [CheckboxListRequired]
         public ICollection<int> LanguageIds { get; set; }
 
         [Required]
-        [Display(Name = "Type")]
+        [Display(Name = "UserType", ResourceType = typeof(Properties.Resources))]
         public UserType UserType { get; set; }
     }
 }

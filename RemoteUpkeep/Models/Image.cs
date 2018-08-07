@@ -22,10 +22,8 @@ namespace RemoteUpkeep.Models
 
         public byte[] Binary { get; set; }
 
-        [UIHint("MultilineText")]
         public string Text { get; set; }
 
-        [Display(Name = "Created")]
         public DateTime CreatedDateTime { get; set; }
 
         //many-to-many

@@ -7,34 +7,35 @@ namespace RemoteUpkeep.ViewModels
     {
         //service info
 
-        [Display(Name = "Service")]
         [UIHint("_Service")]
+        [Display(Name = "Service", ResourceType = typeof(Properties.Resources))]
         public int? ServiceId { get; set; }
 
         //destination info
 
-        [Required]
-        [Display(Name = "Region")]
         [UIHint("_Region")]
+        [Required]
+        [Display(Name = "Region", ResourceType = typeof(Properties.Resources))]
         public int? RegionId { get; set; }
 
         [UIHint("_Geography")]
-        [Display(Name = "Geography")]
+        [Display(Name = "Geography", ResourceType = typeof(Properties.Resources))]
         public string Geography { get; set; }
 
-        [Display(Name = "I know exact location of the grave")]
+        [Display(Name = "HasGeography", ResourceType = typeof(Properties.Resources))]
         public bool HasGeography { get; set; }
 
         [Required]
         [UIHint("MultilineText")]
+        [Display(Name = "Description", ResourceType = typeof(Properties.Resources))]
         public string Description { get; set; }
 
-        [Display(Name = "Images")]
         [UIHint("_FileUpload")]
+        [Display(Name = "Images", ResourceType = typeof(Properties.Resources))]
         public string FileIds { get; set; }
 
-        [Display(Name = "Due Date")]
         [UIHint("_DatePicker")]
+        [Display(Name = "DueDate", ResourceType = typeof(Properties.Resources))]
         public DateTime? DueDate { get; set; }
     }
 }

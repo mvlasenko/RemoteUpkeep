@@ -18,14 +18,16 @@ namespace RemoteUpkeep.Models
         public int Id { get; set; }
 
         [UIHint("_Region")]
-        [Display(Name = "Region")]
+        [Display(Name = "Region", ResourceType = typeof(Properties.Resources))]
         public int RegionId { get; set; }
 
         public virtual Region Region { get; set; }
 
+        [Display(Name = "Title", ResourceType = typeof(Properties.Resources))]
         public string Title { get; set; }
 
         [UIHint("MultilineText")]
+        [Display(Name = "Description", ResourceType = typeof(Properties.Resources))]
         public string Description { get; set; }
 
         public double? Latitude { get; set; }
@@ -34,7 +36,7 @@ namespace RemoteUpkeep.Models
 
         [UIHint("_Geography")]
         [NotMapped]
-        [Display(Name = "Geography")]
+        [Display(Name = "Geography", ResourceType = typeof(Properties.Resources))]
         public string Geography
         {
             get
@@ -53,12 +55,12 @@ namespace RemoteUpkeep.Models
             }
         }
 
-        [Display(Name = "Changed By")]
+        [Display(Name = "ChangedBy", ResourceType = typeof(Properties.Resources))]
         public string ChangedByUserId { get; set; }
 
         public virtual ApplicationUser ChangedBy { get; set; }
 
-        [Display(Name = "Changed")]
+        [Display(Name = "Changed", ResourceType = typeof(Properties.Resources))]
         public DateTime ChangedDateTime { get; set; }
 
         public virtual ICollection<OrderDetails> OrderDetails { get; set; }
@@ -71,13 +73,13 @@ namespace RemoteUpkeep.Models
         public int OrderId { get; set; }
 
         //view only
-        [Display(Name = "Images")]
+        [Display(Name = "Images", ResourceType = typeof(Properties.Resources))]
         [UIHint("_FileUpload")]
         [NotMapped]
         public string FileIds { get; set; }
 
         //view only
-        [Display(Name = "Images")]
+        [Display(Name = "Images", ResourceType = typeof(Properties.Resources))]
         [UIHint("_Image")]
         [NotMapped]
         public string ImageIds { get; set; }
