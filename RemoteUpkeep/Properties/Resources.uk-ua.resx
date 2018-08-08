@@ -387,4 +387,37 @@
   <data name="Service" xml:space="preserve">
     <value>Послуга</value>
   </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Змінити пароль</value>
+  </data>
+  <data name="CreatePassword" xml:space="preserve">
+    <value>Придумайте пароль</value>
+  </data>
+  <data name="CreatePasswordInfo" xml:space="preserve">
+    <value>У вас немає локального імені користувача та пароля для цього сайту. Додайте локальний обліковий запис, щоб ви могли входити без використання соціальних мереж.</value>
+  </data>
+  <data name="EditProfile" xml:space="preserve">
+    <value>Ваші дані</value>
+  </data>
+  <data name="ExternalLogin" xml:space="preserve">
+    <value>Вхід за допомогою соціальних мереж</value>
+  </data>
+  <data name="ExternalLogins" xml:space="preserve">
+    <value>Налаштувати вхід за допомогою соціальних мереж</value>
+  </data>
+  <data name="LogOff" xml:space="preserve">
+    <value>Вихід</value>
+  </data>
+  <data name="Manage" xml:space="preserve">
+    <value>Змінити</value>
+  </data>
+  <data name="ManageAccount" xml:space="preserve">
+    <value>Змінити налаштування свого облікового запису</value>
+  </data>
+  <data name="ManageLogins" xml:space="preserve">
+    <value>Налаштування входу за допомогою соціальних мереж</value>
+  </data>
+  <data name="SetPassword" xml:space="preserve">
+    <value>Придумати пароль</value>
+  </data>
 </root>

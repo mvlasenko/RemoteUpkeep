@@ -142,6 +142,15 @@ namespace RemoteUpkeep.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change Password.
+        /// </summary>
+        public static string ChangePassword {
+            get {
+                return ResourceManager.GetString("ChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
         public static string Close {
@@ -250,6 +259,24 @@ namespace RemoteUpkeep.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create Password.
+        /// </summary>
+        public static string CreatePassword {
+            get {
+                return ResourceManager.GetString("CreatePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You do not have a local username/password for this site. Add a local account so you can log in without an external login..
+        /// </summary>
+        public static string CreatePasswordInfo {
+            get {
+                return ResourceManager.GetString("CreatePasswordInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current password.
         /// </summary>
         public static string CurrentPassword {
@@ -331,6 +358,15 @@ namespace RemoteUpkeep.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Profile.
+        /// </summary>
+        public static string EditProfile {
+            get {
+                return ResourceManager.GetString("EditProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         public static string Email {
@@ -354,6 +390,24 @@ namespace RemoteUpkeep.Properties {
         public static string EmailNoReplyName {
             get {
                 return ResourceManager.GetString("EmailNoReplyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use another service to log in.
+        /// </summary>
+        public static string ExternalLogin {
+            get {
+                return ResourceManager.GetString("ExternalLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to External Logins.
+        /// </summary>
+        public static string ExternalLogins {
+            get {
+                return ResourceManager.GetString("ExternalLogins", resourceCulture);
             }
         }
         
@@ -511,11 +565,47 @@ namespace RemoteUpkeep.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Log off.
+        /// </summary>
+        public static string LogOff {
+            get {
+                return ResourceManager.GetString("LogOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Make Order.
         /// </summary>
         public static string MakeOrder {
             get {
                 return ResourceManager.GetString("MakeOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage.
+        /// </summary>
+        public static string Manage {
+            get {
+                return ResourceManager.GetString("Manage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change your account settings.
+        /// </summary>
+        public static string ManageAccount {
+            get {
+                return ResourceManager.GetString("ManageAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage your external logins.
+        /// </summary>
+        public static string ManageLogins {
+            get {
+                return ResourceManager.GetString("ManageLogins", resourceCulture);
             }
         }
         
@@ -786,6 +876,15 @@ namespace RemoteUpkeep.Properties {
         public static string Services {
             get {
                 return ResourceManager.GetString("Services", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set Password.
+        /// </summary>
+        public static string SetPassword {
+            get {
+                return ResourceManager.GetString("SetPassword", resourceCulture);
             }
         }
         

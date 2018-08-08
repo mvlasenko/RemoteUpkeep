@@ -387,4 +387,37 @@
   <data name="Service" xml:space="preserve">
     <value>Service</value>
   </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="CreatePassword" xml:space="preserve">
+    <value>Create Password</value>
+  </data>
+  <data name="CreatePasswordInfo" xml:space="preserve">
+    <value>You do not have a local username/password for this site. Add a local account so you can log in without an external login.</value>
+  </data>
+  <data name="EditProfile" xml:space="preserve">
+    <value>Edit Profile</value>
+  </data>
+  <data name="ExternalLogin" xml:space="preserve">
+    <value>Use another service to log in</value>
+  </data>
+  <data name="ExternalLogins" xml:space="preserve">
+    <value>External Logins</value>
+  </data>
+  <data name="LogOff" xml:space="preserve">
+    <value>Log off</value>
+  </data>
+  <data name="Manage" xml:space="preserve">
+    <value>Manage</value>
+  </data>
+  <data name="ManageAccount" xml:space="preserve">
+    <value>Change your account settings</value>
+  </data>
+  <data name="ManageLogins" xml:space="preserve">
+    <value>Manage your external logins</value>
+  </data>
+  <data name="SetPassword" xml:space="preserve">
+    <value>Set Password</value>
+  </data>
 </root>

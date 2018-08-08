@@ -1,32 +1,32 @@
-﻿@model RemoteUpkeep.ViewModels.IndexViewModel
+﻿@using RemoteUpkeep.Properties
+@model RemoteUpkeep.ViewModels.IndexViewModel
 @{
-    ViewBag.Title = "Manage";
+    ViewBag.Title = Resources.ManageAccount;
 }
 
 <h2>@ViewBag.Title</h2>
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div>
-    <h4>Change your account settings</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>Password:</dt>
+        <dt>@Resources.Password:</dt>
         <dd>
             [
             @if (Model.HasPassword)
             {
-                @Html.ActionLink("Change your password", "ChangePassword")
+                @Html.ActionLink(Resources.ChangePassword, "ChangePassword")
             }
             else
             {
-                @Html.ActionLink("Create", "SetPassword")
+                @Html.ActionLink(Resources.SetPassword, "SetPassword")
             }
             ]
         </dd>
-        <dt>External Logins:</dt>
+        <dt>@Resources.ExternalLogins:</dt>
         <dd>
             @Model.Logins.Count [
-            @Html.ActionLink("Manage", "ManageLogins") ]
+            @Html.ActionLink(Resources.Manage, "ManageLogins") ]
         </dd>
     </dl>
 </div>
@@ -35,7 +35,7 @@
 {
     @Html.AntiForgeryToken()
 
-    <h4>Edit Profile</h4>
+    <h4>@Resources.EditProfile</h4>
     <hr />
 
     @Html.ValidationSummary("", new { @class = "text-danger" })
@@ -79,7 +79,7 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-primary" />
+            <input type="submit" value="@Resources.Save" class="btn btn-primary" />
         </div>
     </div>
 }
