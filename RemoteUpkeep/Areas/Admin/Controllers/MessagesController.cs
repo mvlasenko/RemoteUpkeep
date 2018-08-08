@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using RemoteUpkeep.EmailEngine;
 using RemoteUpkeep.Helpers;
 using RemoteUpkeep.Models;
+using RemoteUpkeep.Properties;
 using RemoteUpkeep.ViewModels;
 
 namespace RemoteUpkeep.Areas.Admin.Controllers
@@ -71,7 +72,9 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
 
                 ApplicationUser sender = db.Users.Find(model.SenderId);
                 ApplicationUser receiver = db.Users.Find(model.ReceiverId);
-                EmailHelper.SendEmail(new EmailViewModel { Sender = sender, Receiver = receiver }, model.Text, "Email Message");
+                EmailViewModel emailModel = new EmailViewModel { Sender = sender, Receiver = receiver, Body = model.Text, SignatureName = Resources.SiteName };
+
+                EmailHelper.SendEmail(emailModel, model.Subject);
                 //todo: save status
 
                 var list = db.Messages.ToList();
@@ -86,8 +89,10 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         {
             Message message = db.Messages.Find(id);
 
-            string body = EmailHelper.GetHtmlBody(new EmailViewModel { Sender = message.Sender, Receiver = message.Receiver }, message.Text, "Email Message", "/Content/Images/logo_email.png");
-            message.Text = body;
+            EmailViewModel emailModel = new EmailViewModel { Sender = message.Sender, Receiver = message.Receiver, Body = message.Text, SignatureName = Resources.SiteName };
+
+            string formattedBody = EmailHelper.GetFormattedBody(emailModel);
+            message.Text = EmailHelper.GetHtmlBody(formattedBody, message.Subject);//, "/Content/Images/logo_email.png");
 
             return PartialView("_ViewPartial", message);
         }
@@ -98,6 +103,7 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
             var list = db.Messages.Include(m => m.Receiver).Include(m => m.Sender).Where(x => x.OrderDetailsId == id).ToList();
             foreach (Message item in list)
             {
+                item.Subject = item.Subject.Cut(50);
                 item.Text = item.Text.Cut(50);
             }
 

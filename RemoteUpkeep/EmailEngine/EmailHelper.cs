@@ -8,36 +8,46 @@ using RazorEngine.Configuration;
 using RazorEngine.Templating;
 using RemoteUpkeep.ViewModels;
 using System.IO;
+using RemoteUpkeep.Properties;
 
 namespace RemoteUpkeep.EmailEngine
 {
     public static class EmailHelper
     {
-        public static string GetHtmlBody(EmailViewModel model, string body, string subject, string logo = null)
+        public static string GetHtmlBody(string body, string subject, string logo = null)
         {
-            //string body = Engine.Razor.RunCompile(bodyTemplate, Guid.NewGuid().ToString(), typeof(EmailViewModel), model);
-
             EmailLayoutViewModel layoutModel = new EmailLayoutViewModel
             {
                 Subject = subject,
                 Body = body.TextToHtml(),
                 Logo = logo,
-                Link = Properties.Resources.Link,
+                Link = Resources.Link,
                 Year = DateTime.Now.Year.ToString(),
-                Copyright = Properties.Resources.Copyright,
-                ContactUsLink = Properties.Resources.ContactUsLink,
-                ContactUs = Properties.Resources.ContactUs
+                Copyright = Resources.Copyright,
+                ContactUsLink = Resources.ContactUsLink,
+                ContactUs = Resources.ContactUs
             };
 
             return Engine.Razor.RunCompile(File.ReadAllText(HttpContext.Current.Server.MapPath("~/Views/Shared/Email_layout.html")), Guid.NewGuid().ToString(), typeof(EmailLayoutViewModel), layoutModel);
         }
 
-        public static string GetTextBody(EmailViewModel model, string bodyTemplate)
+        public static string GetTextBody(string body)
         {
-            return Engine.Razor.RunCompile(bodyTemplate, Guid.NewGuid().ToString(), typeof(EmailViewModel), model).HtmlToText();
+            return body.HtmlToText();
         }
 
-        public static void SendEmail(EmailViewModel model, string bodyTemplate, string subject)
+        public static string GetFormattedBody(EmailViewModel model)
+        {
+            string template = Resources.EmailBodyTemplate;
+            return Engine.Razor.RunCompile(template, Guid.NewGuid().ToString(), typeof(EmailViewModel), model);
+        }
+
+        public static string GetFormattedBody(ApplicationUser receiver, string body)
+        {
+            return GetFormattedBody(new EmailViewModel { Receiver = receiver, Body = body, SignatureName = Resources.SiteName });
+        }
+
+        public static void SendEmail(EmailViewModel model, string subject)
         {
             //replace body tokens
             var config = new TemplateServiceConfiguration();
@@ -47,21 +57,9 @@ namespace RemoteUpkeep.EmailEngine
             //send email
 
             SmtpClient client = new SmtpClient();
-            //client.UseDefaultCredentials = false;
-            //client.Host = "mail.remote-upkeep.com.ua";
-            //client.DeliveryMethod = SmtpDeliveryMethod.Network;
-
-            //System.Net.NetworkCredential networkCred = new System.Net.NetworkCredential();
-            //networkCred.UserName = "noreply@remote-upkeep.com.ua";
-            //networkCred.Password = "";
-            //client.Credentials = networkCred;
-
-            //client.Port = 465;
-            //client.EnableSsl = true;
-            //client.Timeout = 500000;
 
             MailAddress from = model.Sender == null || model.Sender.Email == model.Receiver.Email ?
-                new MailAddress(Properties.Resources.EmailNoReply, Properties.Resources.EmailNoReplyName, System.Text.Encoding.UTF8) :
+                new MailAddress(Resources.EmailNoReply, Resources.EmailNoReplyName, System.Text.Encoding.UTF8) :
                 new MailAddress(model.Sender.Email, model.Sender.FullName, System.Text.Encoding.UTF8);
 
             MailAddress to = new MailAddress(model.Receiver.Email, model.Receiver.FullName, System.Text.Encoding.UTF8);
@@ -74,24 +72,29 @@ namespace RemoteUpkeep.EmailEngine
             //var logo = new LinkedResource(HttpContext.Current.Server.MapPath("~/Content/images/logo_email.png"));
             //logo.ContentId = Guid.NewGuid().ToString();
 
-            message.Body = GetTextBody(model, bodyTemplate);
+            string formattedBody = GetFormattedBody(model);
 
-            string body = GetHtmlBody(model, bodyTemplate, subject);// logo.ContentId);
+            message.Body = GetTextBody(formattedBody);
 
-            var view = AlternateView.CreateAlternateViewFromString(body, System.Text.Encoding.UTF8, "text/html");
+            string htmlBody = GetHtmlBody(formattedBody, subject);// logo.ContentId);
+
+            var view = AlternateView.CreateAlternateViewFromString(htmlBody, System.Text.Encoding.UTF8, "text/html");
             //view.LinkedResources.Add(logo);
             message.AlternateViews.Add(view);
 
             client.Send(message);
         }
 
-        public static void SendEmail(ApplicationUser receiver, string bodyTemplate, string subject)
+        public static void SendEmail(ApplicationUser receiver, string formattedBody, string subject)
         {
-            SendEmail(new EmailViewModel { Receiver = receiver }, bodyTemplate, subject);
+            SendEmail(new EmailViewModel { Receiver = receiver, Body = formattedBody, SignatureName = Resources.SiteName }, subject);
         }
 
         public static void SendConfirmEmail(ApplicationUser user, string callbackUrl)
         {
+
+            //todo: localization
+
             string body = "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>";
             SendEmail(user, body, "Confirm your account");
         }

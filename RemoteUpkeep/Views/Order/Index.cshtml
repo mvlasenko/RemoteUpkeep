@@ -28,7 +28,7 @@
                     </div>
                     <div id="service_@service.Id" class="panel-collapse collapse">
                         <div class="panel-body">
-                            @service.Description
+                            @Html.Raw(service.Description.TextToHtml())
                         </div>
                     </div>
                 </div>

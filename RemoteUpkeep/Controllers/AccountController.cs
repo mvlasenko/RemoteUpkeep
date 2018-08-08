@@ -163,7 +163,7 @@ namespace RemoteUpkeep.Controllers
                         UserManager.AddToRole(user.Id, "admin");
                     }
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Order");
                 }
                 AddErrors(result);
             }
@@ -351,7 +351,7 @@ namespace RemoteUpkeep.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Order");
         }
 
         //
@@ -408,7 +408,7 @@ namespace RemoteUpkeep.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Order");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

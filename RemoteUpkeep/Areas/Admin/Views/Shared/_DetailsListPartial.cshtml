@@ -12,7 +12,7 @@
 {
     Target target = details.Target;
 
-    <h4>Task @(count > 1 ? (i + 1).ToString() : "") in @target.Region.Title</h4>
+    <h4>@string.Format(Resources.TaskFormat, (count > 1 ? (i + 1).ToString() : ""), @target.Region.Title)</h4>
     <hr />
 
     @Html.HiddenFor(model => Model[i].Id)
@@ -150,6 +150,9 @@
                     @Resources.Receiver
                 </th>
                 <th>
+                    @Resources.Subject
+                </th>
+                <th>
                     @Resources.Text
                 </th>
                 <th>
@@ -173,6 +176,9 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => message.Receiver.FullName)
+                    </td>
+                    <td>
+                        @message.Subject.Cut(50)
                     </td>
                     <td>
                         @message.Text.Cut(50)

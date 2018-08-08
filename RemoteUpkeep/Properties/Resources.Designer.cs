@@ -376,6 +376,21 @@ namespace RemoteUpkeep.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dear @Model.Receiver.FullName,
+        ///
+        ///@Model.Body
+        ///
+        ///Best Regards,
+        ///----
+        ///@Model.SignatureName.
+        /// </summary>
+        public static string EmailBodyTemplate {
+            get {
+                return ResourceManager.GetString("EmailBodyTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to noreply@remote-upkeep.com.ua.
         /// </summary>
         public static string EmailNoReply {
@@ -385,7 +400,7 @@ namespace RemoteUpkeep.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No-Reply.
+        ///   Looks up a localized string similar to Remote Upkeep Service.
         /// </summary>
         public static string EmailNoReplyName {
             get {
@@ -529,7 +544,7 @@ namespace RemoteUpkeep.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This is your first login or you forgot your password?.
+        ///   Looks up a localized string similar to Forgot password?.
         /// </summary>
         public static string Login_forgot {
             get {
@@ -727,6 +742,26 @@ namespace RemoteUpkeep.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thank you for your order.
+        ///
+        ///You will be contacted within 1 hour..
+        /// </summary>
+        public static string OrderCreatedMessage {
+            get {
+                return ResourceManager.GetString("OrderCreatedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order Created.
+        /// </summary>
+        public static string OrderCreatedSubject {
+            get {
+                return ResourceManager.GetString("OrderCreatedSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Orders.
         /// </summary>
         public static string Orders {
@@ -898,6 +933,15 @@ namespace RemoteUpkeep.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Subject.
+        /// </summary>
+        public static string Subject {
+            get {
+                return ResourceManager.GetString("Subject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Target.
         /// </summary>
         public static string Target {
@@ -912,6 +956,15 @@ namespace RemoteUpkeep.Properties {
         public static string Targets {
             get {
                 return ResourceManager.GetString("Targets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task {0} in {1}.
+        /// </summary>
+        public static string TaskFormat {
+            get {
+                return ResourceManager.GetString("TaskFormat", resourceCulture);
             }
         }
         

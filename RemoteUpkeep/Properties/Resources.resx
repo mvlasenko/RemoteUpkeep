@@ -205,7 +205,7 @@
     <value>noreply@remote-upkeep.com.ua</value>
   </data>
   <data name="EmailNoReplyName" xml:space="preserve">
-    <value>No-Reply</value>
+    <value>Remote Upkeep Service</value>
   </data>
   <data name="ContactUs" xml:space="preserve">
     <value>Contact Us</value>
@@ -271,7 +271,7 @@
     <value>Forgot your password?</value>
   </data>
   <data name="Login_forgot" xml:space="preserve">
-    <value>This is your first login or you forgot your password?</value>
+    <value>Forgot password?</value>
   </data>
   <data name="Login_h4" xml:space="preserve">
     <value>Use a local account to log in</value>
@@ -419,5 +419,28 @@
   </data>
   <data name="SetPassword" xml:space="preserve">
     <value>Set Password</value>
+  </data>
+  <data name="EmailBodyTemplate" xml:space="preserve">
+    <value>Dear @Model.Receiver.FullName,
+
+@Model.Body
+
+Best Regards,
+----
+@Model.SignatureName</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="OrderCreatedMessage" xml:space="preserve">
+    <value>Thank you for your order.
+
+You will be contacted within 1 hour.</value>
+  </data>
+  <data name="OrderCreatedSubject" xml:space="preserve">
+    <value>Order Created</value>
+  </data>
+  <data name="TaskFormat" xml:space="preserve">
+    <value>Task {0} in {1}</value>
   </data>
 </root>

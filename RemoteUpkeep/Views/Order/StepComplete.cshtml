@@ -2,10 +2,10 @@
 @model RemoteUpkeep.ViewModels.OrderViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = Resources.StepComplete_Title;
+    ViewBag.Title = Resources.Order_StepComplete_Title;
 }
 
 <h2>@ViewBag.Title</h2>
 
-@Html.ActionLink("Home", "Index", "Home")
+@Html.ActionLink(Resources.Order, "Index", "Order")
 

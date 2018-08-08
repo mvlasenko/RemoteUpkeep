@@ -27,6 +27,11 @@ namespace RemoteUpkeep.Models
 
         public virtual ApplicationUser Receiver { get; set; }
 
+        [Required]
+        [Display(Name = "Subject", ResourceType = typeof(Properties.Resources))]
+        public string Subject { get; set; }
+
+        [Required]
         [UIHint("MultilineText")]
         [Display(Name = "Text", ResourceType = typeof(Properties.Resources))]
         public string Text { get; set; }

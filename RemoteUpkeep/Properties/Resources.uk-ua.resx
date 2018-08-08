@@ -205,7 +205,7 @@
     <value>noreply@remote-upkeep.com.ua</value>
   </data>
   <data name="EmailNoReplyName" xml:space="preserve">
-    <value>No-Reply</value>
+    <value>Remote Upkeep Service</value>
   </data>
   <data name="ContactUs" xml:space="preserve">
     <value>Контактна інформація</value>
@@ -271,7 +271,7 @@
     <value>Забули пароль?</value>
   </data>
   <data name="Login_forgot" xml:space="preserve">
-    <value>Це Ваш перший вхід або забули пароль?</value>
+    <value>Забули пароль?</value>
   </data>
   <data name="Login_h4" xml:space="preserve">
     <value>Ваш обліковий запис у системі</value>
@@ -295,7 +295,7 @@
     <value>Будь ласка, введіть додаткову інформацію</value>
   </data>
   <data name="Order_StepComplete_Title" xml:space="preserve">
-    <value>З вами звяжуться протягом години</value>
+    <value>З Вами звяжуться протягом однієї години.</value>
   </data>
   <data name="Changed" xml:space="preserve">
     <value>Зміненно</value>
@@ -419,5 +419,28 @@
   </data>
   <data name="SetPassword" xml:space="preserve">
     <value>Придумати пароль</value>
+  </data>
+  <data name="EmailBodyTemplate" xml:space="preserve">
+    <value>Шановний @Model.Receiver.FullName,
+
+@Model.Body
+
+з повагою,
+----
+@Model.SignatureName</value>
+  </data>
+  <data name="Subject" xml:space="preserve">
+    <value>Тема</value>
+  </data>
+  <data name="OrderCreatedMessage" xml:space="preserve">
+    <value>Дякуємо за Ваше замовлення.
+
+З Вами звяжуться протягом однієї години.</value>
+  </data>
+  <data name="OrderCreatedSubject" xml:space="preserve">
+    <value>Замовлення отримано</value>
+  </data>
+  <data name="TaskFormat" xml:space="preserve">
+    <value>Завдання {0} у {1} область</value>
   </data>
 </root>

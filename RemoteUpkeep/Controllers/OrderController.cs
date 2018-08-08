@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using RemoteUpkeep.EmailEngine;
 using RemoteUpkeep.Models;
+using RemoteUpkeep.Properties;
 using RemoteUpkeep.ViewModels;
 
 namespace RemoteUpkeep.Controllers
@@ -104,7 +104,8 @@ namespace RemoteUpkeep.Controllers
                     //new message
                     Message message = new Message
                     {
-                        Text = "Thank you for your order.\r\n You will be contacted later",
+                        Subject = Resources.OrderCreatedSubject,
+                        Text = Resources.OrderCreatedMessage,
                         Date = DateTime.Now,
                         MessageType = MessageType.Email, //todo
                         ReceiverId = this.User.Identity.GetUserId()
@@ -123,9 +124,11 @@ namespace RemoteUpkeep.Controllers
                     context.Orders.Add(order);
                     context.SaveChanges();
 
-                    //send message
                     ApplicationUser user = context.Users.Find(message.ReceiverId);
-                    EmailHelper.SendEmail(user, message.Text, "Email Message"); //todo check status
+                    string formattedBody = EmailHelper.GetFormattedBody(user, message.Text);
+
+                    //send message
+                    EmailHelper.SendEmail(user, formattedBody, message.Subject); //todo check status
                 }
 
                 return PartialView("StepComplete", model);

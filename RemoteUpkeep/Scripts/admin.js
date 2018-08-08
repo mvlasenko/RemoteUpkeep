@@ -112,6 +112,7 @@ function RefreshMessages(detailsId) {
                 var row = "<tr>";
                 row += '<td>' + (item.Sender ? item.Sender.FullName : '') + '</td>';
                 row += '<td>' + (item.Receiver ? item.Receiver.FullName : '') + '</td>';
+                row += '<td>' + item.Subject + '</td>';
                 row += '<td>' + item.Text + '</td>';
                 row += '<td>' + (new Date(parseInt(item.Date.substr(6)))).toLocaleString() + '</td>';
                 row += '<td>' + item.MessageTypeName + '</td>';

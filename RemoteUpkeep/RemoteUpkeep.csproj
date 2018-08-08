@@ -368,7 +368,6 @@
     <Content Include="Areas\Admin\Views\Orders\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Orders\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Orders\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Messages\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Messages\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Actions\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Actions\Edit.cshtml" />

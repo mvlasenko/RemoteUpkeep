@@ -17,6 +17,9 @@
             @Html.DisplayNameFor(model => model.ReceiverId)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Subject)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Text)
         </th>
         <th>
@@ -39,6 +42,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Receiver.FullName)
+            </td>
+            <td>
+                @item.Subject.Cut(50)
             </td>
             <td>
                 @item.Text.Cut(50)

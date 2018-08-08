@@ -11,9 +11,9 @@
 @foreach (Service service in UIHelper.GetServices())
 {
     <div class="checkbox">
-        <label>
+        <label title="@service.Description">
             <input type="checkbox" name="@name" value="@service.Id" id="@id" @{if (selectedServiceIds != null && selectedServiceIds.Any(x => x == service.Id)) { <text> checked='checked' </text>  }} />
-            @service.Description
+            @service.Title
         </label>
     </div>
     i++;
