@@ -443,4 +443,7 @@ You will be contacted within 1 hour.</value>
   <data name="TaskFormat" xml:space="preserve">
     <value>Task {0} in {1}</value>
   </data>
+  <data name="MyActions" xml:space="preserve">
+    <value>My Tasks</value>
+  </data>
 </root>

@@ -10,7 +10,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    @if (SecurityHelper.AdminVisible())
+    @if (SecurityHelper.AdminVisible() || SecurityHelper.DealerVisible())
     {
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
@@ -25,6 +25,10 @@
                     <ul class="nav navbar-nav">
 
                         <li>@Html.ActionLink(Resources.MakeOrder, "Index", "Order", new { area = "" }, null)</li>
+
+                        <li>@Html.ActionLink(Resources.MyActions, "Index", "Actions", new { area = "" }, null)</li>
+
+                        @if (SecurityHelper.AdminVisible()) {
 
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -42,6 +46,8 @@
                                 <li>@Html.ActionLink(Resources.Users, "Index", "Users", new { area = "Admin" }, null)</li>
                             </ul>
                         </li>
+
+                        }
                     </ul>
 
                     @Html.Partial("_LoginPartial")

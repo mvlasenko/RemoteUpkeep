@@ -652,6 +652,15 @@ namespace RemoteUpkeep.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to My Tasks.
+        /// </summary>
+        public static string MyActions {
+            get {
+                return ResourceManager.GetString("MyActions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New Action.
         /// </summary>
         public static string NewAction {

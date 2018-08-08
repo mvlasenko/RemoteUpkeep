@@ -1,0 +1,45 @@
+﻿@using RemoteUpkeep.Properties
+@model IEnumerable<RemoteUpkeep.Models.Action>
+
+@{
+    ViewBag.Title = Resources.Actions;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Resources.MyActions</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Resources.Description
+        </th>
+        <th>
+            @Resources.DueDate
+        </th>
+        <th>
+            @Resources.ChangedDateTime
+        </th>
+        <th>
+            @Resources.ChangedBy
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DueDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChangedDateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChangedBy.FullName)
+        </td>
+    </tr>
+    }
+
+</table>

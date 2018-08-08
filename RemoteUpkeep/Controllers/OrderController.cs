@@ -125,10 +125,9 @@ namespace RemoteUpkeep.Controllers
                     context.SaveChanges();
 
                     ApplicationUser user = context.Users.Find(message.ReceiverId);
-                    string formattedBody = EmailHelper.GetFormattedBody(user, message.Text);
-
+                    
                     //send message
-                    EmailHelper.SendEmail(user, formattedBody, message.Subject); //todo check status
+                    EmailHelper.SendEmail(user, message.Text, message.Subject); //todo check status
                 }
 
                 return PartialView("StepComplete", model);

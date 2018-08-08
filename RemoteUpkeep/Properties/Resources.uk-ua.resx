@@ -443,4 +443,7 @@
   <data name="TaskFormat" xml:space="preserve">
     <value>Завдання {0} у {1} область</value>
   </data>
+  <data name="MyActions" xml:space="preserve">
+    <value>Мої завдання</value>
+  </data>
 </root>
