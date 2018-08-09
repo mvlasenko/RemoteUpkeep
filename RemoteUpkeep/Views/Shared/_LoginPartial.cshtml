@@ -16,8 +16,8 @@
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", new { area = "" }, new { @id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", new { area = "" }, new { @id = "loginLink" })</li>
-    </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink(Resources.Register, "Register", "Account", new { @returnUrl = Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString()), area = "" }, new { @id = "registerLink" })</li>
+            <li>@Html.ActionLink(Resources.Login, "Login", "Account", new { @returnUrl = Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString()), area = "" }, new { @id = "loginLink" })</li>
+        </ul>
 }

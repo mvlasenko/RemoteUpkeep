@@ -276,7 +276,7 @@
   <data name="Login_h4" xml:space="preserve">
     <value>Use a local account to log in</value>
   </data>
-  <data name="Login_submit" xml:space="preserve">
+  <data name="Login" xml:space="preserve">
     <value>Log in</value>
   </data>
   <data name="Login_Title" xml:space="preserve">
@@ -445,5 +445,40 @@ You will be contacted within 1 hour.</value>
   </data>
   <data name="MyActions" xml:space="preserve">
     <value>My Tasks</value>
+  </data>
+  <data name="AdminEmail" xml:space="preserve">
+    <value>mark.vlasenko@gmail.com</value>
+  </data>
+  <data name="AdminName" xml:space="preserve">
+    <value>Mark Vlasenko</value>
+  </data>
+  <data name="EmailAdminRegisterBody" xml:space="preserve">
+    <value>Next user was registered
+
+Full Name: @Model.FullName
+Email: @Model.Email
+
+Edit Profile
+{0}</value>
+  </data>
+  <data name="EmailAdminRegisterSubject" xml:space="preserve">
+    <value>New User Registered</value>
+  </data>
+  <data name="EmailConfirmBody" xml:space="preserve">
+    <value>You've been registered by admin.
+
+Please confirm your account by clicking {0}</value>
+  </data>
+  <data name="EmailConfirmSubject" xml:space="preserve">
+    <value>Confirm your account</value>
+  </data>
+  <data name="EmailRegisterBody" xml:space="preserve">
+    <value>You've been registered successfully.
+
+To change your profile data, click
+{0}</value>
+  </data>
+  <data name="EmailRegisterSubject" xml:space="preserve">
+    <value>Registration successfull</value>
   </data>
 </root>

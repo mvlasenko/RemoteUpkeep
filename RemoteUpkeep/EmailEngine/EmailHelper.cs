@@ -47,6 +47,11 @@ namespace RemoteUpkeep.EmailEngine
             return GetFormattedBody(new EmailViewModel { Receiver = receiver, Body = body, SignatureName = Resources.SiteName });
         }
 
+        public static string GetUserFormattedBody(ApplicationUser user, string template)
+        {
+            return Engine.Razor.RunCompile(template, Guid.NewGuid().ToString(), typeof(ApplicationUser), user);
+        }
+
         public static void SendEmail(EmailViewModel model, string subject)
         {
             //replace body tokens
@@ -85,19 +90,14 @@ namespace RemoteUpkeep.EmailEngine
             client.Send(message);
         }
 
-        public static void SendEmail(ApplicationUser receiver, string formattedBody, string subject)
+        public static void SendEmail(ApplicationUser receiver, string body, string subject)
         {
-            SendEmail(new EmailViewModel { Receiver = receiver, Body = formattedBody, SignatureName = Resources.SiteName }, subject);
+            SendEmail(new EmailViewModel { Receiver = receiver, Body = body, SignatureName = Resources.SiteName }, subject);
         }
 
-        public static void SendConfirmEmail(ApplicationUser user, string callbackUrl)
+        public static void SendAdminEmail(string body, string subject)
         {
-
-            //todo: localization
-
-            string body = "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>";
-            SendEmail(user, body, "Confirm your account");
+            SendEmail(new ApplicationUser { Email = Resources.AdminEmail, FirstName = Resources.AdminName }, body, subject);
         }
-
     }
 }

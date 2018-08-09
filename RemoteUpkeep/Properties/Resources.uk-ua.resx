@@ -276,7 +276,7 @@
   <data name="Login_h4" xml:space="preserve">
     <value>Ваш обліковий запис у системі</value>
   </data>
-  <data name="Login_submit" xml:space="preserve">
+  <data name="Login" xml:space="preserve">
     <value>Увійти</value>
   </data>
   <data name="Login_Title" xml:space="preserve">
@@ -445,5 +445,41 @@
   </data>
   <data name="MyActions" xml:space="preserve">
     <value>Мої завдання</value>
+  </data>
+  <data name="AdminEmail" xml:space="preserve">
+    <value>mark.vlasenko@gmail.com</value>
+  </data>
+  <data name="AdminName" xml:space="preserve">
+    <value>Mark Vlasenko</value>
+  </data>
+  <data name="EmailAdminRegisterBody" xml:space="preserve">
+    <value>Новий користувач
+
+Full Name: @Model.FullName
+Email: @Model.Email
+
+Edit Profile
+{0}</value>
+  </data>
+  <data name="EmailAdminRegisterSubject" xml:space="preserve">
+    <value>Новий користувач</value>
+  </data>
+  <data name="EmailConfirmBody" xml:space="preserve">
+    <value>Ви були зареєстровані адміністратором.
+Будь ласка, підтвердіть, що ви бажаєте бути зареєстрованим.
+
+Натисніть тут {0}</value>
+  </data>
+  <data name="EmailConfirmSubject" xml:space="preserve">
+    <value>Підтвердіть свою реєстрацію</value>
+  </data>
+  <data name="EmailRegisterBody" xml:space="preserve">
+    <value>Ви успішно зараєструвались.
+
+Щоб змінити свої дані, натисніть
+{0}</value>
+  </data>
+  <data name="EmailRegisterSubject" xml:space="preserve">
+    <value>Реєстрація успішна</value>
   </data>
 </root>

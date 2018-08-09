@@ -55,7 +55,7 @@ namespace RemoteUpkeep.Models
         {
             get
             {
-                return this.FirstName + " " + this.LastName;
+                return this.FirstName + (string.IsNullOrEmpty(this.LastName) ? "" : " " + this.LastName);
             }
         }
 

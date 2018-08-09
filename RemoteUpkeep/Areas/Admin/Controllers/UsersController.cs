@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using RemoteUpkeep.EmailEngine;
 using RemoteUpkeep.Models;
+using RemoteUpkeep.Properties;
 using RemoteUpkeep.ViewModels;
 
 namespace RemoteUpkeep.Areas.Admin.Controllers
@@ -78,7 +79,11 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
                         await UserManager.AddToRoleAsync(user.Id, "dealer");
                     }
 
-                    EmailHelper.SendConfirmEmail(user, Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = UserManager.GenerateEmailConfirmationToken(user.Id) }, protocol: Request.Url.Scheme));
+                    //send email
+                    string callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = UserManager.GenerateEmailConfirmationToken(user.Id) }, protocol: Request.Url.Scheme);
+                    string body = string.Format(Resources.EmailConfirmBody, callbackUrl);
+                    EmailHelper.SendEmail(user, body, Resources.EmailConfirmSubject);
+
                     return RedirectToAction("Index");
                 }
             }

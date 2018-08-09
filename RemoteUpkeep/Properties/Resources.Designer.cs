@@ -88,11 +88,29 @@ namespace RemoteUpkeep.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to mark.vlasenko@gmail.com.
+        /// </summary>
+        public static string AdminEmail {
+            get {
+                return ResourceManager.GetString("AdminEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Administration.
         /// </summary>
         public static string Administration {
             get {
                 return ResourceManager.GetString("Administration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mark Vlasenko.
+        /// </summary>
+        public static string AdminName {
+            get {
+                return ResourceManager.GetString("AdminName", resourceCulture);
             }
         }
         
@@ -376,6 +394,30 @@ namespace RemoteUpkeep.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Next user was registered
+        ///
+        ///Full Name: @Model.FullName
+        ///Email: @Model.Email
+        ///
+        ///Edit Profile
+        ///{0}.
+        /// </summary>
+        public static string EmailAdminRegisterBody {
+            get {
+                return ResourceManager.GetString("EmailAdminRegisterBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New User Registered.
+        /// </summary>
+        public static string EmailAdminRegisterSubject {
+            get {
+                return ResourceManager.GetString("EmailAdminRegisterSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dear @Model.Receiver.FullName,
         ///
         ///@Model.Body
@@ -387,6 +429,26 @@ namespace RemoteUpkeep.Properties {
         public static string EmailBodyTemplate {
             get {
                 return ResourceManager.GetString("EmailBodyTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You&apos;ve been registered by admin.
+        ///
+        ///Please confirm your account by clicking {0}.
+        /// </summary>
+        public static string EmailConfirmBody {
+            get {
+                return ResourceManager.GetString("EmailConfirmBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm your account.
+        /// </summary>
+        public static string EmailConfirmSubject {
+            get {
+                return ResourceManager.GetString("EmailConfirmSubject", resourceCulture);
             }
         }
         
@@ -405,6 +467,27 @@ namespace RemoteUpkeep.Properties {
         public static string EmailNoReplyName {
             get {
                 return ResourceManager.GetString("EmailNoReplyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You&apos;ve been registered successfully.
+        ///
+        ///To change your profile data, click
+        ///{0}.
+        /// </summary>
+        public static string EmailRegisterBody {
+            get {
+                return ResourceManager.GetString("EmailRegisterBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registration successfull.
+        /// </summary>
+        public static string EmailRegisterSubject {
+            get {
+                return ResourceManager.GetString("EmailRegisterSubject", resourceCulture);
             }
         }
         
@@ -544,6 +627,15 @@ namespace RemoteUpkeep.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Log in.
+        /// </summary>
+        public static string Login {
+            get {
+                return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Forgot password?.
         /// </summary>
         public static string Login_forgot {
@@ -558,15 +650,6 @@ namespace RemoteUpkeep.Properties {
         public static string Login_h4 {
             get {
                 return ResourceManager.GetString("Login_h4", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Log in.
-        /// </summary>
-        public static string Login_submit {
-            get {
-                return ResourceManager.GetString("Login_submit", resourceCulture);
             }
         }
         

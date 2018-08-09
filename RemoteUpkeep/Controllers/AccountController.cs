@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using RemoteUpkeep.EmailEngine;
 using RemoteUpkeep.Models;
+using RemoteUpkeep.Properties;
 using RemoteUpkeep.ViewModels;
 
 namespace RemoteUpkeep.Controllers
@@ -122,7 +123,7 @@ namespace RemoteUpkeep.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Register()
+        public ActionResult Register(string returnUrl)
         {
             return View();
         }
@@ -132,7 +133,7 @@ namespace RemoteUpkeep.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -153,7 +154,16 @@ namespace RemoteUpkeep.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    EmailHelper.SendConfirmEmail(user, Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = UserManager.GenerateEmailConfirmationToken(user.Id) }, protocol: Request.Url.Scheme));
+                    //send email
+                    string profileLink = Url.Action("Index", "Manage");
+                    string body = string.Format(Resources.EmailRegisterBody, profileLink);
+                    EmailHelper.SendEmail(user, body, Resources.EmailRegisterSubject);
+
+                    //admin email
+                    string editLink = Url.Action("Edit", "Users", new { area = "", @id = user.Id });
+                    string adminBody = EmailHelper.GetUserFormattedBody(user, Resources.EmailAdminRegisterBody);
+                    adminBody = string.Format(adminBody, profileLink);
+                    EmailHelper.SendAdminEmail(body, Resources.EmailAdminRegisterSubject);
 
                     //first registration only
                     if (user.UserName == "mark.vlasenko@gmail.com")
@@ -163,7 +173,14 @@ namespace RemoteUpkeep.Controllers
                         UserManager.AddToRole(user.Id, "admin");
                     }
 
-                    return RedirectToAction("Index", "Order");
+                    if (!string.IsNullOrEmpty(returnUrl))
+                    {
+                        return RedirectToLocal(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Order");
+                    }
                 }
                 AddErrors(result);
             }
@@ -195,8 +212,6 @@ namespace RemoteUpkeep.Controllers
                     // user does not exist
                     return View("ForgotPasswordWrongEmail");
                 }
-
-                EmailHelper.SendConfirmEmail(user, Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = UserManager.GenerateEmailConfirmationToken(user.Id) }, protocol: Request.Url.Scheme));
 
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
@@ -326,6 +341,17 @@ namespace RemoteUpkeep.Controllers
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
+                        //send email
+                        string profileLink = Url.Action("Index", "Manage");
+                        string body = string.Format(Resources.EmailRegisterBody, profileLink);
+                        EmailHelper.SendEmail(user, body, Resources.EmailRegisterSubject);
+
+                        //admin email
+                        string editLink = Url.Action("Edit", "Users", new { area = "", @id = user.Id });
+                        string adminBody = EmailHelper.GetUserFormattedBody(user, Resources.EmailAdminRegisterBody);
+                        adminBody = string.Format(adminBody, profileLink);
+                        EmailHelper.SendAdminEmail(body, Resources.EmailAdminRegisterSubject);
+
                         //first registration only
                         if (user.UserName == "mark.vlasenko@gmail.com")
                         {
@@ -334,7 +360,14 @@ namespace RemoteUpkeep.Controllers
                             UserManager.AddToRole(user.Id, "admin");
                         }
 
-                        return RedirectToLocal(returnUrl);
+                        if (!string.IsNullOrEmpty(returnUrl))
+                        {
+                            return RedirectToLocal(returnUrl);
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Order");
+                        }
                     }
                 }
                 AddErrors(result);
@@ -351,7 +384,7 @@ namespace RemoteUpkeep.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Order");
+            return RedirectToAction("Index", "Order", new { area = "" });
         }
 
         //
