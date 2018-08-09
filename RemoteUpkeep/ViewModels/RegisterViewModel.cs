@@ -44,5 +44,7 @@ namespace RemoteUpkeep.ViewModels
         [Display(Name = "ConfirmPassword", ResourceType = typeof(Properties.Resources))]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public string ReturnUrl { get; set; }
     }
 }

@@ -106,7 +106,7 @@ namespace RemoteUpkeep.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mark Vlasenko.
+        ///   Looks up a localized string similar to Admin.
         /// </summary>
         public static string AdminName {
             get {

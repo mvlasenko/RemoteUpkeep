@@ -60,7 +60,9 @@ namespace RemoteUpkeep.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return View();
+            LoginViewModel model = new LoginViewModel();
+            model.ReturnUrl = returnUrl;
+            return View(model);
         }
 
         //
@@ -68,7 +70,7 @@ namespace RemoteUpkeep.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public async Task<ActionResult> Login(LoginViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -79,7 +81,7 @@ namespace RemoteUpkeep.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToLocal(model.ReturnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 default:
@@ -125,7 +127,9 @@ namespace RemoteUpkeep.Controllers
         [AllowAnonymous]
         public ActionResult Register(string returnUrl)
         {
-            return View();
+            RegisterViewModel model = new RegisterViewModel();
+            model.ReturnUrl = returnUrl;
+            return View(model);
         }
 
         //
@@ -133,7 +137,7 @@ namespace RemoteUpkeep.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model, string returnUrl)
+        public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -155,15 +159,15 @@ namespace RemoteUpkeep.Controllers
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     //send email
-                    string profileLink = Url.Action("Index", "Manage");
+                    string profileLink = Url.Action("Index", "Manage", null, protocol: Request.Url.Scheme);
                     string body = string.Format(Resources.EmailRegisterBody, profileLink);
                     EmailHelper.SendEmail(user, body, Resources.EmailRegisterSubject);
 
                     //admin email
-                    string editLink = Url.Action("Edit", "Users", new { area = "", @id = user.Id });
+                    string editLink = Url.Action("Edit", "Users", new { area = "", id = user.Id }, protocol: Request.Url.Scheme);
                     string adminBody = EmailHelper.GetUserFormattedBody(user, Resources.EmailAdminRegisterBody);
                     adminBody = string.Format(adminBody, profileLink);
-                    EmailHelper.SendAdminEmail(body, Resources.EmailAdminRegisterSubject);
+                    EmailHelper.SendAdminEmail(adminBody, Resources.EmailAdminRegisterSubject);
 
                     //first registration only
                     if (user.UserName == "mark.vlasenko@gmail.com")
@@ -173,9 +177,9 @@ namespace RemoteUpkeep.Controllers
                         UserManager.AddToRole(user.Id, "admin");
                     }
 
-                    if (!string.IsNullOrEmpty(returnUrl))
+                    if (!string.IsNullOrEmpty(model.ReturnUrl))
                     {
-                        return RedirectToLocal(returnUrl);
+                        return RedirectToLocal(model.ReturnUrl);
                     }
                     else
                     {
@@ -282,7 +286,7 @@ namespace RemoteUpkeep.Controllers
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
             // Request a redirect to the external login provider
-            return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
+            return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { returnUrl = returnUrl }));
         }
 
         //
@@ -342,15 +346,15 @@ namespace RemoteUpkeep.Controllers
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                         //send email
-                        string profileLink = Url.Action("Index", "Manage");
+                        string profileLink = Url.Action("Index", "Manage", null, protocol: Request.Url.Scheme);
                         string body = string.Format(Resources.EmailRegisterBody, profileLink);
                         EmailHelper.SendEmail(user, body, Resources.EmailRegisterSubject);
 
                         //admin email
-                        string editLink = Url.Action("Edit", "Users", new { area = "", @id = user.Id });
+                        string editLink = Url.Action("Edit", "Users", new { area = "", id = user.Id }, protocol: Request.Url.Scheme);
                         string adminBody = EmailHelper.GetUserFormattedBody(user, Resources.EmailAdminRegisterBody);
                         adminBody = string.Format(adminBody, profileLink);
-                        EmailHelper.SendAdminEmail(body, Resources.EmailAdminRegisterSubject);
+                        EmailHelper.SendAdminEmail(adminBody, Resources.EmailAdminRegisterSubject);
 
                         //first registration only
                         if (user.UserName == "mark.vlasenko@gmail.com")

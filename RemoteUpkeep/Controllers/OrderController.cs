@@ -30,7 +30,7 @@ namespace RemoteUpkeep.Controllers
             }
             else
             {
-                return RedirectToAction("Login", "Account", new { ReturnUrl = "/Order/StepTwo" });
+                return RedirectToAction("Login", "Account", new { returnUrl = "/Order/StepTwo" });
             }
         }
 
@@ -137,7 +137,7 @@ namespace RemoteUpkeep.Controllers
                 //save selected service
                 this.Session.Add("OrderTmp", model);
 
-                return RedirectToAction("Login", "Account", new { ReturnUrl = "/Order/StepTwo" });
+                return RedirectToAction("Login", "Account", new { returnUrl = "/Order/StepTwo" });
             }
         }
     }

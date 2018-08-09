@@ -28,6 +28,8 @@ namespace RemoteUpkeep.ViewModels
 
         [Display(Name = "RememberMe", ResourceType = typeof(Properties.Resources))]
         public bool RememberMe { get; set; }
+
+        public string ReturnUrl { get; set; }
     }
 
     public class ResetPasswordViewModel

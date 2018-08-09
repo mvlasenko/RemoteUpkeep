@@ -450,7 +450,7 @@ You will be contacted within 1 hour.</value>
     <value>mark.vlasenko@gmail.com</value>
   </data>
   <data name="AdminName" xml:space="preserve">
-    <value>Mark Vlasenko</value>
+    <value>Admin</value>
   </data>
   <data name="EmailAdminRegisterBody" xml:space="preserve">
     <value>Next user was registered

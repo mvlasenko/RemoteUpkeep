@@ -2,7 +2,7 @@
 @using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { @id = "logoutForm", @class = "navbar-right" }))
     {
         @Html.AntiForgeryToken()
 
@@ -17,7 +17,7 @@
 else
 {
         <ul class="nav navbar-nav navbar-right">
-            <li>@Html.ActionLink(Resources.Register, "Register", "Account", new { @returnUrl = Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString()), area = "" }, new { @id = "registerLink" })</li>
-            <li>@Html.ActionLink(Resources.Login, "Login", "Account", new { @returnUrl = Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString()), area = "" }, new { @id = "loginLink" })</li>
+            <li>@Html.ActionLink(Resources.Register, "Register", "Account", new { returnUrl = Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString()), area = "" }, new { @id = "registerLink" })</li>
+            <li>@Html.ActionLink(Resources.Login, "Login", "Account", new { returnUrl = Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString()), area = "" }, new { @id = "loginLink" })</li>
         </ul>
 }
