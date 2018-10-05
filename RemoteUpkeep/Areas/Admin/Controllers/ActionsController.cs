@@ -32,6 +32,8 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
                 db.Actions.Add(model);
                 db.SaveChanges();
                 return RedirectToAction("Index");
+
+				//todo: send email to assinee
             }
 
             return View(model);
@@ -65,6 +67,8 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
                 db.Entry(model).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
+
+				//todo: send email to assinee
             }
 
             return View(model);

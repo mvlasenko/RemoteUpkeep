@@ -50,6 +50,12 @@ namespace RemoteUpkeep.Models
 
         public virtual Region Region { get; set; }
 
+        [UIHint("_Language")]
+        [Display(Name = "PrimaryLanguage", ResourceType = typeof(Properties.Resources))]
+        public int? PrimaryLanguageId { get; set; }
+
+        public virtual Language PrimaryLanguage { get; set; }
+
         [Display(Name = "FullName", ResourceType = typeof(Properties.Resources))]
         public string FullName
         {

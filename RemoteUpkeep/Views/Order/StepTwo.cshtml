@@ -12,50 +12,50 @@
 {
     @Html.AntiForgeryToken()
 
-    @Html.HiddenFor(model => model.ServiceId)
+    @Html.HiddenFor(m => m.ServiceId)
 
     <div class="form-group">
-        @Html.LabelFor(model => model.RegionId, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(m => m.RegionId, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.RegionId, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.RegionId, "", new { @class = "text-danger" })
+            @Html.EditorFor(m => m.RegionId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.RegionId, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.HasGeography, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(m => m.HasGeography, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.HasGeography, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(m => m.HasGeography, new { htmlAttributes = new { @class = "form-control" } })
         </div>
     </div>
 
     <div class="form-group" id="geography-group">
-        @Html.LabelFor(model => model.Geography, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(m => m.Geography, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Geography, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(m => m.Geography, new { htmlAttributes = new { @class = "form-control" } })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(m => m.Description, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            @Html.EditorFor(m => m.Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.FileIds, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(m => m.FileIds, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.FileIds, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(m => m.FileIds, new { htmlAttributes = new { @class = "form-control" } })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.DueDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(m => m.DueDate, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.DueDate, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.DueDate, "", new { @class = "text-danger" })
+            @Html.EditorFor(m => m.DueDate, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.DueDate, "", new { @class = "text-danger" })
         </div>
     </div>
 
@@ -106,7 +106,7 @@
         $(function () {
             'use strict';
 
-            InitFileUpload('@Url.Action("FileUpload", "Images")', '@Html.IdFor(model => model.FileIds)');
+            InitFileUpload('@Url.Action("FileUpload", "Images")', '@Html.IdFor(m => m.FileIds)');
         });
 
         $.validator.methods.date = function (value, element) {

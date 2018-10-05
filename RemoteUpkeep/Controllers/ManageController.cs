@@ -77,6 +77,7 @@ namespace RemoteUpkeep.Controllers
             model.Phone = user.PhoneNumber;
             model.CountryId = user.CountryId;
             model.LanguageIds = user.Languages.Select(x => x.Id).ToList();
+            model.PrimaryLanguageId = user.PrimaryLanguageId;
 
             return View(model);
         }
@@ -100,6 +101,7 @@ namespace RemoteUpkeep.Controllers
             user.LastName = model.LastName;
             user.PhoneNumber = model.Phone;
             user.CountryId = model.CountryId;
+            user.PrimaryLanguageId = model.PrimaryLanguageId;
             user.Languages = model.LanguageIds == null ? new List<Language>() :
                 model.LanguageIds.Select(languageId => context.Languages.FirstOrDefault(x => x.Id == languageId)).ToList();
 

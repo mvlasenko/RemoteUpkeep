@@ -890,6 +890,15 @@ namespace RemoteUpkeep.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Primary Language.
+        /// </summary>
+        public static string PrimaryLanguage {
+            get {
+                return ResourceManager.GetString("PrimaryLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Receiver.
         /// </summary>
         public static string Receiver {
@@ -949,6 +958,15 @@ namespace RemoteUpkeep.Properties {
         public static string SelectCountry {
             get {
                 return ResourceManager.GetString("SelectCountry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Language.
+        /// </summary>
+        public static string SelectLanguage {
+            get {
+                return ResourceManager.GetString("SelectLanguage", resourceCulture);
             }
         }
         

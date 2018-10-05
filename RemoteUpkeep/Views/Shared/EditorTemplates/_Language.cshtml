@@ -1,0 +1,3 @@
+@using RemoteUpkeep.Helpers
+@using RemoteUpkeep.Properties
+@Html.DropDownList("", new SelectList(UIHelper.GetLanguages(), "Id", "Title", ViewData.TemplateInfo.FormattedModelValue.ToString()), string.Format("< {0} >", Resources.SelectLanguage), new { @class = "form-control" })

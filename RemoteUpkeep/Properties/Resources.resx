@@ -481,4 +481,10 @@ To change your profile data, click
   <data name="EmailRegisterSubject" xml:space="preserve">
     <value>Registration successfull</value>
   </data>
+  <data name="PrimaryLanguage" xml:space="preserve">
+    <value>Primary Language</value>
+  </data>
+  <data name="SelectLanguage" xml:space="preserve">
+    <value>Select Language</value>
+  </data>
 </root>

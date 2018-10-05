@@ -53,6 +53,11 @@ namespace RemoteUpkeep.Models
                 .WithMany(e => e.Users)
                 .HasForeignKey(e => e.RegionId);
 
+            modelBuilder.Entity<ApplicationUser>()
+                .HasOptional(e => e.PrimaryLanguage)
+                .WithMany(e => e.Users2)
+                .HasForeignKey(e => e.PrimaryLanguageId);
+
             //many-to-many
             modelBuilder.Entity<ApplicationUser>()
                 .HasMany(e => e.Languages)

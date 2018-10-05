@@ -31,6 +31,11 @@ namespace RemoteUpkeep.ViewModels
         [Display(Name = "Languages", ResourceType = typeof(Properties.Resources))]
         [CheckboxListRequired]
         public ICollection<int> LanguageIds { get; set; }
+
+        [UIHint("_Language")]
+        [Display(Name = "PrimaryLanguage", ResourceType = typeof(Properties.Resources))]
+        public int? PrimaryLanguageId { get; set; }
+
     }
 
     public class ManageLoginsViewModel

@@ -62,7 +62,8 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
                     LastName = model.LastName,
                     PhoneNumber = model.Phone,
                     CountryId = model.CountryId,
-                    RegionId = model.RegionId
+                    RegionId = model.RegionId,
+                    PrimaryLanguageId = model.PrimaryLanguageId
                 };
                 user.Languages = model.LanguageIds == null ? new List<Language>() :
                     model.LanguageIds.Select(languageId => context.Languages.FirstOrDefault(x => x.Id == languageId)).ToList();
@@ -111,6 +112,7 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
             model.Phone = user.PhoneNumber;
             model.CountryId = user.CountryId;
             model.RegionId = user.RegionId;
+            model.PrimaryLanguageId = user.PrimaryLanguageId;
             model.LanguageIds = user.Languages.Select(x => x.Id).ToList();
 
             if (UserManager.IsInRole(id, "admin"))
@@ -155,6 +157,7 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
                 user.PhoneNumber = model.Phone;
                 user.CountryId = model.CountryId;
                 user.RegionId = model.RegionId;
+                user.PrimaryLanguageId = model.PrimaryLanguageId;
                 user.Languages = model.LanguageIds == null ? new List<Language>() :
                     model.LanguageIds.Select(languageId => context.Languages.FirstOrDefault(x => x.Id == languageId)).ToList();
 

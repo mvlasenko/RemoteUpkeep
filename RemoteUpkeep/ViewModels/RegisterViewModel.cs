@@ -34,6 +34,10 @@ namespace RemoteUpkeep.ViewModels
         [CheckboxListRequired]
         public ICollection<int> LanguageIds { get; set; }
 
+        [UIHint("_Language")]
+        [Display(Name = "PrimaryLanguage", ResourceType = typeof(Properties.Resources))]
+        public int? PrimaryLanguageId { get; set; }
+
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]

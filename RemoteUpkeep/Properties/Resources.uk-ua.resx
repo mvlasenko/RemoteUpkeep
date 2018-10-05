@@ -482,4 +482,10 @@ Edit Profile
   <data name="EmailRegisterSubject" xml:space="preserve">
     <value>Реєстрація успішна</value>
   </data>
+  <data name="PrimaryLanguage" xml:space="preserve">
+    <value>Основна мова</value>
+  </data>
+  <data name="SelectLanguage" xml:space="preserve">
+    <value>Оберіть мову</value>
+  </data>
 </root>

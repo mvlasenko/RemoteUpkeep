@@ -143,12 +143,15 @@ namespace RemoteUpkeep.Controllers
             {
                 var context = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
 
-                var user = new ApplicationUser { UserName = model.Email,
+                var user = new ApplicationUser {
+                    UserName = model.Email,
                     Email = model.Email,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     PhoneNumber = model.Phone,
-                    CountryId = model.CountryId
+                    CountryId = model.CountryId,
+                    RegionId = model.RegionId,
+                    PrimaryLanguageId = model.PrimaryLanguageId
                 };
                 user.Languages = model.LanguageIds == null ? new List<Language>() :
                     model.LanguageIds.Select(languageId => context.Languages.FirstOrDefault(x => x.Id == languageId)).ToList();
@@ -166,7 +169,7 @@ namespace RemoteUpkeep.Controllers
                     //admin email
                     string editLink = Url.Action("Edit", "Users", new { area = "", id = user.Id }, protocol: Request.Url.Scheme);
                     string adminBody = EmailHelper.GetUserFormattedBody(user, Resources.EmailAdminRegisterBody);
-                    adminBody = string.Format(adminBody, profileLink);
+                    adminBody = string.Format(adminBody, editLink);
                     EmailHelper.SendAdminEmail(adminBody, Resources.EmailAdminRegisterSubject);
 
                     //first registration only
@@ -336,7 +339,22 @@ namespace RemoteUpkeep.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, PhoneNumber = model.Phone };
+
+                var context = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
+
+                var user = new ApplicationUser {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    PhoneNumber = model.Phone,
+                    CountryId = model.CountryId,
+                    RegionId = model.RegionId,
+                    PrimaryLanguageId = model.PrimaryLanguageId
+                };
+                user.Languages = model.LanguageIds == null ? new List<Language>() :
+                    model.LanguageIds.Select(languageId => context.Languages.FirstOrDefault(x => x.Id == languageId)).ToList();
+
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -353,7 +371,7 @@ namespace RemoteUpkeep.Controllers
                         //admin email
                         string editLink = Url.Action("Edit", "Users", new { area = "", id = user.Id }, protocol: Request.Url.Scheme);
                         string adminBody = EmailHelper.GetUserFormattedBody(user, Resources.EmailAdminRegisterBody);
-                        adminBody = string.Format(adminBody, profileLink);
+                        adminBody = string.Format(adminBody, editLink);
                         EmailHelper.SendAdminEmail(adminBody, Resources.EmailAdminRegisterSubject);
 
                         //first registration only
