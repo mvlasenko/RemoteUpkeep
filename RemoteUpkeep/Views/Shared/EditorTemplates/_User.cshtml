@@ -1,3 +1,19 @@
 @using RemoteUpkeep.Helpers
 @using RemoteUpkeep.Properties
-@Html.DropDownList("", new SelectList(UIHelper.GetUsers(), "Id", "FullName", ViewData.TemplateInfo.FormattedModelValue.ToString()), string.Format("< {0} >", Resources.SelectUser), new { @class = "form-control" })
+@using RemoteUpkeep.Models
+@{
+    var val = ViewData.ModelMetadata.Model;
+    var name = ViewData.TemplateInfo.HtmlFieldPrefix;
+    var id = name.Replace(".", "_").Replace("[", "_").Replace("]", "_");
+}
+
+<select name="@name" id="@id" class="form-control user">
+    <option>@string.Format("< {0} >", Resources.SelectUser)</option>
+    @foreach (ApplicationUser user in UIHelper.GetUsers())
+    {
+        <option value="@user.Id" @(val != null && user.Id.ToString() == val.ToString() ? "selected" : "")
+            data-culture-id="@user.PrimaryLanguageId">
+            @user.FullName
+        </option>
+    }
+</select>

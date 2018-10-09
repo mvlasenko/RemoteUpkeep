@@ -84,6 +84,7 @@ function InitMessagesModal() {
 
             AddAsterisk();
             InitDatePicker();
+            InitReceiverLanguage();
         });
     });
 
@@ -95,6 +96,17 @@ function InitMessagesModal() {
             $('#modal-content').html(data);
             $('#modal').modal('show');
         });
+    });
+}
+
+function InitReceiverLanguage()
+{
+    $('.receiver .user').change(function () {
+        var selected = $(this).find('option:selected');
+        var culture_id = selected.data('culture-id');
+        if (culture_id) {
+            $('.language select').val(culture_id);
+        }
     });
 }
 
@@ -165,6 +177,29 @@ function RefreshTargets(orderId) {
         processData: false,
         async: true
     });
+}
+
+function InitTranslationModal() {
+    $('.translate').unbind();
+    $('.translate').click(function () {
+        var url = "/Admin/Translations/UpdatePartial";
+        var params = $(this).attr('data-id').split('|');
+
+        $.get(url + '/?id=' + params[2] + "&table=" + params[0] + "&field=" + params[1], function (data) {
+            $('#modal-content').html(data);
+
+            $('#modal').modal('show');
+            jQuery.validator.unobtrusive.parse('#frmModal');
+
+            AddAsterisk();
+        });
+    });
+}
+
+function RefreshLanguages(recordId, table, field) {
+
+    alert('updated');
+
 }
 
 function AddAsterisk() {

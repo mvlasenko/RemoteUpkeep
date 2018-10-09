@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -80,10 +81,13 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
                         await UserManager.AddToRoleAsync(user.Id, "dealer");
                     }
 
+                    Language language = context.Languages.FirstOrDefault(x => x.Id == model.PrimaryLanguageId);
+                    CultureInfo culture = language != null ? new CultureInfo(language.Code) : CultureInfo.CurrentCulture;
+
                     //send email
                     string callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = UserManager.GenerateEmailConfirmationToken(user.Id) }, protocol: Request.Url.Scheme);
-                    string body = string.Format(Resources.EmailConfirmBody, callbackUrl);
-                    EmailHelper.SendEmail(user, body, Resources.EmailConfirmSubject);
+                    string body = string.Format(Resources.ResourceManager.GetString("EmailConfirmBody", culture), callbackUrl);
+                    EmailHelper.SendEmail(user, body, Resources.ResourceManager.GetString("EmailConfirmSubject", culture));
 
                     return RedirectToAction("Index");
                 }

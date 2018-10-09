@@ -20,4 +20,15 @@
         Ongoing = 1,
         Closed = 2
     }
+
+    public enum Table
+    {
+        Services = 0
+    }
+
+    public enum Field
+    {
+        Title = 0,
+        Description = 1
+    }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
@@ -101,6 +102,23 @@ namespace RemoteUpkeep.Controllers
                     };
                     orderDetails.Actions.Add(action);
 
+                    string userId = this.User.Identity.GetUserId();
+                    ApplicationUser user = context.Users.Find(userId);
+
+
+                    //TODO: set UI culture!!!!
+
+                    //get user language
+                    int? primaryLanguageId = user.PrimaryLanguageId;
+                    if (primaryLanguageId == null)
+                    {
+                        Language language = context.Languages.FirstOrDefault(x => x.Code == CultureInfo.CurrentUICulture.Name);
+                        if (language != null)
+                        {
+                            primaryLanguageId = language.Id;
+                        }
+                    }
+
                     //new message
                     Message message = new Message
                     {
@@ -108,7 +126,8 @@ namespace RemoteUpkeep.Controllers
                         Text = Resources.OrderCreatedMessage,
                         Date = DateTime.Now,
                         MessageType = MessageType.Email, //todo
-                        ReceiverId = this.User.Identity.GetUserId()
+                        ReceiverId = userId,
+                        LanguageId = primaryLanguageId
                     };
                     orderDetails.Messages.Add(message);
 
@@ -124,8 +143,6 @@ namespace RemoteUpkeep.Controllers
                     context.Orders.Add(order);
                     context.SaveChanges();
 
-                    ApplicationUser user = context.Users.Find(message.ReceiverId);
-                    
                     //send message
                     EmailHelper.SendEmail(user, message.Text, message.Subject); //todo check status
                 }

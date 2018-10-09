@@ -27,6 +27,12 @@ namespace RemoteUpkeep.Models
 
         public virtual ApplicationUser Receiver { get; set; }
 
+        [UIHint("_Language")]
+        [Display(Name = "Language", ResourceType = typeof(Properties.Resources))]
+        public int? LanguageId { get; set; }
+
+        public virtual Language Language { get; set; }
+
         [Required]
         [Display(Name = "Subject", ResourceType = typeof(Properties.Resources))]
         public string Subject { get; set; }

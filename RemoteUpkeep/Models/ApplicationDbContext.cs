@@ -36,6 +36,8 @@ namespace RemoteUpkeep.Models
 
         public virtual DbSet<Language> Languages { get; set; }
 
+        public virtual DbSet<Translation> Translations { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -169,6 +171,11 @@ namespace RemoteUpkeep.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Message>()
+                .HasOptional(e => e.Language)
+                .WithMany(e => e.Messages)
+                .HasForeignKey(e => e.LanguageId);
+
+            modelBuilder.Entity<Message>()
                 .HasRequired(e => e.OrderDetails)
                 .WithMany(e => e.Messages)
                 .HasForeignKey(e => e.OrderDetailsId);
@@ -183,6 +190,13 @@ namespace RemoteUpkeep.Models
                     m.MapRightKey("ImageId");
                     m.ToTable("MessageAttachments");
                 });
+
+            //translations
+
+            modelBuilder.Entity<Translation>()
+                .HasRequired(e => e.Language)
+                .WithMany(e => e.Translations)
+                .HasForeignKey(e => e.LanguageId);
 
         }
 

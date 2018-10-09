@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -161,10 +162,13 @@ namespace RemoteUpkeep.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
+                    Language language = context.Languages.FirstOrDefault(x => x.Id == model.PrimaryLanguageId);
+                    CultureInfo culture = language != null ? new CultureInfo(language.Code) : CultureInfo.CurrentCulture;
+
                     //send email
                     string profileLink = Url.Action("Index", "Manage", null, protocol: Request.Url.Scheme);
-                    string body = string.Format(Resources.EmailRegisterBody, profileLink);
-                    EmailHelper.SendEmail(user, body, Resources.EmailRegisterSubject);
+                    string body = string.Format(Resources.ResourceManager.GetString("EmailRegisterBody", culture), profileLink);
+                    EmailHelper.SendEmail(user, body, Resources.ResourceManager.GetString("EmailRegisterSubject", culture));
 
                     //admin email
                     string editLink = Url.Action("Edit", "Users", new { area = "", id = user.Id }, protocol: Request.Url.Scheme);
@@ -363,10 +367,13 @@ namespace RemoteUpkeep.Controllers
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
+                        Language language = context.Languages.FirstOrDefault(x => x.Id == model.PrimaryLanguageId);
+                        CultureInfo culture = language != null ? new CultureInfo(language.Code) : CultureInfo.CurrentCulture;
+
                         //send email
                         string profileLink = Url.Action("Index", "Manage", null, protocol: Request.Url.Scheme);
-                        string body = string.Format(Resources.EmailRegisterBody, profileLink);
-                        EmailHelper.SendEmail(user, body, Resources.EmailRegisterSubject);
+                        string body = string.Format(Resources.ResourceManager.GetString("EmailRegisterBody", culture), profileLink);
+                        EmailHelper.SendEmail(user, body, Resources.ResourceManager.GetString("EmailRegisterSubject", culture));
 
                         //admin email
                         string editLink = Url.Action("Edit", "Users", new { area = "", id = user.Id }, protocol: Request.Url.Scheme);

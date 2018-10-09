@@ -10,6 +10,8 @@ namespace RemoteUpkeep.Models
         {
             this.Users = new List<ApplicationUser>();
             this.Users2 = new List<ApplicationUser>();
+            this.Messages = new List<Message>();
+            this.Translations = new List<Translation>();
         }
 
         [Key]
@@ -27,5 +29,10 @@ namespace RemoteUpkeep.Models
         [ScriptIgnore(ApplyToOverrides = true)]
         public virtual ICollection<ApplicationUser> Users2 { get; }
 
+        [ScriptIgnore(ApplyToOverrides = true)]
+        public virtual ICollection<Message> Messages { get; }
+
+        [ScriptIgnore(ApplyToOverrides = true)]
+        public virtual ICollection<Translation> Translations { get; }
     }
 }

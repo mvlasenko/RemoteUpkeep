@@ -488,4 +488,10 @@ Edit Profile
   <data name="SelectLanguage" xml:space="preserve">
     <value>Оберіть мову</value>
   </data>
+  <data name="Translate" xml:space="preserve">
+    <value>Переклад</value>
+  </data>
+  <data name="Translation" xml:space="preserve">
+    <value>Переклад</value>
+  </data>
 </root>
