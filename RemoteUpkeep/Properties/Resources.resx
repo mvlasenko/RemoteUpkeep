@@ -493,4 +493,7 @@ To change your profile data, click
   <data name="Translation" xml:space="preserve">
     <value>Translation</value>
   </data>
+  <data name="Original" xml:space="preserve">
+    <value>Original</value>
+  </data>
 </root>

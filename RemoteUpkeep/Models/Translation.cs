@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RemoteUpkeep.Models
 {
@@ -21,6 +23,12 @@ namespace RemoteUpkeep.Models
 
         [UIHint("MultilineText")]
         [Display(Name = "Translation", ResourceType = typeof(Properties.Resources))]
-        public string Value { get; set; }
+        public string TranslationValue { get; set; }
+
+        [NotMapped]
+        [ReadOnly(true)]
+        [UIHint("MultilineText")]
+        [Display(Name = "Original", ResourceType = typeof(Properties.Resources))]
+        public string OriginalValue { get; set; }
     }
 }

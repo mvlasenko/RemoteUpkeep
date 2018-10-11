@@ -494,4 +494,7 @@ Edit Profile
   <data name="Translation" xml:space="preserve">
     <value>Переклад</value>
   </data>
+  <data name="Original" xml:space="preserve">
+    <value>Оригінал</value>
+  </data>
 </root>

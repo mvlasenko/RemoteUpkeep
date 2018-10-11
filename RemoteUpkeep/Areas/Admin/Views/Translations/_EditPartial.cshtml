@@ -1,13 +1,13 @@
 ﻿@using RemoteUpkeep.Properties
 @model RemoteUpkeep.Models.Translation
 
-@using (Ajax.BeginForm("UpdatePartial", new { area = "Admin" },
+@using (Ajax.BeginForm("UpdatePartial", null,
     new AjaxOptions
     {
         InsertionMode = InsertionMode.Replace,
         HttpMethod = "POST",
         UpdateTargetId = "modal-content",
-        OnSuccess = "RefreshLanguages(" + Model.RecordId + ", " + Model.Table + ", " + Model.Field + ");"
+        OnSuccess = "RefreshLanguages(" + Model.RecordId + ", '" + Model.Table + "', '" + Model.Field + "');"
     },
     new { @id = "frmModal" }))
 {
@@ -21,16 +21,21 @@
         @Html.HiddenFor(m => m.Table)
         @Html.HiddenFor(m => m.Field)
 
-        <div class="form-group">
+        <div class="form-group translation-language">
             @Html.LabelFor(m => m.LanguageId, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.EditorFor(m => m.LanguageId, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(m => m.LanguageId, new { htmlAttributes = new { @class = "form-control language" } })
             @Html.ValidationMessageFor(m => m.LanguageId, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.Value, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.EditorFor(m => m.Value, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(m => m.Value, "", new { @class = "text-danger" })
+            @Html.LabelFor(m => m.OriginalValue, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(m => m.OriginalValue, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.TranslationValue, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(m => m.TranslationValue, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.TranslationValue, "", new { @class = "text-danger" })
         </div>
 
     </div>

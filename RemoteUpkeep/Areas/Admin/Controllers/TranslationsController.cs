@@ -13,16 +13,44 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
         [HttpGet, ValidateInput(false)]
         public ActionResult UpdatePartial(int id, Table table, Field field)
         {
-            Translation translation = db.Translations.FirstOrDefault(x => x.RecordId == id && x.Table == table && x.Field == field);
-            if (translation == null)
+            Translation translation = GetDefaultTranslation(id, table, field);
+            return PartialView("_EditPartial", translation);
+        }
+
+        private Translation GetDefaultTranslation(int id, Table table, Field field)
+        {
+            Translation translation = new Translation();
+            translation.RecordId = id;
+            translation.Table = table;
+            translation.Field = field;
+            translation.LanguageId = 0;
+
+            if (table == Table.Services)
             {
-                translation = new Translation();
-                translation.RecordId = id;
-                translation.Table = table;
-                translation.Field = field;
+                Service service = db.Services.Find(id);
+                if (field == Field.Title)
+                {
+                    translation.OriginalValue = service.Title;
+                }
+                else if (field == Field.Description)
+                {
+                    translation.OriginalValue = service.Description;
+                }
             }
 
-            return PartialView("_EditPartial", translation);
+            translation.TranslationValue = translation.OriginalValue;
+
+            return translation;
+        }
+
+        [HttpGet, ValidateInput(false)]
+        public ActionResult GetTranslation(int id, int? languageId, Table table, Field field)
+        {
+            Translation translation = languageId == null ?
+                GetDefaultTranslation(id, table, field) :
+                db.Translations.FirstOrDefault(x => x.RecordId == id && x.Table == table && x.Field == field && x.LanguageId == languageId);
+
+            return Json(translation, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost, ValidateInput(false)]
@@ -31,7 +59,6 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 Translation translation = db.Translations.FirstOrDefault(x => x.RecordId == model.RecordId && x.Table == model.Table && x.Field == model.Field && x.LanguageId == model.LanguageId);
-                db.Entry(translation).State = EntityState.Detached;
 
                 if (translation == null)
                 {
@@ -40,6 +67,7 @@ namespace RemoteUpkeep.Areas.Admin.Controllers
                 else
                 {
                     model.Id = translation.Id;
+                    db.Entry(translation).State = EntityState.Detached;
                     db.Entry(model).State = EntityState.Modified;
                 }
 

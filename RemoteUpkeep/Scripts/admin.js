@@ -182,24 +182,44 @@ function RefreshTargets(orderId) {
 function InitTranslationModal() {
     $('.translate').unbind();
     $('.translate').click(function () {
-        var url = "/Admin/Translations/UpdatePartial";
-        var params = $(this).attr('data-id').split('|');
-
-        $.get(url + '/?id=' + params[2] + "&table=" + params[0] + "&field=" + params[1], function (data) {
+        var params_arr = $(this).attr('data-id').split('-');
+        var url = "/Admin/Translations/UpdatePartial/?id=" + params_arr[0] + "&table=" + params_arr[1] + "&field=" + params_arr[2];
+        $.get(url , function (data) {
             $('#modal-content').html(data);
 
             $('#modal').modal('show');
             jQuery.validator.unobtrusive.parse('#frmModal');
 
             AddAsterisk();
+            InitTranslationLanguage();
         });
     });
 }
 
 function RefreshLanguages(recordId, table, field) {
+    //todo: update list of translations;
+}
 
-    alert('updated');
-
+function InitTranslationLanguage() {
+    $('.translation-language .language').unbind();
+    $('.translation-language .language').change(function () {
+        var record_id = $('#RecordId').val();
+        var table = $('#Table').val();
+        var field = $('#Field').val();
+        var selected = $(this).find('option:selected');
+        var language_id = selected.val();
+        var url = "/Admin/Translations/GetTranslation/?id=" + record_id + "&languageId=" + language_id + "&table=" + table + "&field=" + field;
+        $.ajax({
+            type: 'GET',
+            dataType: 'Json',
+            url: url,
+            success: function (data) {
+                $('#TranslationValue').val(data.TranslationValue);
+            },
+            processData: false,
+            async: true
+        });
+    });
 }
 
 function AddAsterisk() {
