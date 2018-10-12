@@ -7,13 +7,14 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using RemoteUpkeep.Helpers;
 using RemoteUpkeep.Models;
 using RemoteUpkeep.ViewModels;
 
 namespace RemoteUpkeep.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -107,6 +108,12 @@ namespace RemoteUpkeep.Controllers
 
             context.Entry(user).State = EntityState.Modified;
             await context.SaveChangesAsync();
+
+            //set cookies
+            if (model.PrimaryLanguageId != null)
+            {
+                TranslationHelper.SetCulture(model.PrimaryLanguageId.Value);
+            }
 
             return RedirectToAction("Index", new { Message = ManageMessageId.ChangeProfileSuccess });
         }

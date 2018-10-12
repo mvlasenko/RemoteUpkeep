@@ -1,7 +1,7 @@
-﻿@using RemoteUpkeep.Models
-@using RemoteUpkeep.Helpers
+﻿@using RemoteUpkeep.Helpers
 @using RemoteUpkeep.Properties
-@model RemoteUpkeep.ViewModels.OrderViewModel
+@using RemoteUpkeep.ViewModels
+@model OrderViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = Resources.Order_Step1_Title;
@@ -16,7 +16,7 @@
     <div class="container">
         <div class="panel-group wrap" id="bs-collapse">
 
-            @foreach (Service service in TranslationHelper.GetServices())
+            @foreach (ServiceViewModel service in TranslationHelper.GetServices())
             {
                 <div class="panel">
                     <div class="panel-heading">

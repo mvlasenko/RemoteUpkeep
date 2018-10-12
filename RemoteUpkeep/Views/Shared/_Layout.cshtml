@@ -24,30 +24,32 @@
 
                     <li>@Html.ActionLink(Resources.MakeOrder, "Index", "Order", new { area = "" }, null)</li>
 
-                    @if (SecurityHelper.AdminVisible() || SecurityHelper.DealerVisible()) {
+                    @if (SecurityHelper.AdminVisible() || SecurityHelper.DealerVisible())
+                    {
 
-                    <li>@Html.ActionLink(Resources.MyActions, "Index", "Actions", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink(Resources.MyActions, "Index", "Actions", new { area = "" }, null)</li>
 
                     }
 
-                    @if (SecurityHelper.AdminVisible()) {
+                    @if (SecurityHelper.AdminVisible())
+                    {
 
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            @Resources.Admin
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink(Resources.Orders, "Index", "Orders", new { area = "Admin" }, null)</li>
-                            <li>@Html.ActionLink(Resources.Countries, "Index", "Countries", new { area = "Admin" }, null)</li>
-                            <li>@Html.ActionLink(Resources.Regions, "Index", "Regions", new { area = "Admin" }, null)</li>
-                            <li>@Html.ActionLink(Resources.Languages, "Index", "Languages", new { area = "Admin" }, null)</li>
-                            <li>@Html.ActionLink(Resources.Services, "Index", "Services", new { area = "Admin" }, null)</li>
-                            <li>@Html.ActionLink(Resources.Targets, "Index", "Targets", new { area = "Admin" }, null)</li>
-                            <li>@Html.ActionLink(Resources.Messages, "Index", "Messages", new { area = "Admin" }, null)</li>
-                            <li>@Html.ActionLink(Resources.Users, "Index", "Users", new { area = "Admin" }, null)</li>
-                        </ul>
-                    </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                @Resources.Admin
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink(Resources.Orders, "Index", "Orders", new { area = "Admin" }, null)</li>
+                                <li>@Html.ActionLink(Resources.Countries, "Index", "Countries", new { area = "Admin" }, null)</li>
+                                <li>@Html.ActionLink(Resources.Regions, "Index", "Regions", new { area = "Admin" }, null)</li>
+                                <li>@Html.ActionLink(Resources.Languages, "Index", "Languages", new { area = "Admin" }, null)</li>
+                                <li>@Html.ActionLink(Resources.Services, "Index", "Services", new { area = "Admin" }, null)</li>
+                                <li>@Html.ActionLink(Resources.Targets, "Index", "Targets", new { area = "Admin" }, null)</li>
+                                <li>@Html.ActionLink(Resources.Messages, "Index", "Messages", new { area = "Admin" }, null)</li>
+                                <li>@Html.ActionLink(Resources.Users, "Index", "Users", new { area = "Admin" }, null)</li>
+                            </ul>
+                        </li>
 
                     }
                 </ul>
@@ -56,7 +58,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -68,5 +70,31 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    @if (!Request.IsAuthenticated)
+    {
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+
+                $('.current-language').change(function () {
+                    var selected = $(this).find('option:selected');
+                    var url = "/Languages/SetCulture/" + selected.val();
+                    $.ajax({
+                        type: 'GET',
+                        dataType: 'Json',
+                        url: url,
+                        success: function (data) {
+                            location.reload();
+                        },
+                        processData: false,
+                        async: true
+                    });
+                });
+            });
+
+        </script>
+    }
+
 </body>
 </html>

@@ -7,7 +7,7 @@ using RemoteUpkeep.Models;
 namespace RemoteUpkeep.Controllers
 {
     [Authorize(Roles = "admin,dealer")]
-    public class ActionsController : Controller
+    public class ActionsController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 

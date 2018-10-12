@@ -4,7 +4,7 @@ using RemoteUpkeep.Properties;
 
 namespace RemoteUpkeep.Controllers
 {
-    public class ResourcesController : Controller
+    public class ResourcesController : BaseController
     {
         public JsonResult Index()
         {

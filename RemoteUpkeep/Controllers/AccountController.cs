@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using RemoteUpkeep.EmailEngine;
+using RemoteUpkeep.Helpers;
 using RemoteUpkeep.Models;
 using RemoteUpkeep.Properties;
 using RemoteUpkeep.ViewModels;
@@ -16,7 +17,7 @@ using RemoteUpkeep.ViewModels;
 namespace RemoteUpkeep.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -164,6 +165,12 @@ namespace RemoteUpkeep.Controllers
 
                     Language language = context.Languages.FirstOrDefault(x => x.Id == model.PrimaryLanguageId);
                     CultureInfo culture = language != null ? new CultureInfo(language.Code) : CultureInfo.CurrentCulture;
+
+                    //set cookies
+                    if (model.PrimaryLanguageId != null)
+                    {
+                        TranslationHelper.SetCulture(model.PrimaryLanguageId.Value);
+                    }
 
                     //send email
                     string profileLink = Url.Action("Index", "Manage", null, protocol: Request.Url.Scheme);
@@ -369,6 +376,12 @@ namespace RemoteUpkeep.Controllers
 
                         Language language = context.Languages.FirstOrDefault(x => x.Id == model.PrimaryLanguageId);
                         CultureInfo culture = language != null ? new CultureInfo(language.Code) : CultureInfo.CurrentCulture;
+
+                        //set cookies
+                        if (model.PrimaryLanguageId != null)
+                        {
+                            TranslationHelper.SetCulture(model.PrimaryLanguageId.Value);
+                        }
 
                         //send email
                         string profileLink = Url.Action("Index", "Manage", null, protocol: Request.Url.Scheme);

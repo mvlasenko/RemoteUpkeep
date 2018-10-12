@@ -10,7 +10,7 @@ using RemoteUpkeep.ViewModels;
 
 namespace RemoteUpkeep.Controllers
 {
-    public class OrderController : Controller
+    public class OrderController : BaseController
     {
         public ActionResult Index()
         {
