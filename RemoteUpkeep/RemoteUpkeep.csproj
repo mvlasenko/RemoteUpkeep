@@ -229,6 +229,7 @@
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Helpers\Keys.cs" />
     <Compile Include="Helpers\SecurityHelper.cs" />
+    <Compile Include="Helpers\TranslationHelper.cs" />
     <Compile Include="Helpers\UIHelper.cs" />
     <Compile Include="Helpers\XmlHelper.cs" />
     <Compile Include="Migrations\Configuration.cs" />
@@ -262,6 +263,7 @@
     <Compile Include="ViewModels\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="ViewModels\PostedFile.cs" />
     <Compile Include="ViewModels\QuickResetViewModel.cs" />
+    <Compile Include="ViewModels\ServiceViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
   </ItemGroup>
@@ -499,7 +501,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54708</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
