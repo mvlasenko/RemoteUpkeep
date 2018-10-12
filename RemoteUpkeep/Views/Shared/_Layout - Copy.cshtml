@@ -1,0 +1,100 @@
+﻿@using RemoteUpkeep.Helpers
+@using RemoteUpkeep.Properties
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - @Resources.SiteName</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+                    <li>@Html.ActionLink(Resources.MakeOrder, "Index", "Order", new { area = "" }, null)</li>
+
+                    @if (SecurityHelper.AdminVisible() || SecurityHelper.DealerVisible())
+                    {
+
+                        <li>@Html.ActionLink(Resources.MyActions, "Index", "Actions", new { area = "" }, null)</li>
+
+                    }
+
+                    @if (SecurityHelper.AdminVisible())
+                    {
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                @Resources.Admin
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink(Resources.Orders, "Index", "Orders", new { area = "Admin" }, null)</li>
+                                <li>@Html.ActionLink(Resources.Countries, "Index", "Countries", new { area = "Admin" }, null)</li>
+                                <li>@Html.ActionLink(Resources.Regions, "Index", "Regions", new { area = "Admin" }, null)</li>
+                                <li>@Html.ActionLink(Resources.Languages, "Index", "Languages", new { area = "Admin" }, null)</li>
+                                <li>@Html.ActionLink(Resources.Services, "Index", "Services", new { area = "Admin" }, null)</li>
+                                <li>@Html.ActionLink(Resources.Targets, "Index", "Targets", new { area = "Admin" }, null)</li>
+                                <li>@Html.ActionLink(Resources.Messages, "Index", "Messages", new { area = "Admin" }, null)</li>
+                                <li>@Html.ActionLink(Resources.Users, "Index", "Users", new { area = "Admin" }, null)</li>
+                            </ul>
+                        </li>
+
+                    }
+                </ul>
+
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - @Resources.SiteName</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    @if (!Request.IsAuthenticated)
+    {
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+
+                $('.current-language').change(function () {
+                    var selected = $(this).find('option:selected');
+                    var url = "/Languages/SetCulture/" + selected.val();
+                    $.ajax({
+                        type: 'GET',
+                        dataType: 'Json',
+                        url: url,
+                        success: function (data) {
+                            location.reload();
+                        },
+                        processData: false,
+                        async: true
+                    });
+                });
+            });
+
+        </script>
+    }
+
+</body>
+</html>

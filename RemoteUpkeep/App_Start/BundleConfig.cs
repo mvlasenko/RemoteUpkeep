@@ -22,10 +22,18 @@ namespace RemoteUpkeep
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/jquery-easing").Include(
+                "~/Scripts/jquery-easing/jquery.easing.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/grayscale").Include(
+                "~/Scripts/grayscale.min.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
-                "~/Content/site.css"));
-					  
+                "~/Content/grayscale.min.css",
+                "~/Content/fontawesome-free/css/all.min.css"
+                ));
+
             //datepicker
             bundles.Add(new StyleBundle("~/Content/datetimepicker").Include(
                 "~/Content/bootstrap-datetimepicker.css"));
@@ -33,8 +41,8 @@ namespace RemoteUpkeep
             bundles.Add(new ScriptBundle("~/bundles/datetimepicker").Include(
                 "~/Scripts/moment-with-locales.js",
                 "~/Scripts/bootstrap-datetimepicker.js"));
-			
-			//file upload
+
+            //file upload
             bundles.Add(new StyleBundle("~/Content/fileupload").Include(
                 "~/Content/jQuery.FileUpload/css/jquery.fileupload.css"));
 
@@ -47,7 +55,7 @@ namespace RemoteUpkeep
             //admin area scripts
             bundles.Add(new ScriptBundle("~/bundles/admin").Include(
                 "~/Scripts/admin.js"));
-            
+
             //geography scripts
             bundles.Add(new ScriptBundle("~/bundles/geography").Include(
                 "~/Scripts/geography.js"));
