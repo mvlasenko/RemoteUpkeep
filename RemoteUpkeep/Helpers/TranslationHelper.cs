@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading;
 using System.Web;
@@ -10,7 +11,7 @@ namespace RemoteUpkeep.Helpers
 {
     public static class TranslationHelper
     {
-        public static int GetCurrentLanguage()
+        public static Language GetCurrentLanguage()
         {
             //return primary language if user is authenticated
 
@@ -19,9 +20,9 @@ namespace RemoteUpkeep.Helpers
                 string userName = HttpContext.Current.User.Identity.Name;
                 using (var context = new ApplicationDbContext())
                 {
-                    ApplicationUser user = context.Users.FirstOrDefault(x => x.UserName == userName);
-                    if (user != null && user.PrimaryLanguageId != null)
-                        return user.PrimaryLanguageId.Value;
+                    ApplicationUser user = context.Users.Include(x => x.PrimaryLanguage).FirstOrDefault(x => x.UserName == userName);
+                    if (user != null && user.PrimaryLanguage != null)
+                        return user.PrimaryLanguage;
                 }
             }
 
@@ -37,10 +38,7 @@ namespace RemoteUpkeep.Helpers
                     language = context.Languages.FirstOrDefault();
             }
 
-            if (language == null)
-                return 0;
-
-            return language.Id;
+            return language;
         }
 
         public static void SetCulture(int id)
@@ -73,7 +71,7 @@ namespace RemoteUpkeep.Helpers
 
         public static List<ServiceViewModel> GetServices()
         {
-            int languageId = GetCurrentLanguage();
+            int languageId = GetCurrentLanguage().Id;
 
             using (var context = new ApplicationDbContext())
             {

@@ -1,8 +1,6 @@
-﻿@if (ViewData.ModelMetadata.IsReadOnly)
-{
-    @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, new { @class = "form-control", @readonly = "readonly" })
+﻿@{
+    var htmlAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(ViewData["htmlAttributes"]);
+    htmlAttributes["placeholder"] = ViewData.ModelMetadata.DisplayName;
 }
-else
-{
-    @Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, new { @class = "form-control" })
-}
+
+@Html.TextBox("", ViewData.TemplateInfo.FormattedModelValue, htmlAttributes)

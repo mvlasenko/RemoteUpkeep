@@ -1,3 +1,10 @@
 @using RemoteUpkeep.Helpers
 @using RemoteUpkeep.Properties
-@Html.DropDownList("", new SelectList(UIHelper.GetCountries(), "Id", "Title", ViewData.TemplateInfo.FormattedModelValue.ToString()), string.Format("< {0} >", Resources.SelectCountry), new { @class = "form-control" })
+@{
+    var htmlAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(ViewData["htmlAttributes"]);
+}
+
+<div class="select-option">
+    <i class="ti-angle-down"></i>
+    @Html.DropDownList("", new SelectList(UIHelper.GetCountries(), "Id", "Title", ViewData.TemplateInfo.FormattedModelValue.ToString()), string.Format("< {0} >", Resources.SelectCountry), htmlAttributes)
+</div>

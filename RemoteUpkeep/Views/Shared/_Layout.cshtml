@@ -1,74 +1,282 @@
 ﻿@using RemoteUpkeep.Helpers
 @using RemoteUpkeep.Properties
-<!DOCTYPE html>
+@using RemoteUpkeep.Models
+@using Microsoft.AspNet.Identity
+<!doctype html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
     <title>@ViewBag.Title - @Resources.SiteName</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-</head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-                    <li>@Html.ActionLink(Resources.MakeOrder, "Index", "Order", new { area = "" }, null)</li>
+    @Styles.Render("~/Content/css")
+
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400%7CRaleway:100,400,300,500,600,700%7COpen+Sans:400,500,600' rel='stylesheet' type='text/css'>
+
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body class="scroll-assist">
+    <div class="nav-container">
+        <a id="top"></a>
+        <nav class="bg-dark">
+            <div class="nav-bar">
+                <div class="module left">
+                    <a href="/">
+                        <img class="logo logo-light" alt="Foundry" src="/Content/images/logo-light.png" />
+                        <img class="logo logo-dark" alt="Foundry" src="/Content/images/logo-dark.png" />
+                    </a>
+                </div>
+                <div class="module widget-handle mobile-toggle right visible-sm visible-xs">
+                    <i class="ti-menu"></i>
+                </div>
+                <div class="module-group right">
+                    <div class="module left">
+                        <ul class="menu">
+                            <li>
+                                @Html.ActionLink(Resources.MakeOrder, "Index", "Order", new { area = "" }, null)
+                            </li>
+                            @if (SecurityHelper.AdminVisible() || SecurityHelper.DealerVisible())
+                            {
+                                <li>
+                                    @Html.ActionLink(Resources.MyActions, "Index", "Actions", new { area = "" }, null)
+                                </li>
+                            }
+
+                            @if (SecurityHelper.AdminVisible())
+                            {
+                                <li class="has-dropdown">
+                                    <a href="#">
+                                        @Resources.Admin
+                                    </a>
+                                    <ul>
+                                        <li>@Html.ActionLink(Resources.Orders, "Index", "Orders", new { area = "Admin" }, null)</li>
+                                        <li>@Html.ActionLink(Resources.Countries, "Index", "Countries", new { area = "Admin" }, null)</li>
+                                        <li>@Html.ActionLink(Resources.Regions, "Index", "Regions", new { area = "Admin" }, null)</li>
+                                        <li>@Html.ActionLink(Resources.Languages, "Index", "Languages", new { area = "Admin" }, null)</li>
+                                        <li>@Html.ActionLink(Resources.Services, "Index", "Services", new { area = "Admin" }, null)</li>
+                                        <li>@Html.ActionLink(Resources.Targets, "Index", "Targets", new { area = "Admin" }, null)</li>
+                                        <li>@Html.ActionLink(Resources.Messages, "Index", "Messages", new { area = "Admin" }, null)</li>
+                                        <li>@Html.ActionLink(Resources.Users, "Index", "Users", new { area = "Admin" }, null)</li>
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <!--end of menu module-->
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        <div class="module widget-handle cart-widget-handle left">
+                            <div class="cart">
+                                <i class="ti-email"></i>
+                                <span class="label number">2</span>
+                                <span class="title">Messages</span>
+                            </div>
+                            <div class="function">
+                                <div class="widget">
+                                    <h6 class="title">Messages</h6>
+                                    <hr>
+                                    <ul class="cart-overview">
+                                        <li>
+                                            <a href="#">
+                                                <img alt="Product" src="/Content/images/shop-widget-1.png" />
+                                                <div class="description">
+                                                    <span class="product-title">Message 1</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img alt="Product" src="/Content/images/shop-widget-2.png" />
+                                                <div class="description">
+                                                    <span class="product-title">Message 2</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--end of widget-->
+                            </div>
+                        </div>
+
+                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { @id = "logoutForm", @class = "navbar-right" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                        <div class="module widget-handle user left">
+                            <ul class="menu">
+                                <li class="has-dropdown">
+                                    <div class="user">
+                                        <i class="ti-user"></i>
+                                        <span class="title">User</span>
+                                    </div>
+                                    <ul>
+                                        <li>
+                                            @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", new { area = "" }, new { title = "Manage" })
+                                        </li>
+                                        <li>
+                                            <a href="javascript:document.getElementById('logoutForm').submit()">@Resources.LogOff</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="module widget-handle user left">
+                            <ul class="menu">
+                                <li class="has-dropdown">
+                                    <div class="user">
+                                        <i class="ti-user"></i>
+                                        <span class="title">User</span>
+                                    </div>
+                                    <ul>
+                                        <li>
+                                            @Html.ActionLink(Resources.Login, "Login", "Account", new { returnUrl = Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString()), area = "" }, new { @id = "loginLink" })
+                                        </li>
+                                        <li>
+                                            @Html.ActionLink(Resources.Register, "Register", "Account", new { returnUrl = Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString()), area = "" }, new { @id = "registerLink" })
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    }
 
                     @if (SecurityHelper.AdminVisible() || SecurityHelper.DealerVisible())
                     {
-
-                        <li>@Html.ActionLink(Resources.MyActions, "Index", "Actions", new { area = "" }, null)</li>
-
+                        <div class="module widget-handle cart-widget-handle left">
+                            <div class="cart">
+                                <i class="ti-timer"></i>
+                                <span class="label number">2</span>
+                                <span class="title">Tasks</span>
+                            </div>
+                            <div class="function">
+                                <div class="widget">
+                                    <h6 class="title">Tasks</h6>
+                                    <hr>
+                                    <ul class="cart-overview">
+                                        <li>
+                                            <a href="#">
+                                                <img alt="Product" src="/Content/images/shop-widget-1.png" />
+                                                <div class="description">
+                                                    <span class="product-title">Task 1</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img alt="Product" src="/Content/images/shop-widget-2.png" />
+                                                <div class="description">
+                                                    <span class="product-title">Task 2</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--end of widget-->
+                            </div>
+                        </div>
                     }
 
-                    @if (SecurityHelper.AdminVisible())
+                    @if (Request.IsAuthenticated)
                     {
-
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                @Resources.Admin
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>@Html.ActionLink(Resources.Orders, "Index", "Orders", new { area = "Admin" }, null)</li>
-                                <li>@Html.ActionLink(Resources.Countries, "Index", "Countries", new { area = "Admin" }, null)</li>
-                                <li>@Html.ActionLink(Resources.Regions, "Index", "Regions", new { area = "Admin" }, null)</li>
-                                <li>@Html.ActionLink(Resources.Languages, "Index", "Languages", new { area = "Admin" }, null)</li>
-                                <li>@Html.ActionLink(Resources.Services, "Index", "Services", new { area = "Admin" }, null)</li>
-                                <li>@Html.ActionLink(Resources.Targets, "Index", "Targets", new { area = "Admin" }, null)</li>
-                                <li>@Html.ActionLink(Resources.Messages, "Index", "Messages", new { area = "Admin" }, null)</li>
-                                <li>@Html.ActionLink(Resources.Users, "Index", "Users", new { area = "Admin" }, null)</li>
+                        <div class="module widget-handle language left">
+                            <ul class="menu">
+                                <li class="has-dropdown">
+                                    <a href="#">@TranslationHelper.GetCurrentLanguage().Title</a>
+                                </li>
                             </ul>
-                        </li>
-
+                        </div>
                     }
-                </ul>
+                    else
+                    {
+                        Language currLanguage = TranslationHelper.GetCurrentLanguage();
 
-                @Html.Partial("_LoginPartial")
+                        <div class="module widget-handle language left">
+                            <ul class="menu">
+                                <li class="has-dropdown">
+                                    <a href="#">@currLanguage.Title</a>
+                                    <ul class="current-language">
+                                        @foreach (Language language in UIHelper.GetLanguages())
+                                        {
+                                            if (currLanguage.Id != language.Id)
+                                            {
+                                                <li>
+                                                    <a data-id="@language.Id" href="#">@language.Title</a>
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    }
+
+                </div>
+                <!--end of module group-->
             </div>
-        </div>
+        </nav>
     </div>
+    <div class="main-container">
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - @Resources.SiteName</p>
+        <section class="pt24 pb80 image-bg overlay">
+
+            <div class="background-image-holder">
+                <img alt="image" class="background-image" src="/Content/images/home19.jpg" />
+            </div>
+
+            <div class="container">
+                @RenderBody()
+            </div>
+
+        </section>
+
+        <section class="pt80 pb80 parallax image-bg overlay">
+            <div class="background-image-holder">
+                <img alt="image" class="background-image" src="/Content/images/home21.jpg" />
+            </div>
+        </section>
+
+        <footer class="footer-1 bg-dark">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10">
+                        <img alt="Logo" class="logo" src="/Content/images/logo-light.png" />
+                    </div>
+                    <div class="col-md-2 text-right">
+                        <ul class="list-inline social-list">
+                            <li>
+                                <a href="#">
+                                    <i class="ti-twitter-alt"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="ti-facebook"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--end of row-->
+                <div class="row">
+                    <div class="col-sm-6">
+                        <span class="sub">&copy; @DateTime.Now.Year - @Resources.SiteName</span>
+                    </div>
+                </div>
+            </div>
+            <!--end of container-->
         </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/scripts")
+
     @RenderSection("scripts", required: false)
 
     @if (!Request.IsAuthenticated)
@@ -77,9 +285,9 @@
 
             $(document).ready(function () {
 
-                $('.current-language').change(function () {
-                    var selected = $(this).find('option:selected');
-                    var url = "/Languages/SetCulture/" + selected.val();
+                $('.current-language a').click(function () {
+                    var id = $(this).data('id');
+                    var url = "/Languages/SetCulture/" + id;
                     $.ajax({
                         type: 'GET',
                         dataType: 'Json',
@@ -91,6 +299,7 @@
                         async: true
                     });
                 });
+
             });
 
         </script>

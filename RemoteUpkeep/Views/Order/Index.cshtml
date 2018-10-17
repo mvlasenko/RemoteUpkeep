@@ -15,30 +15,38 @@
 
     <div class="container">
         <div class="panel-group wrap" id="bs-collapse">
-
+            @{
+                int index = 0;
+            }
             @foreach (ServiceViewModel service in TranslationHelper.GetServices())
             {
                 <div class="panel">
-                    <div class="panel-heading">
+                    <div class="panel-heading @(index == 0 ? "active" : "")">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#bs-collapse" href="#service_@service.Id">
-                                @Html.RadioButtonFor(m => m.ServiceId, service.Id) @service.Title
+                                <div class="radio-container">
+                                    @service.Title
+                                    @Html.RadioButtonFor(m => m.ServiceId, service.Id, index == 0 ? new { @checked = "checked" } : null)
+                                    <span class="checkmark"></span>
+                                </div>
                             </a>
                         </h4>
                     </div>
-                    <div id="service_@service.Id" class="panel-collapse collapse">
+                    <div id="service_@service.Id" class="panel-collapse collapse @(index == 0 ? "in" : "")">
                         <div class="panel-body">
                             @Html.Raw(service.Description.TextToHtml())
                         </div>
                     </div>
                 </div>
+
+                index++;
             }
 
         </div>
     </div>
 
     <div class="form-group">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <input type="submit" value="@Resources.Next" class="btn btn-primary" />
         </div>
     </div>

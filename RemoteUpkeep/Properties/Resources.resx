@@ -400,7 +400,7 @@
     <value>Edit Profile</value>
   </data>
   <data name="ExternalLogin" xml:space="preserve">
-    <value>Use another service to log in</value>
+    <value>Login with social media</value>
   </data>
   <data name="ExternalLogins" xml:space="preserve">
     <value>External Logins</value>
