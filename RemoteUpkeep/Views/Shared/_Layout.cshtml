@@ -36,12 +36,6 @@
                             <li>
                                 @Html.ActionLink(Resources.MakeOrder, "Index", "Order", new { area = "" }, null)
                             </li>
-                            @if (SecurityHelper.AdminVisible() || SecurityHelper.DealerVisible())
-                            {
-                                <li>
-                                    @Html.ActionLink(Resources.MyActions, "Index", "Actions", new { area = "" }, null)
-                                </li>
-                            }
 
                             @if (SecurityHelper.AdminVisible())
                             {
@@ -149,36 +143,13 @@
                     @if (SecurityHelper.AdminVisible() || SecurityHelper.DealerVisible())
                     {
                         <div class="module widget-handle cart-widget-handle left">
-                            <div class="cart">
-                                <i class="ti-timer"></i>
-                                <span class="label number">2</span>
-                                <span class="title">Tasks</span>
-                            </div>
-                            <div class="function">
-                                <div class="widget">
-                                    <h6 class="title">Tasks</h6>
-                                    <hr>
-                                    <ul class="cart-overview">
-                                        <li>
-                                            <a href="#">
-                                                <img alt="Product" src="/Content/images/shop-widget-1.png" />
-                                                <div class="description">
-                                                    <span class="product-title">Task 1</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <img alt="Product" src="/Content/images/shop-widget-2.png" />
-                                                <div class="description">
-                                                    <span class="product-title">Task 2</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
+                            <a href="@Html.Action("Index", "Actions", new { area = "" })">
+                                <div class="cart">
+                                    <i class="ti-timer"></i>
+                                    <span class="label number">2</span>
+                                    <span class="title">@Resources.MyActions</span>
                                 </div>
-                                <!--end of widget-->
-                            </div>
+                            </a>
                         </div>
                     }
 
