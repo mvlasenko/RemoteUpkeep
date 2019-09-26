@@ -1,8 +1,7 @@
-﻿@if (ViewData.ModelMetadata.IsReadOnly)
-{
-    @Html.TextArea("", @Html.Raw(HttpUtility.HtmlDecode(ViewData.TemplateInfo.FormattedModelValue.ToString())).ToString(), 4, 60, new { @class = "form-control", @style = "min-width: 100%;", @readonly = "readonly" })
+﻿@{
+    var htmlAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(ViewData["htmlAttributes"]);
+    htmlAttributes["placeholder"] = ViewData.ModelMetadata.DisplayName;
+    htmlAttributes["style"] = "min-width: 100%;";
 }
-else
-{
-    @Html.TextArea("", @Html.Raw(HttpUtility.HtmlDecode(ViewData.TemplateInfo.FormattedModelValue.ToString())).ToString(), 4, 60, new { @class = "form-control", @style = "min-width: 100%;" })
-}
+
+@Html.TextArea("", @Html.Raw(HttpUtility.HtmlDecode(ViewData.TemplateInfo.FormattedModelValue.ToString())).ToString(), 4, 60, htmlAttributes)

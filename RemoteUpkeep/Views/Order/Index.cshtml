@@ -7,46 +7,84 @@
     ViewBag.Title = Resources.Order_Step1_Title;
 }
 
-<h3>@ViewBag.Title</h3>
-
-@using (Html.BeginForm("StepOne", "Order", FormMethod.Post, new { @class = "form-horizontal", role = "form", @id = "frmOrder" }))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="container">
-        <div class="panel-group wrap" id="bs-collapse">
-
-            @foreach (ServiceViewModel service in TranslationHelper.GetServices())
-            {
-                <div class="panel">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#bs-collapse" href="#service_@service.Id">
-                                @Html.RadioButtonFor(m => m.ServiceId, service.Id) @service.Title
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="service_@service.Id" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            @Html.Raw(service.Description.TextToHtml())
-                        </div>
-                    </div>
-                </div>
-            }
-
+<section class="projects p0 bg-dark">
+    <ul class="filters floating cast-shadow mb0"></ul>
+    <div class="row masonry-loader fixed-center">
+        <div class="col-sm-12 text-center">
+            <div class="spinner"></div>
         </div>
     </div>
-
-    <div class="form-group">
-        <div class="col-md-10">
-            <input type="submit" value="@Resources.Next" class="btn btn-primary" />
+    <div class="row masonry masonryFlyIn">
+        <div class="col-md-4 col-sm-6 masonry-item project" data-filter="People">
+            <div class="image-tile inner-title hover-reveal text-center">
+                <a href="#">
+                    <img alt="Pic" src="/Content/images/project-single-1.jpg" />
+                    <div class="title">
+                        <h5 class="uppercase mb0">Happy Couple</h5>
+                        <span>People / Life</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6 masonry-item project" data-filter="Animals">
+            <div class="image-tile inner-title hover-reveal text-center">
+                <a href="#">
+                    <img alt="Pic" src="/Content/images/project-single-2.jpg" />
+                    <div class="title">
+                        <h5 class="uppercase mb0">Lonely Dog</h5>
+                        <span>Animals / Art</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6 masonry-item project" data-filter="People">
+            <div class="image-tile inner-title hover-reveal text-center">
+                <a href="#">
+                    <img alt="Pic" src="/Content/images/project-single-3.jpg" />
+                    <div class="title">
+                        <h5 class="uppercase mb0">Pondering Blonde</h5>
+                        <span>People / Life</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6 masonry-item project" data-filter="Objects">
+            <div class="image-tile inner-title hover-reveal text-center">
+                <a href="#">
+                    <img alt="Pic" src="/Content/images/project-single-5.jpg" />
+                    <div class="title">
+                        <h5 class="uppercase mb0">Vintage Typewriter</h5>
+                        <span>Objects / Isolated</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6 masonry-item project" data-filter="Objects">
+            <div class="image-tile inner-title hover-reveal text-center">
+                <a href="#">
+                    <img alt="Pic" src="/Content/images/project-single-4.jpg" />
+                    <div class="title">
+                        <h5 class="uppercase mb0">Summer Lovin'</h5>
+                        <span>Objects / Food</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6 masonry-item project" data-filter="People">
+            <div class="image-tile inner-title hover-reveal text-center">
+                <a href="#">
+                    <img alt="Pic" src="/Content/images/project-single-6.jpg" />
+                    <div class="title">
+                        <h5 class="uppercase mb0">Thick Fog</h5>
+                        <span>People / Life</span>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
-}
+</section>
 
 @section Scripts {
-
     @Styles.Render("~/Content/accordion")
     @Scripts.Render("~/bundles/accordion")
-
 }

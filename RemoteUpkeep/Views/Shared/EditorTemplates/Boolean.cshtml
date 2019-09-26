@@ -1,1 +1,6 @@
-﻿@Html.CheckBox(string.Empty, (bool)ViewData.TemplateInfo.FormattedModelValue, new { @class = "checkbox" })
+﻿@{
+    var htmlAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(ViewData["htmlAttributes"]);
+    htmlAttributes["placeholder"] = ViewData.ModelMetadata.DisplayName;
+}
+
+@Html.CheckBox(string.Empty, (bool)ViewData.TemplateInfo.FormattedModelValue, new { @class = "checkbox" })

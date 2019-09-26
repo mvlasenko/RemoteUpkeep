@@ -37,9 +37,7 @@ namespace RemoteUpkeep
 
 
             this.ConfigureFb(app);
-            
-            //disabled in 1st version
-            //this.ConfigureGoogle(app);
+            this.ConfigureGoogle(app);
         }
     }
 }

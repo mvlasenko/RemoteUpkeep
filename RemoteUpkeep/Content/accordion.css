@@ -43,7 +43,8 @@ a:active {
 }
 
 .panel-heading {
-    background-color: #0072AE;
+    background-color: #222222;
+    opacity: 0.5;
     border-radius: 0;
     border: none;
     color: #fff;

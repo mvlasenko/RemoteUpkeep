@@ -492,7 +492,7 @@ namespace RemoteUpkeep.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use another service to log in.
+        ///   Looks up a localized string similar to Login with social media.
         /// </summary>
         public static string ExternalLogin {
             get {

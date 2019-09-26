@@ -19,21 +19,32 @@ namespace RemoteUpkeep
                 "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                "~/Scripts/bootstrap.js",
-                "~/Scripts/respond.js"));
+                "~/Scripts/bootstrap.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jquery-easing").Include(
-                "~/Scripts/jquery-easing/jquery.easing.min.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/grayscale").Include(
-                "~/Scripts/grayscale.min.js"));
+            bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
+                "~/Scripts/flickr.js",
+                "~/Scripts/flexslider.min.js",
+                "~/Scripts/lightbox.min.js",
+                "~/Scripts/masonry.min.js",
+                "~/Scripts/twitterfetcher.min.js",
+                "~/Scripts/spectragram.min.js",
+                "~/Scripts/ytplayer.min.js",
+                "~/Scripts/countdown.min.js",
+                "~/Scripts/smooth-scroll.min.js",
+                "~/Scripts/parallax.js",
+                "~/Scripts/scripts.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
-                "~/Content/grayscale.min.css",
-                "~/Content/fontawesome-free/css/all.min.css"
+                "~/Content/themify-icons.css",
+                "~/Content/flexslider.css",
+                "~/Content/lightbox.min.css",
+                "~/Content/ytplayer.css",
+                "~/Content/theme.css",
+                "~/Content/custom.css",
+                "~/Content/Site.css"
                 ));
-
+					  
             //datepicker
             bundles.Add(new StyleBundle("~/Content/datetimepicker").Include(
                 "~/Content/bootstrap-datetimepicker.css"));
@@ -41,8 +52,8 @@ namespace RemoteUpkeep
             bundles.Add(new ScriptBundle("~/bundles/datetimepicker").Include(
                 "~/Scripts/moment-with-locales.js",
                 "~/Scripts/bootstrap-datetimepicker.js"));
-
-            //file upload
+			
+			//file upload
             bundles.Add(new StyleBundle("~/Content/fileupload").Include(
                 "~/Content/jQuery.FileUpload/css/jquery.fileupload.css"));
 
@@ -55,7 +66,7 @@ namespace RemoteUpkeep
             //admin area scripts
             bundles.Add(new ScriptBundle("~/bundles/admin").Include(
                 "~/Scripts/admin.js"));
-
+            
             //geography scripts
             bundles.Add(new ScriptBundle("~/bundles/geography").Include(
                 "~/Scripts/geography.js"));
